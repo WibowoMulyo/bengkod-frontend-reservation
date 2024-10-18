@@ -1,13 +1,19 @@
 import Image from 'next/image'
 import NavBar from "./navbar";
-import BodLad from "./body";
+import FirstSec from "./firstSection";
+import SecondSec from "./secondSection";
+import Footer from "./footer";
 
 export default function Home() {
   return (
     <div>
       <NavBar />
 
-      <BodLad />
+      <FirstSec />
+
+      <SecondSec />
+
+      <Footer />
     </div>
   )
 };
