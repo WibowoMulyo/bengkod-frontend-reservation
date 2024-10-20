@@ -40,7 +40,7 @@ const renderDisplay = () => {
                         width={100}
                         height={40}
                     /> */}
-                    <img src="https://dummyimage.com/150/000000/fff&text=Foto+profile" width={60} alt="" className="rounded-full" />
+                    <img src="/img/profile-image.jpeg" width={60} alt="" className="rounded-full" />
                 </div>
             </div>
         </div>

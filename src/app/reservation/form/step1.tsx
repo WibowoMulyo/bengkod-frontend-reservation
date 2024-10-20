@@ -3,17 +3,19 @@ import HeaderAuth from "../../template/header";
 
 interface props {
     onClick?: () => void,
-    reserv_date?: (val: string) => void,
-    reserv_email?: (val: string[]) => void,
-    reserv_opt?: (val: string) => void,
+    reserv_date: (val: string) => void,
+    reserv_email: (val: string[]) => void,
+    reserv_opt: (val: string) => void,
+    // data: {}
 }
 
-const renderDisplay = ({ onClick , reserv_date, reserv_email, reserv_opt}: props) => {
+const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props) => {
 
     const [date, setDate] = useState<string>('')
     const [email, setEmail] = useState<string[]>([''])
     const [option, setOption] = useState('')
-    
+
+    const [error, setError] = useState({})
     const [numberInput, setNumberInput] = useState(1)
     const [isShown, setShown] = useState(false)
 
@@ -58,24 +60,40 @@ const renderDisplay = ({ onClick , reserv_date, reserv_email, reserv_opt}: props
         return render
     }
 
-    // function validation(){
-    //     if (date === '') {
-    //     }
-    //     if ()
-    // }
+    function validation() {
+        const eror = {date: '',  email: '',   option: ''}
 
-    function submit(){
-        if(reserv_date){
-            reserv_date(date)
+        if (date.length < 1) {
+            eror.date = 'Please select a date'
         }
-        if(reserv_email){
-            reserv_email(email)
+        email.map(data => {
+            if (data.length < 1) {
+                eror.email = 'Please enter an email'
+            }
         }
-        if(reserv_opt){
-            reserv_opt(option)
+        )
+
+        if (option == '') {
+            eror.option = 'Please select an option'
         }
-        if(onClick){
+
+        setError(eror)
+        return false
+    }
+
+    function submit() {
+        validation()
+        
+        reserv_date(date)
+        // reserv_email(email)
+        // reserv_opt(option)
+
+        console.log(date)
+        let check = validation()
+        if (onClick) {
             onClick()
+        }
+        if(check){
         }
     }
 
@@ -154,6 +172,7 @@ const renderDisplay = ({ onClick , reserv_date, reserv_email, reserv_opt}: props
                                             value={option}
                                             onChange={(e) => { setOption(e.target.value); shownTeamInput(e.target.value) }}
                                         >
+                                            <option value="">--</option>
                                             <option value="individu">individu</option>
                                             <option value="tim">Tim</option>
                                         </select>

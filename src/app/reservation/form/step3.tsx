@@ -44,6 +44,8 @@ const renderDisplay = ({ step, status }: props) => {
         }
     }
 
+    
+
     return (
         <div className="my-10">
             <div className="flex w-full justify-center mx-auto items-center gap-3">

@@ -63,7 +63,6 @@ const renderDisplay = ({ step, dur_arr, reserved_time }: props) => {
         if (dur_arr) {
             dur_arr(duration)
         }
-        console.log(dur_arr)
         if (step) {
             step()
         }
