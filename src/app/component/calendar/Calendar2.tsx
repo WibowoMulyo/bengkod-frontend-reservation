@@ -52,42 +52,42 @@ const Calendar: React.FC<CalendarProps> = ({ events, weekDates }) => {
 
 
       <div className="grid grid-cols-8">
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M10.49 0.5C4.97 0.5 0.5 4.98 0.5 10.5C0.5 16.02 4.97 20.5 10.49 20.5C16.02 20.5 20.5 16.02 20.5 10.5C20.5 4.98 16.02 0.5 10.49 0.5ZM10.5 18.5C6.08 18.5 2.5 14.92 2.5 10.5C2.5 6.08 6.08 2.5 10.5 2.5C14.92 2.5 18.5 6.08 18.5 10.5C18.5 14.92 14.92 18.5 10.5 18.5ZM10.28 5.5H10.22C9.82 5.5 9.5 5.82 9.5 6.22V10.94C9.5 11.29 9.68 11.62 9.99 11.8L14.14 14.29C14.48 14.49 14.92 14.39 15.12 14.05C15.33 13.71 15.22 13.26 14.87 13.06L11 10.76V6.22C11 5.82 10.68 5.5 10.28 5.5Z" fill="#C3CAD9" />
           </svg>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Monday</h1>
           </div>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Tuesday</h1>
           </div>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Wednesday</h1>
           </div>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Thursday</h1>
           </div>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Friday</h1>
           </div>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Saturday</h1>
           </div>
         </div>
-        <div className="col-span-1 border-2 border-[#F5F6F7]">
+        <div className="col-span-1 border-2 border-[#F5F6F7] p-6">
           <div className="h-full flex items-center justify-center">
             <h1 className='text-[#6B7A99] font-bold my-auto'>Sunday</h1>
           </div>

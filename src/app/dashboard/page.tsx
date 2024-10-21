@@ -1,7 +1,7 @@
 import Image from "next/image";
 import HeaderAuth from "../template/header";
 import Calendar from "../component/calendar/Calendar2";
-
+import History from "../dashboard/history/history";
 const events = [
     { id: 1, title: 'DNCC', startTime: '09:00', endTime: '10:00', participants: ['avatar1.png', 'avatar2.png'], day: 0 },
     { id: 2, title: 'BEM FIK', startTime: '11:00', endTime: '12:00', participants: ['avatar3.png'], day: 1 },
@@ -81,8 +81,11 @@ const renderDisplay = () => {
                         </div>
                     </div>
                 </div>
-                <div className="min-w-[1200px] my-4 mr-4">
+                {/* <div className="min-w-[1200px] my-4 mr-4">
                     <Calendar events={events} weekDates={weekDates} />
+                </div> */}
+                <div className="my-4 mr-4 min-w-[1200px]">
+                    <History/>
                 </div>
             </div>
         </div>
