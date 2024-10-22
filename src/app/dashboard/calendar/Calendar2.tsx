@@ -25,8 +25,8 @@ const Table = [1, 2, 3, 4, 5, 6, 7, 8]
 
 const Calendar: React.FC<CalendarProps> = ({ events, weekDates }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  
-  const contents = ['Content 1', 'Content 2', 'Content 3', 'Content 4'];
+
+  const contents = ['Table 1', 'Table 2', 'Table 3', 'Table 4'];
 
   const handleNext = () => {
     if (activeIndex < contents.length - 1) {
@@ -42,25 +42,17 @@ const Calendar: React.FC<CalendarProps> = ({ events, weekDates }) => {
 
   return (
     <div className="flex items-center justify-center space-x-4">
-      {/* Tombol Kiri */}
-      {/* <button 
-        onClick={handlePrevious} 
+      
+      <button
+        onClick={handlePrevious}
         disabled={activeIndex === 0}
-        className={`px-4 py-2 bg-gray-300 ${activeIndex === 0 ? 'cursor-not-allowed' : 'hover:bg-gray-400'}`}
+        className={'rounded-full border-2 p-4 hover:border-gray-700 active:border-[3px] shadow-sm ' + 
+          (activeIndex === 0 ? 'cursor-not-allowed' : 'hover:bg-gray-400')}
       >
-        Previous
-      </button> */}
-           <button
-           onClick={handlePrevious} 
-           disabled={activeIndex === 0}
-           className={'rounded-full border-2 p-4 hover:border-gray-700 active:border-[3px] shadow-sm ' + (activeIndex)}
-           >
-           <div className="rounded-full border-2 p-4 hover:border-gray-700 active:border-[3px] shadow-sm">
-             <svg width="11" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M6.0732 0.672889C5.89882 0.49812 5.66208 0.399902 5.4152 0.399902C5.16831 0.399902 4.93157 0.49812 4.7572 0.672889L0.473195 4.95689C0.109195 5.32089 0.109195 5.90889 0.473195 6.27289L4.7572 10.5569C5.1212 10.9209 5.7092 10.9209 6.0732 10.5569C6.4372 10.1929 6.4372 9.60489 6.0732 9.24089L2.45186 5.61022L6.0732 1.98889C6.4372 1.62489 6.42786 1.02756 6.0732 0.672889Z" fill="#C3CAD9" />
-             </svg>
-           </div>
-     </button>
+        <svg width="11" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M6.0732 0.672889C5.89882 0.49812 5.66208 0.399902 5.4152 0.399902C5.16831 0.399902 4.93157 0.49812 4.7572 0.672889L0.473195 4.95689C0.109195 5.32089 0.109195 5.90889 0.473195 6.27289L4.7572 10.5569C5.1212 10.9209 5.7092 10.9209 6.0732 10.5569C6.4372 10.1929 6.4372 9.60489 6.0732 9.24089L2.45186 5.61022L6.0732 1.98889C6.4372 1.62489 6.42786 1.02756 6.0732 0.672889Z" fill="#C3CAD9" />
+        </svg>
+      </button>
 
       {/* Konten Tengah */}
       <div className="flex space-x-4">
@@ -69,18 +61,20 @@ const Calendar: React.FC<CalendarProps> = ({ events, weekDates }) => {
         {activeIndex < contents.length - 1 && <span>{contents[activeIndex + 1]}</span>}
       </div>
 
-      {/* Tombol Kanan */}
-      <button 
-        onClick={handleNext} 
+      <button
+        onClick={handleNext}
         disabled={activeIndex === contents.length - 1}
-        className={`px-4 py-2 bg-gray-300 ${activeIndex === contents.length - 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400'}`}
+        className={'rounded-full border-2 p-4 hover:border-gray-700 active:border-[3px] shadow-sm ' + 
+          (activeIndex === contents.length - 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400')}
       >
-        Next
+        <svg width="11" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.473195 0.67408C0.109195 1.03808 0.109195 1.62608 0.473195 1.99008L4.09453 5.61141L0.473195 9.23275C0.109195 9.59675 0.109195 10.1847 0.473195 10.5487C0.837195 10.9127 1.4252 10.9127 1.7892 10.5487L6.0732 6.26475C6.4372 5.90075 6.4372 5.31275 6.0732 4.94875L1.7892 0.664747C1.43453 0.31008 0.837195 0.31008 0.473195 0.67408Z" fill="#C3CAD9" />
+        </svg>
       </button>
     </div>
     // <div className="bg-white w-full rounded-t-xl">
     //   <div className="flex py-8 gap-x-4 justify-center">
-    
+
     //     <div className="flex gap-x-4 my-auto">
     //       <div className="py-1 px-4 my-auto bg-[#dc2626] rounded-lg font-medium text-white">
     //         <h1 className=''>Table 1</h1>
