@@ -27,9 +27,9 @@ const renderDisplay = ({ step, status }: props) => {
                 </div>
             </div>
         } else {
-            return <div className="my-2">
+            return <div className="mb-4">
                 <div className="bg-[#f89f9b] rounded-xl border-[#de8e8b] border-4 mb-4">
-                    <div className="flex px-12 py-[10px]  gap-8 items-center">
+                    <div className="flex px-12 py-[10px] gap-8 items-center">
                         <div className="">
                             <div className="bg-white p-[7px] rounded-lg">
                                 <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,13 +37,15 @@ const renderDisplay = ({ step, status }: props) => {
                                 </svg>
                             </div>
                         </div>
-                        <div className="">
+                        <div className="text-[13px]">
                             <h1 className="font-semibold">Your confirmation isn't Confirmed!</h1>
                         </div>
                     </div>
                 </div>
-                <div className="bg-black/25 rounded-xl shadow-lg px-4 py-3 italic text-sm">
-                    <p>Kami mohon maaf, pemesanan meja Anda tidak dapat diproses karena Anda telah meminjam meja melebihi batas yang ditentukan. Silakan cek halaman profile Anda untuk mengetahui detail limit peminjaman.</p>
+                <div className="bg-black/[.1] rounded-xl shadow-md px-6 py-3">
+                    <div className="italic text-wrap text-[11px] leading-4">
+                        <p>Kami mohon maaf, pemesanan meja Anda tidak dapat diproses karena Anda telah meminjam meja melebihi batas yang ditentukan. Silakan cek halaman profile Anda untuk mengetahui detail limit peminjaman.</p>
+                    </div>
                 </div>
             </div>
         }
@@ -81,7 +83,7 @@ const renderDisplay = ({ step, status }: props) => {
             </div>
 
             <div className="my-10">
-                <div className="flex gap-8 w-4/5 mx-auto justify-center my-5">
+                <div className="flex gap-8 my-5 w-[80%] mx-auto">
                     {/* START RESERVATION DETAILS */}
                     <div className="">
                         {renderStatus()}
@@ -91,28 +93,27 @@ const renderDisplay = ({ step, status }: props) => {
                                 <div className="pb-4">
                                     <h1 className="font-extrabold">Reservation Details  </h1>
                                 </div>
-
                                 {/*START ROW 1 */}
                                 <div className="grid grid-cols-3 gap-8">
-                                    <div className="col-span-1">
+                                    <div className="col-span-1 text-[12px]">
                                         <h1 className="font-light italic">Guess</h1>
-                                        <div className="font-bold">
+                                        <div className="font-semibold">
                                             <p>example@mhs.dinus.ac.id</p>
                                             <p>example@mhs.dinus.ac.id</p>
                                             <p>example@mhs.dinus.ac.id</p>
                                             <p>example@mhs.dinus.ac.id</p>
                                         </div>
                                     </div>
-                                    <div className="col-span-1">
+                                    <div className="col-span-1 text-[12px]">
                                         <h1 className="font-light italic">From</h1>
-                                        <div className="font-bold">
+                                        <div className="font-semibold">
                                             <p>Senin, 31 Oktober 2024</p>
                                         </div>
-                                        <p className="font-medium">Pukul 10.00 AM</p>
+                                        <p className="font-bold">Pukul 10.00 AM</p>
                                     </div>
-                                    <div className="col-span-1">
+                                    <div className="col-span-1 text-[12px]">
                                         <h1 className="font-light italic">End</h1>
-                                        <div className="font-bold">
+                                        <div className="font-semibold">
                                             <p>Senin, 31 Oktober 2024</p>
                                         </div>
                                         <p className="font-medium">Pukul 12.00 AM</p>
@@ -122,22 +123,22 @@ const renderDisplay = ({ step, status }: props) => {
 
                                 {/* START ROW 2 */}
                                 <div className="grid grid-cols-3 gap-8 mt-4">
-                                    <div className="col-span-1">
+                                    <div className="col-span-1 text-[12px]">
                                         <h1 className="font-light italic">Table number</h1>
-                                        <div className="font-bold">
+                                        <div className="font-semibold">
                                             <p>T-01</p>
                                         </div>
                                     </div>
-                                    <div className="col-span-1">
+                                    <div className="col-span-1 text-[12px]">
                                         <h1 className="font-light italic">Person</h1>
-                                        <div className="font-bold">
+                                        <div className="font-semibold">
                                             <p>4</p>
                                         </div>
                                     </div>
-                                    <div className="col-span-1">
+                                    <div className="col-span-1 text-[12px]">
                                         <div className="">
                                             <h1 className="font-light italic">Booking number</h1>
-                                            <div className="font-bold">
+                                            <div className="font-semibold">
                                                 <p>123ASW</p>
                                             </div>
                                         </div>
@@ -158,41 +159,41 @@ const renderDisplay = ({ step, status }: props) => {
                             <div className="border-[#e5e5e5] border-4 rounded-lg">
                                 <div className="px-3 py-4">
                                     <div className="flex">
-                                        <div className="mr-auto flex flex-col gap-2">
-                                            <p className="text-sm font-bold text-[#ababab]">From</p>
-                                            <p className="text-sm font-bold">Senin, 24 Oktober 2024</p>
-                                            <p className="text-[15px] font-medium">Pukul 10:00 AM</p>
+                                        <div className="mr-auto flex flex-col gap-2 ">
+                                            <p className="text-[10px] font-semibold text-[#ababab]">From</p>
+                                            <p className="text-[12px] font-semibold">Senin, 24 Oktober 2024</p>
+                                            <p className="text-[12px] font-semibold">Pukul 10:00 AM</p>
                                         </div>
                                         <div className="h-full border-r-[3px] border-[#b2b2b2] py-6 my-auto">
                                         </div>
                                         <div className="ml-auto flex flex-col gap-2">
-                                            <p className="text-sm font-bold text-[#ababab]">To</p>
-                                            <p className="text-sm font-bold">Senin, 24 Oktober 2024</p>
-                                            <p className="text-[15px] font-medium">Pukul 11:00 AM</p>
+                                            <p className="text-[10px] font-semibold text-[#ababab]">To</p>
+                                            <p className="text-[10px] font-semibold">Senin, 24 Oktober 2024</p>
+                                            <p className="text-[12px] font-semibold">Pukul 11:00 AM</p>
                                         </div>
                                     </div>
 
                                     <div className="flex mt-5">
                                         <div className="flex flex-col gap-3 mr-8">
                                             <div className="">
-                                                <p className="text-sm font-bold text-[#ababab]">Total peminjam</p>
-                                                <p className="text-sm font-bold">99+</p>
+                                                <p className="text-[10px] font-semibold text-[#ababab]">Total peminjam</p>
+                                                <p className="text-[12px] font-semibold">99+</p>
                                             </div>
                                             <div className="">
-                                                <p className="text-sm font-bold text-[#ababab]">No meja</p>
-                                                <p className="text-sm font-bold">T1</p>
+                                                <p className="text-[10px] font-semibold text-[#ababab]">No meja</p>
+                                                <p className="text-[12px] font-semibold">T1</p>
                                             </div>
                                             <div className="">
-                                                <p className="text-sm font-bold text-[#ababab]">Booking number</p>
-                                                <p className="text-sm font-bold">123ASW</p>
+                                                <p className="text-[10px] font-semibold text-[#ababab]">Booking number</p>
+                                                <p className="text-[12px] font-bold">123ASW</p>
                                             </div>
                                         </div>
                                         <div className="">
-                                            <p className="text-sm font-bold text-[#ababab]">NIM</p>
-                                            <div className="">
-                                                <p className="text-sm font-bold">example@mail.com</p>
-                                                <p className="text-sm font-bold">example@mail.com</p>
-                                                <p className="text-sm font-bold">example@mail.com</p>
+                                            <p className="text-[10px] font-semibold text-[#ababab]">NIM</p>
+                                            <div className="text-[12px] font-semibold">
+                                                <p>example@mail.com</p>
+                                                <p>example@mail.com</p>
+                                                <p>example@mail.com</p>
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +201,7 @@ const renderDisplay = ({ step, status }: props) => {
                                     <div className="mt-4 w-full text-center">
                                         <button className="mx-auto">
                                             <div className="flex items-center">
-                                                <h1 className="text-[11px] text-[#172688] mr-2">Kembali ke dashboard</h1>
+                                                <h1 className="text-[10px] text-[#172688] mr-2">Kembali ke dashboard</h1>
                                             </div>
                                         </button>
                                     </div>

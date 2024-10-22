@@ -48,8 +48,8 @@ const Calendar: React.FC<CalendarProps> = ({ events, weekDates }) => {
         <button
           onClick={handlePrevious}
           disabled={activeIndex === 0}
-          className={'rounded-full border-2 p-4 hover:border-gray-700 active:border-[3px] shadow-sm ' +
-            (activeIndex === 0 ? 'cursor-not-allowed' : 'hover:bg-gray-400')}
+          className={'rounded-full border-2 p-4 hover:border-gray-400 active:border-[3px] shadow-sm ' +
+            (activeIndex === 0 ? 'cursor-not-allowed' : '')}
         >
           <div className="">
             <svg width="11" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,8 +75,8 @@ const Calendar: React.FC<CalendarProps> = ({ events, weekDates }) => {
         <button
           onClick={handleNext}
           disabled={activeIndex === contents.length - 1}
-          className={"rounded-full border-2 p-4 hover:border-gray-700 active:border-[3px] shadow-sm " +
-            (activeIndex === contents.length - 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400')}
+          className={"rounded-full border-2 p-4 hover:border-gray-400 active:border-[3px] shadow-sm " +
+            (activeIndex === contents.length - 1 ? 'cursor-not-allowed' : '')}
         >
           <div >
             <svg width="11" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">

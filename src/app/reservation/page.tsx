@@ -19,9 +19,9 @@ const renderDisplay = () => {
 
     const [status, setStatus] = useState('')
 
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
     function nextButt(){
-        if(step == 1){
+        if(step == totalStep.length - 1){
             // submit()
             console.log(date2String())
         }
