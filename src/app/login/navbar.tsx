@@ -1,9 +1,9 @@
 const navbar = () => {
   return (
     <div className="">
-      <nav className="bg-white ">
+      <nav className="">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <div className="flex items-center md:shadow-md md:w-full md:col-auto md:rounded-lg md:py-6">
+          <div className="flex items-center bg-white md:border-[3px] md:border-gray-200 md:w-full md:col-auto md:rounded-[20px] md:py-6">
             <div className="flex md:mx-10">
               <img
                 src="./image/benlogo.png"
