@@ -2,7 +2,7 @@
 import Image from "next/image";
 import HeaderAuth from "../template/header";
 import Calendar from "./calendar/Calendar2";
-import History from "../dashboard/history/history";
+import History from "./history/history";
 import Footer from "../template/footer";
 import { useState } from "react";
 

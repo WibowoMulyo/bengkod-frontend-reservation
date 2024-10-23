@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Navlink from "@/app/component/NavLink";
+import Navlink from "@/pages/component/NavLink";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 const renderDisplay = () => {
@@ -17,13 +17,13 @@ const renderDisplay = () => {
           <div className="flex mr-20 gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full items-center">
             <Navlink
               href="dashboard"
-              active={window.location.pathname == "/dashboard"}
+              // active={window.location.pathname == "/dashboard"}
             >
               Dashboard
             </Navlink>
             <Navlink
               href="reservation"
-              active={window.location.pathname == "/reservation"}
+              // active={window.location.pathname == "/reservation"}
             >
               Reservation
             </Navlink>
