@@ -17,15 +17,15 @@ const renderComp: React.FC<props> = ({ children, value, setValue, disabled }) =>
 
     return (
         <div
-            className={"relative py-2 pr-2 pl-4 rounded-xl flex items-center " + (isActive ? 'bg-blue-900 text-white' : 'bg-[#d9d9d9]')}
+            className={"relative md:py-[2.5%] md:pr-[2%] md:pl-[3%] pr-[1%] pl-[8%] py-[2%] md:rounded-2xl rounded-full flex items-center " + (isActive ? 'bg-blue-900 text-white' : 'bg-[#d9d9d9]')}
         >
-            <div className="mr-auto py-4">
+            <div className="mr-auto">
                 {children}
             </div>
             <input type="checkbox" checked={true} value={value} 
             onChange={(e) => {setValue(e.target.value); switchBool()}}
             disabled={disabled}
-            className="absolute top-0 left-0 p-4 w-full h-full opacity-0 cursor-pointer" />
+            className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer md:text-lg text-sm" />
         </div>
     )
 }
