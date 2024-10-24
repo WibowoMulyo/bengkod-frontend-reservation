@@ -90,7 +90,7 @@ const renderDisplay = ({ step, status }: props) => {
                         <hr />
                     </div>
                     {/* Step 3 */}
-                    <div className="rounded-lg p-4 bg-[#c4c8d3] mr-2">
+                    <div className="rounded-lg p-4 bg-[#1e3a8b] mr-2">
                     </div>
                     <div className="font-semibold">
                         Confirmation

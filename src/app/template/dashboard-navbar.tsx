@@ -1,11 +1,10 @@
-'use client'
 import Image from "next/image";
 import HeaderAuth from "../template/header";
-import Calendar from "./calendar/Calendar2";
-import History from "./history/history";
+import Calendar from "../dashboard/calendar/Calendar2";
+import History from "../dashboard/history/history";
 import Footer from "../template/footer";
 import { useState } from "react";
-
+import Profile from "../profile/page";
 const events = [
     { id: 1, title: 'DNCC', startTime: '09:00', endTime: '10:00', participants: ['avatar1.png', 'avatar2.png'], day: 0 },
     { id: 2, title: 'BEM FIK', startTime: '11:00', endTime: '12:00', participants: ['avatar3.png'], day: 1 },
@@ -15,12 +14,11 @@ const events = [
 
 const weekDates = ["12", "13", "14", "15", "16", "17", "18"];
 
-const renderDisplay = () => {
-    const [navbar, setNavbar] = useState(1)
-    return (
-        <div className="">
-            <HeaderAuth />
-            <div className="md:flex block">
+const Dashboard_navbar = () => {
+    const [navbar, setNavbar] = useState(0)
+
+    return(
+        <div className="md:flex block">
                 {/* HEADER CONTENT */}
                 <div className="lg:mx-8 my-14 flex flex-col">
                     <div className="text-center">
@@ -49,7 +47,9 @@ const renderDisplay = () => {
                     </div>
                     <div className="hidden md:flex flex-col h-full mt-2">
                         <div className="mt-6 mx-2">
-                            <button className={"relative w-full rounded-lg hover:bg-[#1e3a8b] hover:text-white " + (navbar === 1 ? 'bg-[#1e3a8b] text-white' : 'text-black')} onClick={e => setNavbar(1)}>
+                            <button className={"relative mt-4 w-full rounded-lg hover:bg-[#1e3a8b] hover:text-white " + (navbar === 2 ? 'bg-[#1e3a8b] text-white' : 'text-black')} 
+                            onClick={e => setNavbar(1)}
+                            disabled>
                                 <div className="p-4 flex gap-x-4 items-center">
                                     <svg width="17" height="17" viewBox="0 0 18 17" fill="#1e3a8b" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.00625 2.8501C4.63906 1.21729 6.58698 0.400879 8.85 0.400879C11.113 0.400879 13.0466 1.21729 14.6508 2.8501C16.2836 4.45426 17.1 6.38786 17.1 8.65088C17.1 10.9139 16.2836 12.8618 14.6508 14.4946C13.0466 16.0988 11.113 16.9009 8.85 16.9009C6.58698 16.9009 4.63906 16.0988 3.00625 14.4946C1.40208 12.8618 0.599998 10.9139 0.599998 8.65088C0.599998 6.38786 1.40208 4.45426 3.00625 2.8501ZM13.7055 3.79541C12.3591 2.44906 10.7406 1.77588 8.85 1.77588C6.95937 1.77588 5.34088 2.44906 3.99453 3.79541C2.64818 5.14176 1.975 6.76025 1.975 8.65088C1.975 10.5415 2.64818 12.16 3.99453 13.5063C5.34088 14.8527 6.95937 15.5259 8.85 15.5259C10.7406 15.5259 12.3591 14.8527 13.7055 13.5063C15.0518 12.16 15.725 10.5415 15.725 8.65088C15.725 6.76025 15.0518 5.14176 13.7055 3.79541ZM8.33437 2.67822C8.4776 2.53499 8.64948 2.46338 8.85 2.46338C9.05052 2.46338 9.20807 2.53499 9.32265 2.67822C9.46588 2.79281 9.5375 2.95036 9.5375 3.15088C9.5375 3.3514 9.46588 3.52327 9.32265 3.6665C9.20807 3.78109 9.05052 3.83838 8.85 3.83838C8.64948 3.83838 8.4776 3.78109 8.33437 3.6665C8.21979 3.52327 8.1625 3.3514 8.1625 3.15088C8.1625 2.95036 8.21979 2.79281 8.33437 2.67822ZM4.46719 4.31104C4.61042 4.16781 4.76797 4.09619 4.93984 4.09619C5.14036 4.09619 5.31224 4.16781 5.45547 4.31104C5.5987 4.42562 5.67031 4.58317 5.67031 4.78369C5.67031 4.95557 5.5987 5.11312 5.45547 5.25635C5.31224 5.39958 5.14036 5.47119 4.93984 5.47119C4.76797 5.47119 4.61042 5.39958 4.46719 5.25635C4.3526 5.11312 4.29531 4.95557 4.29531 4.78369C4.29531 4.58317 4.3526 4.42562 4.46719 4.31104ZM12.2445 4.26807L13.2328 5.25635L10.182 8.30713C10.2107 8.42171 10.225 8.5363 10.225 8.65088C10.225 9.02327 10.0818 9.3527 9.79531 9.63916C9.5375 9.89697 9.22239 10.0259 8.85 10.0259C8.4776 10.0259 8.14818 9.89697 7.86172 9.63916C7.6039 9.3527 7.475 9.02327 7.475 8.65088C7.475 8.27848 7.6039 7.96338 7.86172 7.70557C8.14818 7.41911 8.4776 7.27588 8.85 7.27588C8.96458 7.27588 9.07917 7.2902 9.19375 7.31885L12.2445 4.26807ZM2.83437 8.17822C2.9776 8.03499 3.14948 7.96338 3.35 7.96338C3.55052 7.96338 3.70807 8.03499 3.82265 8.17822C3.96588 8.29281 4.0375 8.45036 4.0375 8.65088C4.0375 8.8514 3.96588 9.02327 3.82265 9.1665C3.70807 9.28109 3.55052 9.33838 3.35 9.33838C3.14948 9.33838 2.9776 9.28109 2.83437 9.1665C2.71979 9.02327 2.6625 8.8514 2.6625 8.65088C2.6625 8.45036 2.71979 8.29281 2.83437 8.17822ZM13.8344 8.17822C13.9776 8.03499 14.1495 7.96338 14.35 7.96338C14.5505 7.96338 14.7081 8.03499 14.8227 8.17822C14.9659 8.29281 15.0375 8.45036 15.0375 8.65088C15.0375 8.8514 14.9659 9.02327 14.8227 9.1665C14.7081 9.28109 14.5505 9.33838 14.35 9.33838C14.1495 9.33838 13.9776 9.28109 13.8344 9.1665C13.7198 9.02327 13.6625 8.8514 13.6625 8.65088C13.6625 8.45036 13.7198 8.29281 13.8344 8.17822ZM4.46719 12.0454C4.61042 11.9022 4.76797 11.8306 4.93984 11.8306C5.14036 11.8306 5.31224 11.9022 5.45547 12.0454C5.5987 12.1886 5.67031 12.3605 5.67031 12.561C5.67031 12.7329 5.5987 12.8905 5.45547 13.0337C5.31224 13.1483 5.14036 13.2056 4.93984 13.2056C4.76797 13.2056 4.61042 13.1483 4.46719 13.0337C4.3526 12.8905 4.29531 12.7329 4.29531 12.561C4.29531 12.3605 4.3526 12.1886 4.46719 12.0454ZM12.2445 12.0454C12.3878 11.9022 12.5453 11.8306 12.7172 11.8306C12.9177 11.8306 13.0753 11.9022 13.1898 12.0454C13.3331 12.1886 13.4047 12.3605 13.4047 12.561C13.4047 12.7329 13.3331 12.8905 13.1898 13.0337C13.0753 13.1483 12.9177 13.2056 12.7172 13.2056C12.5453 13.2056 12.3878 13.1483 12.2445 13.0337C12.1013 12.8905 12.0297 12.7329 12.0297 12.561C12.0297 12.3605 12.1013 12.1886 12.2445 12.0454Z" fill="white" />
@@ -58,7 +58,11 @@ const renderDisplay = () => {
                                 </div>
                                 {navbar === 1 ? <div className="absolute top-0 -left-14 bg-[#1e3a8b] py-[26px] px-[10px] rounded-lg"></div> : ''}
                             </button>
-                            <button className={"relative mt-4 w-full rounded-lg hover:bg-[#1e3a8b] hover:text-white " + (navbar === 2 ? 'bg-[#1e3a8b] text-white' : 'text-black')} onClick={e => setNavbar(2)}>
+                            <button 
+                            className={"relative mt-4 w-full rounded-lg hover:bg-[#1e3a8b] hover:text-white " + (navbar === 2 ? 'bg-[#1e3a8b] text-white' : 'text-black')} 
+                            onClick={e => setNavbar(2)}
+                            disabled
+                            >
                                 <div className="p-4 flex gap-x-4 items-center">
                                     <svg width="17" height="17" viewBox="0 0 16 16" fill="#1e3a8b" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.287499 0.0883789H0.974999H14.725H15.4125V0.775879V14.5259V15.2134H14.725H0.974999H0.287499V14.5259V0.775879V0.0883789ZM1.6625 1.46338V6.96338H7.1625V1.46338H1.6625ZM8.5375 1.46338V6.96338H14.0375V1.46338H8.5375ZM1.6625 8.33838V13.8384H7.1625V8.33838H1.6625ZM8.5375 8.33838V13.8384H14.0375V8.33838H8.5375Z" fill="black" />
@@ -90,16 +94,14 @@ const renderDisplay = () => {
                         </div>
                     </div>
                 </div>
-                <div className="overflow-x-auto xl:overflow-visible">
+                <div className="overflow-x-auto xl:overflow-visible hidden">
                     <div className="min-w-[1080px] md:my-4 md:mr-4 ml-4 md:ml-0">
                         {navbar === 1 && <Calendar events={events} weekDates={weekDates} />}
                         {navbar === 2 && <History navbar={navbar} />}
                     </div>
                 </div>
             </div>
-            <Footer />
-        </div>
     )
 }
 
-export default renderDisplay;
+export default Dashboard_navbar;
