@@ -151,7 +151,7 @@ const renderDisplay = ({ step, status }: props) => {
                                 {/*START ROW 1 */}
                                 <div className="xl:grid grid-cols-3 gap-8 flex flex-col gap-y-4">
                                     <div className="col-span-1">
-                                        <h1 className="font-light italic md:text-lg text-[10px]">Guess</h1>
+                                        <h1 className="font-light italic md:text-[16px] text-[10px]">Guess</h1>
                                         <div className="md:text-[15px] text-[11px] font-medium">
                                             <p>example@mhs.dinus.ac.id</p>
                                             <p>example@mhs.dinus.ac.id</p>
@@ -160,14 +160,14 @@ const renderDisplay = ({ step, status }: props) => {
                                         </div>
                                     </div>
                                     <div className="col-span-1">
-                                        <h1 className="font-light italic md:text-lg text-[10px]">From</h1>
+                                        <h1 className="font-light italic md:text-[16px] text-[10px]">From</h1>
                                         <div className="md:text-[15px] text-[11px] font-medium">
                                             <p>Senin, 31 Oktober 2024</p>
                                         </div>
                                         <p className="md:text-[15px] text-[11px] font-medium">Pukul 10.00 AM</p>
                                     </div>
                                     <div className="col-span-1">
-                                        <h1 className="font-light italic md:text-lg text-[10px]">End</h1>
+                                        <h1 className="font-light italic md:text-[16px] text-[10px]">End</h1>
                                         <div className="md:text-[15px] text-[11px] font-medium">
                                             <p>Senin, 31 Oktober 2024</p>
                                         </div>
@@ -180,20 +180,20 @@ const renderDisplay = ({ step, status }: props) => {
                                 {/* START ROW 2 */}
                                 <div className="xl:grid grid-cols-3 gap-8 mt-4 flex flex-col gap-y-4">
                                     <div className="col-span-1">
-                                        <h1 className="font-light italic md:text-lg text-[10px]">Table number</h1>
+                                        <h1 className="font-light italic md:text-[16px] text-[10px]">Table number</h1>
                                         <div className="md:text-[15px] text-[11px] font-medium">
                                             <p>T-01</p>
                                         </div>
                                     </div>
                                     <div className="col-span-1">
-                                        <h1 className="font-light italic md:text-lg text-[10px]">Person</h1>
+                                        <h1 className="font-light italic md:text-[16px] text-[10px]">Person</h1>
                                         <div className="md:text-[15px] text-[11px] font-medium">
                                             <p>4</p>
                                         </div>
                                     </div>
                                     <div className="col-span-1">
                                         <div className="">
-                                            <h1 className="font-light italic md:text-lg text-[10px]">Booking number</h1>
+                                            <h1 className="font-light italic md:text-[16px] text-[10px]">Booking number</h1>
                                             <div className="md:text-[15px] text-[11px] font-medium">
                                                 <p>123ASW</p>
                                             </div>

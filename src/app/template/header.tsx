@@ -19,27 +19,27 @@ const renderDisplay = () => {
           </div>
           <div className="flex mr-20 gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full items-center">
             <Navlink
-              href="/dashboard"
-            // active={route.pathname == '/dashboard'}
+              statichref="/dashboard"
+              href="/dashboard/calendar"
             >
               Dashboard
             </Navlink>
             <Navlink
+            statichref="/reservation"
               href="/reservation"
-            // active={route.pathname == '/reservation'}
             >
               Reservation
             </Navlink>
           </div>
           <div className="my-auto">
-            <CustomLink href="/profile">
+            <CustomLink href="/dashboard/profile">
               <img src="/image/profile-image.jpeg" alt="" className="rounded-full w-[60px]" />
             </CustomLink>
           </div>
         </div>
       </div>
 
-      <div className="flex m-4 items-center md:hidden">
+      <div className="flex m-3 items-center md:hidden">
         <div className="mr-auto">
 
           <img src="/image/Bengkod_Logo.png" className="lg:hidden w-[150px]" alt="" />

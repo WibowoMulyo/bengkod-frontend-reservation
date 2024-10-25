@@ -1,6 +1,6 @@
 const footer = () => {
   return (
-    <div className="bg-blue-900 flex flex-col text-white md:relative mt-4">
+    <div className="bg-blue-900 flex flex-col text-white md:relative">
       <div className="mx-6 my-10 md:flex md:mx-40">
         <div className="md:absolute md:right-64 text-sm">
           <h4 className="flex my-6 md:text-sm items-center">Beranda</h4>
@@ -11,7 +11,7 @@ const footer = () => {
         <div className="my-12 md:my-0 md:mr-64">
           <div className="flex space-x-4 my-6 items-center">
             <div className="size-12 md:size-16">
-              <img src="./image/benlogo_white.png" alt="benlogo" />
+              <img src="/image/benlogo_white.png" alt="benlogo" />
             </div>
             <div>
               <h1 className="text-xl font-bold md:text-3xl">Bengkel Koding</h1>
@@ -28,9 +28,9 @@ const footer = () => {
           </div>
 
           <div className="flex size-6 my-6 md:size-8 md:my-10">
-            <img src="./image/block_tktk.png" alt="tiktok icon" />
-            <img src="./image/block_twitta.png" alt="twitter icon" />
-            <img src="./image/block_insta.png" alt="instagram icon" />
+            <img src="/image/block_tktk.png" alt="tiktok icon" />
+            <img src="/image/block_twitta.png" alt="twitter icon" />
+            <img src="/image/block_insta.png" alt="instagram icon" />
           </div>
         </div>
       </div>
@@ -38,7 +38,6 @@ const footer = () => {
         <hr className="border-gray-300 size-8/12" />
         <div className="my-6 text-xs flex items-center justify-center md:text-lg">Copyright © 2024. Bengkel Koding</div>
       </div>
-
       <div>
         <h1 className="text-blue-900">Atashi no</h1>
       </div>
@@ -46,8 +45,8 @@ const footer = () => {
 
 
       <div className="hidden md:block">
-        <img className="left-0 bottom-0 absolute w-56" src="./image/bg-left-bottom.png" alt="" />
-        <img className="right-0 top-0 absolute w-56" src="./image/bg-right-top.png" alt="" />
+        <img className="left-0 bottom-0 absolute w-56" src="/image/bg-left-bottom.png" alt="" />
+        <img className="right-0 top-0 absolute w-56" src="/image/bg-right-top.png" alt="" />
       </div>
 
     </div>
