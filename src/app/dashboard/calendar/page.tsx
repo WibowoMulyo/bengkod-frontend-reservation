@@ -2,49 +2,59 @@
 import Footer from "../../template/footer";
 import HeaderAuth from "../../template/header";
 import Dashboard_navbar from "../../template/dashboard-navbar";
-import { getDayOfWeek, getReservationsMap } from "@/app/component/calendar/calendartype";
-import React, { useState } from 'react';
+import { getDayOfWeek, getReservationsDateMap } from "@/app/component/calendar/calendartype";
+import React, { useEffect, useState } from 'react';
+import { Reservation } from "@/app/component/interface/Reservation";
 
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const time_rents = ["08:00-10:00", "10:01-12:00", "12:01-13:00", "13:01-15:00", "15:01-17:00"]
 const hours = ['08:00-10:00', '10:01-12:00', '12:01-13:00', '13:01-15:00', '15:01-17:00'];
 const Table = [1, 2, 3, 4, 5, 6, 7, 8]
 
-
-interface Reservation {
-  id: number;
-  status: 0 | 1;
-  reservation_type: 0 | 1;
-  reservation_date: string; // format 'YYYY-MM-DD'
-  time_rents: string; // format 'HH:mm'
-}
-
-// Mock reservation data
+// Mock reservation reservationMap
 const reservations: Reservation[] = [
-  { id: 1, status: 1, reservation_type: 0, reservation_date: '2024-10-24', time_rents: '13:01-15:00' },
-  { id: 2, status: 0, reservation_type: 1, reservation_date: '2024-10-30', time_rents: '10:01-12:00' },
+  { id: 1, status: 1, reservation_type: 0, reservation_date: '2024-10-29', time_rents: '13:01-15:00', table: 'Table 01' },
+  { id: 2, status: 0, reservation_type: 1, reservation_date: '2024-10-30', time_rents: '10:01-12:00', table: 'Table 01' },
+  { id: 3, status: 0, reservation_type: 1, reservation_date: '2024-10-31', time_rents: '15:01-17:00', table: 'Table 04' },
 ];
 
-const color_array = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
+const filterData = (reservationMap: Array<Reservation>, key: string ) => {
+  if (!reservationMap) return [];
+  if(!key) return [];
+
+  return reservationMap.filter((x) =>
+    x.table.includes(key)
+  )
+}
+
+// const color_array = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
 
 const Calendar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const contents = ['Content 1', 'Content 2', 'Content 3', 'Content 4'];
+  const contents = ['Table 01', 'Table 02', 'Table 03', 'Table 04', 'Table 05', 'Table 06'];
+  const [reservationsMap, setReservationMap] = useState(getReservationsDateMap(filterData(reservations, contents[0])))
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeIndex < contents.length - 1) {
-      setActiveIndex(prevIndex => prevIndex + 1);
-      console.log(reservationsMap)
+      // setActiveIndex(prevIndex => prevIndex + 1);
+      setActiveIndex(prevIndex => prevIndex + 1)
+      setReservationMap(getReservationsDateMap(filterData(reservations, contents[activeIndex + 1])))
     }
   };
 
-  const handlePrevious = () => {
+  const handlePrevious = async () => {
     if (activeIndex > 0) {
       setActiveIndex(prevIndex => prevIndex - 1);
+      setReservationMap(getReservationsDateMap(filterData(reservations, contents[activeIndex - 1])))
     }
   };
-  const reservationsMap = getReservationsMap(reservations)
+
+  const show = () => {
+    
+  }
+
+  // const reservationsMap = getReservationsDateMap(reservations)
   return (
     <div className="">
       <HeaderAuth />
@@ -70,13 +80,13 @@ const Calendar = () => {
               {/* Konten Tengah */}
               <div className="flex gap-x-4 my-auto">
                 <div className="py-1 px-4 rounded-lg font-medium text-[#71717A]">
-                  {activeIndex > 0 && <h1 className=''>{contents[activeIndex - 1]}</h1>}
+                  {activeIndex > 0 ? <h1 className=''>{contents[activeIndex - 1]}</h1> : <h1 className="invisible pointer-events-none">Table 00</h1>}
                 </div>
                 <div className="py-1 px-4 my-auto bg-[#dc2626] rounded-lg font-medium text-white ">
                   <h1 className=''>{contents[activeIndex]}</h1>
                 </div>
                 <div className="py-1 px-4 rounded-lg font-medium text-[#71717A]">
-                  {activeIndex < contents.length - 1 && <h1 className=''>{contents[activeIndex + 1]}</h1>}
+                  {activeIndex < contents.length - 1 ? <h1 className=''>{contents[activeIndex + 1]}</h1>  : <h1 className="invisible pointer-events-none">Table 07</h1>}
                 </div>
               </div>
 

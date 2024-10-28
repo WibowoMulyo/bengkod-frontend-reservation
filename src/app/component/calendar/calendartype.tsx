@@ -16,10 +16,11 @@ function getDayOfWeek(dateString: string): number {
   return date.getDay(); 
 }
 
-function getReservationsMap(reservations: Reservation[]) {
+function getReservationsDateMap(reservations: Reservation[]) {
   const map: { [key: string]: Set<string> } = {};
   
   reservations.forEach(({ reservation_date, time_rents }) => {
+    // column_key
     if (!map[reservation_date]) {
       map[reservation_date] = new Set();
     }
@@ -29,4 +30,18 @@ function getReservationsMap(reservations: Reservation[]) {
   return map; // { '2024-10-07': Set{'10:00', ...}, ...}
 }
 
-export { getDayOfWeek, getReservationsMap };
+function getReservationHourMap(reservations: Reservation[]){
+  const map: { [key: string]: Set<string> } = {};
+  
+  reservations.forEach(({ id, time_rents }) => {
+    // column_key
+    if (!map[time_rents]) {
+      map[time_rents] = new Set();
+    }
+    map[time_rents].add(id.toString());
+  });
+
+  return map; // { '2024-10-07': Set{'10:00', ...}, ...}
+}
+
+export { getDayOfWeek, getReservationsDateMap, getReservationHourMap };

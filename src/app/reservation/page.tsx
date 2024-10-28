@@ -19,7 +19,7 @@ const renderDisplay = () => {
 
     const [status, setStatus] = useState('')
 
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     function nextButt(){
         if(step == totalStep.length - 1){
             // submit()
@@ -62,7 +62,7 @@ const renderDisplay = () => {
                     reserv_opt={setReservationType}
                 />
             case 1:
-                return <Step2 step={nextButt} dur_arr={settime} reserved_time={['08:00']}/>
+                return <Step2 step={nextButt} dur_arr={settime}/>
             case 2:
                 return <Step3 step={nextButt} status={'1'}/>
 
