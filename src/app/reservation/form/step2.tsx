@@ -2,10 +2,10 @@
 // import Calendar from "@/app/component/calendar/Calendar";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { useEffect, useState } from "react";
-import Checkbox from "../../component/Button";
 import ImageMapper from 'react-img-mapper';
 import { getReservationHourMap } from "@/app/component/calendar/calendartype";
 import { reservations } from "@/app/component/mock_data/reservations";
+import { filterData } from "@/app/component/FilterReservation";
 interface props {
   step?: () => void,
   dur_arr: (val: string[]) => void,
@@ -99,7 +99,7 @@ const renderDisplay = ({ step, dur_arr }: props) => {
 
   async function changeTable(e: string) {
     setTable(e)
-    setReservationMap(getReservationHourMap(reservations.filter((data) => data.table.includes(e))))
+    setReservationMap(getReservationHourMap(filterData(reservations, e)))
   }
   useEffect(() => {
 

@@ -5,54 +5,33 @@ import Dashboard_navbar from "../../template/dashboard-navbar";
 import { getDayOfWeek, getReservationsDateMap } from "@/app/component/calendar/calendartype";
 import React, { useEffect, useState } from 'react';
 import { Reservation } from "@/app/component/interface/Reservation";
-
+import { reservations2 } from "@/app/component/mock_data/reservations";
+import { filterData } from "@/app/component/FilterReservation";
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const time_rents = ["08:00-10:00", "10:01-12:00", "12:01-13:00", "13:01-15:00", "15:01-17:00"]
 const hours = ['08:00-10:00', '10:01-12:00', '12:01-13:00', '13:01-15:00', '15:01-17:00'];
 const Table = [1, 2, 3, 4, 5, 6, 7, 8]
 
-// Mock reservation reservationMap
-const reservations: Reservation[] = [
-  { id: 1, status: 1, reservation_type: 0, reservation_date: '2024-10-29', time_rents: '13:01-15:00', table: 'Table 01' },
-  { id: 2, status: 0, reservation_type: 1, reservation_date: '2024-10-30', time_rents: '10:01-12:00', table: 'Table 01' },
-  { id: 3, status: 0, reservation_type: 1, reservation_date: '2024-10-31', time_rents: '15:01-17:00', table: 'Table 04' },
-];
-
-const filterData = (reservationMap: Array<Reservation>, key: string ) => {
-  if (!reservationMap) return [];
-  if(!key) return [];
-
-  return reservationMap.filter((x) =>
-    x.table.includes(key)
-  )
-}
-
-// const color_array = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
-
 const Calendar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const contents = ['Table 01', 'Table 02', 'Table 03', 'Table 04', 'Table 05', 'Table 06'];
-  const [reservationsMap, setReservationMap] = useState(getReservationsDateMap(filterData(reservations, contents[0])))
+  const [reservationsMap, setReservationMap] = useState(getReservationsDateMap(filterData(reservations2, contents[0])))
 
   const handleNext = async () => {
     if (activeIndex < contents.length - 1) {
       // setActiveIndex(prevIndex => prevIndex + 1);
       setActiveIndex(prevIndex => prevIndex + 1)
-      setReservationMap(getReservationsDateMap(filterData(reservations, contents[activeIndex + 1])))
+      setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex + 1])))
     }
   };
 
   const handlePrevious = async () => {
     if (activeIndex > 0) {
       setActiveIndex(prevIndex => prevIndex - 1);
-      setReservationMap(getReservationsDateMap(filterData(reservations, contents[activeIndex - 1])))
+      setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex - 1])))
     }
   };
-
-  const show = () => {
-    
-  }
 
   // const reservationsMap = getReservationsDateMap(reservations)
   return (
