@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import localFont from 'next/font/local'
 import { BrowserRouter } from 'react-router-dom';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Poppins({ 
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+})
 const myFont = localFont({
   src: 'Poppins-Bold.ttf',
   display: 'swap'
