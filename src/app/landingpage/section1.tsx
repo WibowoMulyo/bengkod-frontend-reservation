@@ -1,10 +1,10 @@
 const firstSec = () => {
   return (
-    <div className="my-10 md:mx-16">
+    <div className="my-10 md:mx-16" id="beranda">
       <div className="items-center text-center justify-center">
-        <div className="mx-6 my-4">
-          <div className="text-[24px] mx-10 md:text-5xl md:mx-40 font-bold">
-            <h1 className="">
+        <div className="my-[50px]">
+          <div className="text-[24px] md:text-[40px] font-bold">
+            <h1 className="mx-[64px]">
               Ruang Belajar Privat dan Produktif, Hanya{" "}
               <span className="bg-gradient-to-r from-[#1E3A8B] to-[#35C677] text-transparent bg-clip-text">
                 {" "}
@@ -12,19 +12,19 @@ const firstSec = () => {
               </span>
             </h1>
           </div>
-          <h2 className="my-2 text-xs mx-4 md:text-xl md:mx-40 md:my-10">
+          <h2 className="my-4 mx-6 text-[11px] md:text-[14px] md:text-xl md:mx-64 md:my-10">
             Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
             dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
           </h2>
-        </div>
         <button
-          className="text-white bg-[#1E3A8B] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
-          text-[13px] h-[39px] w-[192px] me-2 mb-2
-          md:text-3xl md:py-4 md:w-40 md:h-12
+          className="text-white bg-[#1E3A8B] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-lg
+          text-[13px] max-h-[39px] max-w-[135px] min-h-[39px] min-w-[135px] me-2 mb-2
+          md:text-3xl md:py-4 md:h-[39px] md:w-[192px]
         "
         >
           Pesan Sekarang
         </button>
+        </div>
       </div>
 
       <div className="hidden md:flex md:w-10/12 md:my-10">

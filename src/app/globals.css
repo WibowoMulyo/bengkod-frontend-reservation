@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+html{
+  top:auto;
+  scroll-behavior: smooth;
+}
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 247,249,250;
   --background-end-rgb: 247,249,250;
-}
+} */
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
@@ -22,7 +27,7 @@
   }
 }*/
 
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -30,7 +35,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
+} */
 
 /* body{
   background: linear-gradient(to bottom, transparent, rgb(247,249,250)) rgb(247,249,250);

@@ -4,8 +4,8 @@ const thirdSec = () => {
       <div className="my-16">
         <div className="flex flex-col justify-center items-center md:my-32">
           <div className="text-center">
-            <h1 className="font-bold text-xl md:text-4xl">Peraturan Kami</h1>
-            <p className="text-xs my-2 md:text-xl md:mx-48">
+            <h1 className="font-bold text-[24px] md:text-4xl">Peraturan Kami</h1>
+            <p className="text-[10px] my-2 md:text-xl md:mx-48">
               Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
               untuk kenyamanan bersama saat menggunakan fasilitas bersama.
             </p>
@@ -13,16 +13,16 @@ const thirdSec = () => {
           <div className="md:flex md:flex-col-2">
             <div>
               <div
-                className="text-center max-w-2xs p-6 bg-white border border-gray-200 rounded-lg shadow-md mx-6 my-6
+                className="text-center justify-center items-center max-w-2xs p-6 bg-white border border-gray-200 rounded-lg shadow-md mx-6 my-6
           md:mx-12"
               >
                 <img
-                  className=""
+                  className="size-[150px] mx-auto"
                   src="./img/time_management.png"
                   alt="manajemen waktu"
                 />
-                <h2 className="font-bold my-2 md:text-lg">Waktu Penggunaan</h2>
-                <p className="text-xs md:text-sm">
+                <h2 className="font-bold my-2 text-[16px] md:text-lg">Waktu Penggunaan</h2>
+                <p className="text-[10px] mx-4 md:text-sm">
                   Patuhi jam operasional ruang belajar yang sudah ditetapkan,
                   waktu adalah uang.
                 </p>
@@ -33,12 +33,12 @@ const thirdSec = () => {
           md:mx-12"
               >
                 <img
-                  className=""
+                  className="size-[150px] mx-auto"
                   src="./img/ketenangan.png"
                   alt="manajemen waktu"
                 />
-                <h2 className="font-bold my-2 md:text-lg">Ketenangan</h2>
-                <p className="text-xs md:text-sm">
+                <h2 className="font-bold my-2 text-[16px] md:text-lg">Ketenangan</h2>
+                <p className="text-[10px] mx-4 md:text-sm">
                   Jaga suasana tenang. Hindari suara berisik yang mengganggu
                   pengguna lain.
                 </p>
@@ -50,12 +50,12 @@ const thirdSec = () => {
           md:mx-12"
               >
                 <img
-                  className=""
+                  className="size-[150px] mx-auto"
                   src="./img/no_bever.png"
                   alt="manajemen waktu"
                 />
-                <h2 className="font-bold my-2 md:text-lg">Makanan & Minuman</h2>
-                <p className="text-xs md:text-sm">
+                <h2 className="font-bold my-2 text-[16px] md:text-lg">Makanan & Minuman</h2>
+                <p className="text-[10px] mx-4 md:text-sm">
                   Dilarang makan makanan berat yang berbau menyengat di dalam
                   ruangan.
                 </p>
@@ -66,12 +66,12 @@ const thirdSec = () => {
           md:mx-12 md:size-auto"
               >
                 <img
-                  className="md:py-0"
+                  className="md:py-0 size-[150px] mx-auto"
                   src="./img/clean.png"
                   alt="manajemen waktu"
                 />
-                <h2 className="font-bold my-2 md:text-lg">Kebersihan</h2>
-                <p className="text-xs md:text-sm">
+                <h2 className="font-bold my-2 text-[16px] md:text-lg">Kebersihan</h2>
+                <p className="text-[10px] mx-4 md:text-sm">
                   Jaga kebersihan lingkungan sekitar. Buang sampah pada
                   tempatnya.
                 </p>

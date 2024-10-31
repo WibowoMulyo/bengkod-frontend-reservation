@@ -1,12 +1,12 @@
 const forthSec = () => {
   return (
-    <div className="mx-4 my-16">
+    <div className="mx-4 my-16" id="tutorial">
       <div
         className="flex flex-col justify-center items-center mx-auto text-center sm:max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow
           md:max-w-4xl md:max-h-fit"
       >
         <img
-          className="mx-auto size-[50px] md:size-20 mt-6"
+          className="mx-auto mt-6 size-[50px] md:size-20"
           src="./img/benlogo.png"
           alt="manajemen waktu"
         />
