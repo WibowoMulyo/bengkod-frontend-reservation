@@ -28,11 +28,17 @@ const renderDisplay = () => {
                 <button className="bg-[#D92D20] rounded-lg p-2 capitalize text-white">hapus gambar</button>
               </div>
               <div className="flex flex-col mt-[4%] space-y-[1.5%]">
-                <div className="font-normal">
-                  <h1 className="text-sm">Sisa Token</h1>
-                  <div className="text-[#667085] italic font-light text-sm ml-2 mt-2">
-                    <p>Anda memiliki sisa 99 jam peminjaman</p>
-                  </div>
+                <div className="bg-[#E9EEF9] p-6 rounded-2xl italic text-[14px] font-normal text-[#344054]">
+                  <p className="mb-4">
+                  Peraturan pengguna:
+                  </p>
+                  <ol>
+                    <li>1. Pengguna diperbolehkan meminjam meja 1 kali dalam 1 hari</li>
+                    <li>2. Pengguna diperbolehkan meminjam meja maksimal untuk 2 hari kedepan</li>
+                    <li>3. Pengguna dilarang membawa makan dan minum kedalam lobby H6</li>
+                    <li>4. Bagi pengguna yang tidak mengikuti aturan akan dikenakan penalti selama 1  minggu</li>
+                    <li>5. Jika pengguna sudah pesan tetapi tidak melakukan konfirmasi kehadiran selama 1 jam, akan terbatalkan secara sistem</li>
+                  </ol>
                 </div>
 
                 <div className="font-normal">

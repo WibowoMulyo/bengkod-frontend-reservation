@@ -13,8 +13,8 @@ const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props
 
     const [date, setDate] = useState<string>('')
     const [email, setEmail] = useState<string[]>([''])
-    const [option, setOption] = useState('')
-
+    const [typeReserve, setTypeReserve] = useState('')
+    const [reason, setReason] = useState('')
     const [error, setError] = useState({})
     const [numberInput, setNumberInput] = useState(1)
     const [isShown, setShown] = useState(false)
@@ -61,7 +61,8 @@ const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props
     }
 
     function validation() {
-        const eror = { date: '', email: '', option: '' }
+        const eror = { date: '', email: '', typeReserve: '',  reason: '' }
+
 
         if (date.length < 1) {
             eror.date = 'Please select a date'
@@ -73,8 +74,12 @@ const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props
         }
         )
 
-        if (option == '') {
-            eror.option = 'Please select an option'
+        if (typeReserve == '') {
+            eror.typeReserve = 'Please select an option'
+        }
+
+        if(reason == ''){
+          eror.reason = 'Please select a reason'
         }
 
         setError(eror)
@@ -117,7 +122,7 @@ const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props
                         <hr />
                     </div>
                     {/* Step 2 */}
-                    <div className="rounded-lg p-4 bg-[#1e3a8b] mr-2">
+                    <div className="rounded-lg p-4 bg-[#c4c8d3] mr-2">
                     </div>
                     <div className="font-semibold">
                         Tables
@@ -176,7 +181,7 @@ const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props
 
             <div className="bg-white rounded-2xl lg:mx-36 lg:mb-44 my-10 mx-4">
                 <div className="lg:py-16 lg:px-14 py-10 px-7 md:flex block">
-                    <img src="/img/test-cropped.jpg" alt="" className="xl:w-[650px] w-[300px] lg:w-[400px]" />
+                    <img src="/img/test-cropped.jpg" alt="" className="xl:w-[650px] xl:h-[466px] w-[300px] lg:w-[400px]" />
                     <div className="bg-[#f6f6f6] rounded-xl ml-auto lg:w-[375px]">
                         <div className="pt-6 px-6 pb-9 h-full flex flex-col lg:mt-0 mt-6">
                             <div className="mb-auto">
@@ -191,12 +196,26 @@ const renderDisplay = ({ onClick, reserv_date, reserv_email, reserv_opt }: props
                                     </div>
                                 </div>
                                 <div className="my-2">
+                                    <h1 className="font-semibold">Tujuan pemesanan</h1>
+                                    <div className="my-2">
+                                        <select name="" id="" className=
+                                            "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10"
+                                            value={reason}
+                                            onChange={(e) => { setReason(e.target.value); }}
+                                        >
+                                            <option value="">--</option>
+                                            <option value="individu">Belajar mandiri</option>
+                                            <option value="tim">Nyantuy</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="my-2">
                                     <h1 className="font-semibold">Jenis pemesanan</h1>
                                     <div className="my-2">
                                         <select name="" id="" className=
                                             "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10"
-                                            value={option}
-                                            onChange={(e) => { setOption(e.target.value); shownTeamInput(e.target.value) }}
+                                            value={typeReserve}
+                                            onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value) }}
                                         >
                                             <option value="">--</option>
                                             <option value="individu">individu</option>

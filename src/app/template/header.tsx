@@ -25,13 +25,18 @@ const renderDisplay = () => {
               Dashboard
             </Navlink>
             <Navlink
-            statichref="/reservation"
+              statichref="/reservation"
               href="/reservation"
             >
               Reservation
             </Navlink>
           </div>
-          <div className="my-auto">
+          <div className="my-auto flex gap-x-4 items-center">
+            <div className="">
+              <div className="p-1 bg-[#FFE3E3] border-[#E59898] italic font-normal border-2 rounded-xl text-[14px] text-[#667085]">
+                Sisa waktu peminjaman tersisa 2 jam
+              </div>
+            </div>
             <CustomLink href="/dashboard/profile">
               <img src="/image/profile-image.jpeg" alt="" className="rounded-full w-[60px]" />
             </CustomLink>

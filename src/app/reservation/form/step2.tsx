@@ -58,7 +58,7 @@ const renderDisplay = ({ step, dur_arr }: props) => {
     '08:00-10:00', '10:01-12:00', '13:01-15:00', '15:01-17:00'
   ];
   const [selectSeat, setSelectSeat] = useState('');
-  const [duration, setDuration] = useState<string[]>([])
+  const [duration, setDuration] = useState('')
   const [table, setTable] = useState('')
   const [reservationMap, setReservationMap] = useState(getReservationHourMap([]));
 
@@ -80,7 +80,7 @@ const renderDisplay = ({ step, dur_arr }: props) => {
     return (
       <button
         disabled={table ? false : true}
-        onClick={e => document.getElementById('my_modal_1')?.showModal()}
+        onClick={e => { setDuration(data); document.getElementById('my_modal_1')?.showModal(); }}
         className={"relative md:py-[2.5%] md:pr-[2%] md:pl-[3%] pr-[1%] pl-[8%] py-[2%] md:rounded-2xl rounded-full flex items-center " + (table ? 'bg-[#d9d9d9] text-black hover:bg-blue-900 hover:text-white' : 'bg-[#d9d9d9]/[.5] text-black/[.5]')}
       >
         {data}
@@ -89,9 +89,6 @@ const renderDisplay = ({ step, dur_arr }: props) => {
   }
 
   function onClick() {
-    if (dur_arr) {
-      dur_arr(duration)
-    }
     if (step) {
       step()
     }
@@ -101,9 +98,9 @@ const renderDisplay = ({ step, dur_arr }: props) => {
     setTable(e)
     setReservationMap(getReservationHourMap(filterData(reservations, e)))
   }
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [selectSeat])
+  // }, [selectSeat])
   return (
     <div className="md:my-[3%] my-[5%]">
       <div className="flex flex-col md:gap-y-[10%]">
@@ -250,16 +247,28 @@ const renderDisplay = ({ step, dur_arr }: props) => {
         {/* END CONTENT FORM */}
       </div>
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
-          <div className="border-b-2 border-[#00000066]/[.4]">
-            <h3 className="font-normal text-lg italic text-center py-4">Apakah kamu sudah yakin dengan pilihanmu?</h3>
-          </div>
-          <p className="py-4">Kamu <span className="text-[#BA0900] uppercase font-bold">tidak</span> akan bisa mengubah pilihanmu!</p>
-          <div className="modal-action">
+        <div className="modal-box w-[30%]">
+          <div className="border-b-2 border-[#00000066]/[.4] flex items-center">
+            <h3 className="font-bold text-lg pt-2 pb-4 mr-auto">Apakah kamu yakin?</h3>
             <form method="dialog" className="flex gap-x-4">
               {/* if there is a button in form, it will close the modal */}
-              <button className="bg-[#BA0900] py-2 px-4 rounded-xl text-white">Close</button>
+              <button>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.31382 5.89982L10.8488 2.36382C10.9443 2.27157 11.0205 2.16123 11.0729 2.03922C11.1253 1.91722 11.1529 1.786 11.1541 1.65322C11.1552 1.52044 11.1299 1.38876 11.0796 1.26587C11.0294 1.14297 10.9551 1.03132 10.8612 0.937425C10.7673 0.843532 10.6557 0.769279 10.5328 0.718998C10.4099 0.668717 10.2782 0.643415 10.1454 0.644569C10.0126 0.645723 9.88142 0.673309 9.75942 0.725718C9.63741 0.778127 9.52707 0.854309 9.43482 0.949819L5.89882 4.48482L2.36382 0.949819C2.27157 0.854309 2.16123 0.778127 2.03922 0.725718C1.91722 0.673309 1.786 0.645723 1.65322 0.644569C1.52044 0.643415 1.38876 0.668717 1.26587 0.718998C1.14297 0.769279 1.03132 0.843532 0.937425 0.937425C0.843532 1.03132 0.769279 1.14297 0.718998 1.26587C0.668717 1.38876 0.643415 1.52044 0.644569 1.65322C0.645723 1.786 0.673309 1.91722 0.725718 2.03922C0.778127 2.16123 0.854309 2.27157 0.949819 2.36382L4.48482 5.89882L0.949819 9.43482C0.854309 9.52707 0.778127 9.63741 0.725718 9.75942C0.673309 9.88142 0.645723 10.0126 0.644569 10.1454C0.643415 10.2782 0.668717 10.4099 0.718998 10.5328C0.769279 10.6557 0.843532 10.7673 0.937425 10.8612C1.03132 10.9551 1.14297 11.0294 1.26587 11.0796C1.38876 11.1299 1.52044 11.1552 1.65322 11.1541C1.786 11.1529 1.91722 11.1253 2.03922 11.0729C2.16123 11.0205 2.27157 10.9443 2.36382 10.8488L5.89882 7.31382L9.43482 10.8488C9.52707 10.9443 9.63741 11.0205 9.75942 11.0729C9.88142 11.1253 10.0126 11.1529 10.1454 11.1541C10.2782 11.1552 10.4099 11.1299 10.5328 11.0796C10.6557 11.0294 10.7673 10.9551 10.8612 10.8612C10.9551 10.7673 11.0294 10.6557 11.0796 10.5328C11.1299 10.4099 11.1552 10.2782 11.1541 10.1454C11.1529 10.0126 11.1253 9.88142 11.0729 9.75942C11.0205 9.63741 10.9443 9.52707 10.8488 9.43482L7.31382 5.89882V5.89982Z" fill="#98A2B3" />
+                </svg>
+              </button>
             </form>
+          </div>
+          <p className="py-4 font-normal">Pastikan pilihanmu tepat dan datang tepat waktu agar pengalaman reservasi tetap optimal</p>
+          <div className="py-2">
+            <p>Detail transaksi: </p>
+            <ul>
+              <li>• Waktu: {duration}</li>
+              <li>• Meja: {table}</li>
+            </ul>
+          </div>
+          {/* <p className="py-4">Kamu <span className="text-[#BA0900] uppercase font-bold">tidak</span> akan bisa mengubah pilihanmu!</p> */}
+          <div className="modal-action">
             <button className="bg-[#1e3a8b] py-2 px-4 rounded-xl text-white" onClick={onClick}>Lanjut</button>
           </div>
         </div>
