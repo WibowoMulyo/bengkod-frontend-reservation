@@ -4,84 +4,81 @@ import Step1 from '@/app/reservation/form/step-1';
 import Step2 from '@/app/reservation/form/step-2';
 import Step3 from '@/app/reservation/form/step-3';
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const totalStep = [Step1, Step2, Step3];
 
 
 const renderDisplay = () => {
-  const [reservationdate, setReservationDate] = useState('')
-  const [reservationtype, setReservationType] = useState('')
-  const [reservationreason, setReservationReason] = useState('')
-  const [table, setTable] = useState('')
-  const [timeslot, setTimeSlot] = useState('')
-  const [code, setCode] = useState('')
-  const [email, setEmail] = useState<string[]>([''])
+    const [reservationDate, setReservationDate] = useState('')
+    const [reservationType, setReservationType] = useState('')
+    const [time, settime] = useState<string[]>([''])
+    const [endedAt, setEndedAt] = useState('')
+    const [email, setEmail] = useState<string[]>([''])
+    const [table, setTable] = useState()
 
-  const [status, setStatus] = useState('')
+    const [status, setStatus] = useState('')
 
-  const [step, setStep] = useState(0);
-
-  const refform = useRef(0)
-  function nextButt() {
-    // if (step === 1) {
-    //   submit()
-    //   console.log("memasuki set table!", table)
-    //   console.log("memasuki timeslot!", timeslot)
-    // }
-    if (step < totalStep.length - 1) {
-      setStep(step+1)
+    const [step, setStep] = useState(0);
+    function nextButt(){
+        if(step == 1){
+            // submit()
+            console.log(date2String())
+        }
+        if (step < totalStep.length - 1) {
+            setStep(step + 1)
+        }
     }
-  }
 
-  function submit() {
-    const formData = {
-      reservationdate: reservationdate,
-      reservationtype: reservationtype,
-      reservationreason: reservationreason,
-      time: timeslot,
-      table: table,
-      email: email,
+    function submit(){
+        const formData = {
+            reservationDate: reservationDate,
+            reservationType: reservationType,
+            time: time,
+            email: email,
+            table: table
+        }
+        axios.post("#", formData).then(
+            (response)=>{
+                setStatus(response.data)
+                console.log(response.data)
+            }
+        )
     }
-    console.log(formData)
-  }
 
-  function prevButt() {
-    if (step > 0) {
-      setStep(step - 1)
+    function prevButt(){
+        if (step > 0) {
+            setStep(step - 1)
+        }
     }
-  }
 
-  const RenderStep = () => {
-    switch (step) {
-      case 0:
-        return <Step1
-          onClick={nextButt}
-          reserveDate={setReservationDate}
-          reserveEmail={setEmail}
-          reserveOpt={setReservationType}
-          reserveReason={setReservationReason}
-        />
-      case 1:
-        return <Step2 step={nextButt}
-          reserveTable={setTable}
-          timeSlot={setTimeSlot} />
-      case 2:
-        submit()
-        return <Step3 step={nextButt} status={'1'} />
+    const RenderStep = () => {
+        switch (step) {
+            case 0:
+                return <Step1
+                    onClick={nextButt}
+                    reserv_date={setReservationDate}
+                    reserv_email={setEmail}
+                    reserv_opt={setReservationType}
+                />
+            case 1:
+                return <Step2 step={nextButt} dur_arr={settime} reserved_time={['08:00']}/>
+            case 2:
+                return <Step3 step={nextButt} status={"0"}/>
+
+        }
     }
-  }
 
-  function date2String() {
-    const date = new Date('2024-10-22')
-    console.log(date.getDay())
-  }
-  return (
-    <div className="">
-      <HeaderAuth />
-      <RenderStep />
-    </div>
-  )
+    function date2String(){
+        const date = new Date('2024-10-22')
+        console.log(date.getDay())
+    }
+    return (
+        <div className="">
+            <HeaderAuth />
+            <RenderStep />
+        </div>
+    )
 }
 
 export default renderDisplay;
