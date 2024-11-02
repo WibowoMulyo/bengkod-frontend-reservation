@@ -14,3 +14,4 @@ const ReservedCalendar = ({hexcolor=''}) => {
 }
 
 export default ReservedCalendar;
+
