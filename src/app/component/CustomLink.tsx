@@ -1,9 +1,6 @@
 'use client'
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
-import { stringify } from "querystring";
-import { useState } from "react";
 
 interface props {
   children: React.ReactNode,
@@ -11,10 +8,11 @@ interface props {
   className?: string,
   whenActive?: string,
   whenNonActive?: string,
+  showline?: boolean,
   getActive?: (value: boolean) => void,
 }
 
-function CustomLink({ children, href, className, whenActive, whenNonActive, getActive }: props) {
+function CustomLink({ children, href, className, whenActive, whenNonActive, getActive, showline=true }: props) {
   const pathname = usePathname()
 
   function onClick() {
@@ -30,7 +28,7 @@ function CustomLink({ children, href, className, whenActive, whenNonActive, getA
       <div className={className + ' ' + (pathname.startsWith(href) ? whenActive : whenNonActive)}>
         {children}
       </div>
-      {pathname.startsWith(href) && <div className="absolute -translate-x-16 -translate-y-[50px] bg-[#1e3a8b] rounded-lg px-[15px] py-6">
+      {pathname.startsWith(href) && showline && <div className="absolute -translate-x-14 -translate-y-[50px] bg-[#1e3a8b] rounded-lg px-[15px] py-6">
       </div>}
     </Link>
   )

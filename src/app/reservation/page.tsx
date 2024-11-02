@@ -1,8 +1,8 @@
 'use client'
 import HeaderAuth from "../template/header";
-import Step1 from '@/app/reservation/form/step1';
-import Step2 from '@/app/reservation/form/step2';
-import Step3 from '@/app/reservation/form/step3';
+import Step1 from '@/app/reservation/form/step-1';
+import Step2 from '@/app/reservation/form/step-2';
+import Step3 from '@/app/reservation/form/step-3';
 import axios from "axios";
 import { useRef, useState } from "react";
 
@@ -20,7 +20,7 @@ const renderDisplay = () => {
 
   const [status, setStatus] = useState('')
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   const refform = useRef(0)
   function nextButt() {

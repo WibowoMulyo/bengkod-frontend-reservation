@@ -4,6 +4,7 @@ import InputTextOrDate from "@/app/component/InputTextOrDate";
 import Button from "@/app/component/Button";
 import Label from "@/app/component/Label";
 import SelectInput from "@/app/component/SelectInput";
+import Image from "next/image";
 interface props {
   onClick?: () => void,
   reserveDate: (val: string) => void,
@@ -14,8 +15,8 @@ interface props {
 }
 
 const pesananType = [
-  {id: 1, name: "tim"},
-  {id: 2, name: "individu"},
+  { id: 1, name: "tim" },
+  { id: 2, name: "individu" },
 ]
 
 const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserveReason, ...props }: props) => {
@@ -183,10 +184,12 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
         {/* END SECTION STEP FORM */}
       </div>
 
-      <div className="bg-white rounded-2xl lg:mx-36 lg:mb-44 my-10 mx-4">
-        <div className="lg:py-16 lg:px-14 py-10 px-7 md:flex block">
-          <img src="/img/test-cropped.jpg" alt="" className="xl:w-[650px] xl:h-[466px] w-[300px] lg:w-[400px]" />
-          <div className="bg-[#f6f6f6] rounded-xl ml-auto lg:w-[375px]">
+      <div className="bg-white rounded-2xl lg:mx-36 lg:mb-44 my-10 sm:mx-4">
+        <div className="lg:py-16 lg:px-14 sm:py-10 sm:px-7 md:flex sm:block justify-center gap-x-12">
+          <div className="relative xl:w-[650px] xl:h-[466px] lg:w-[400px] sm:w-[100px] sm:h-[100px]">
+            <Image src={"/img/test-cropped.jpg"} alt="foto meja" fill />
+          </div>
+          <div className="bg-[#f6f6f6] rounded-xl lg:w-[375px]">
             <div className="pt-6 px-6 pb-9 h-full flex flex-col lg:mt-0 mt-6">
               <div className="mb-auto">
                 <div className="my-2">
@@ -252,7 +255,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   </div>
                 </div>}
                 <div className="my-2">
-                <Label>Email pemesan</Label>
+                  <Label>Email pemesan</Label>
                   <div className="mt-2 mb-6">
                     {extraInput(numberinput)}
                   </div>

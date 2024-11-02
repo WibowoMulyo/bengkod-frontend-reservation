@@ -15,7 +15,7 @@ const renderDisplay = () => {
       <div className="border-2 border-[rgb(236,238,239)] rounded-3xl m-4 bg-white hidden md:block">
         <div className="flex lg:mx-20 mx-5 relative items-center">
           <div className="mr-auto">
-            <img src="/image/Bengkod_Logo.png" className="w-[220px] h-[90px]" alt="" />
+            <Image src={"/image/Bengkod_Logo.png"} alt="logo bengkod" width={220} height={90} />
           </div>
           <div className="flex mr-20 gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full items-center">
             <Navlink
@@ -37,8 +37,8 @@ const renderDisplay = () => {
                 Sisa waktu peminjaman tersisa 2 jam
               </div>
             </div>
-            <CustomLink href="/dashboard/profile">
-              <img src="/image/profile-image.jpeg" alt="" className="rounded-full w-[60px]" />
+            <CustomLink href="/dashboard/profile" showline={false}>
+              <Image src="/image/profile-image.jpeg" className="rounded-full w-[60px]" width={60} height={60} alt="profile foto" />
             </CustomLink>
           </div>
         </div>

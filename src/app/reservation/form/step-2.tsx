@@ -67,12 +67,6 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
   function clickToNotReserved(data: string) {
     setDuration(data);
     document.getElementById('my_modal_1')?.showModal()
-    // if(reserveTable){
-    //   reserveTable(table);
-    // }
-    // if(timeSlot){
-    //   timeSlot(data)
-    // }
   }
 
   function itemTemplate(data: string) {

@@ -76,7 +76,7 @@ const Calendar = () => {
                 <div className="py-1 px-4 font-medium text-[#71717A] lg:text-[14px] text-[10px]">
                   {activeIndex > 0 ? <h1 className=''>{contents[activeIndex - 1]}</h1> : <h1 className="invisible pointer-events-none">Table 00</h1>}
                 </div>
-                <div className="py-1 px-4 my-auto bg-[#dc2626] lg:rounded-lg rounded-full font-medium text-white lg:text-[14px] text-[10px]">
+                <div className="py-1 px-4 my-auto bg-[#dc2626] sm:rounded-full lg:rounded-lg font-medium text-white lg:text-[14px] text-[10px]">
                   <h1 className=''>{contents[activeIndex]}</h1>
                 </div>
                 <div className="py-1 px-4 rounded-lg font-medium text-[#71717A] lg:text-[14px] text-[10px]">
