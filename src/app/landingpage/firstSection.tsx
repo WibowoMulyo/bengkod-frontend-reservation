@@ -14,7 +14,7 @@ const firstSec = () => {
         </div>
       <button className="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
         text-sm px-3 py-1.5 me-2 mb-2
-        md:text-3xl md:py-4 md:w-40 md:h-12
+        md:text-3xl md:py-4
       ">
         Pesan Sekarang
       </button>

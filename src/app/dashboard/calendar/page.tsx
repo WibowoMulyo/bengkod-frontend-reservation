@@ -4,14 +4,22 @@ import HeaderAuth from "../../template/header";
 import Dashboard_navbar from "../../template/dashboard-navbar";
 import { getDayOfWeek, getReservationsDateMap } from "@/app/component/calendar/calendartype";
 import React, { useEffect, useState } from 'react';
-import { Reservation } from "@/app/component/interface/Reservation";
 import { reservations2 } from "@/app/component/mock_data/reservations";
 import { filterData } from "@/app/component/FilterReservation";
+import ReservedCalendar from "../components/ReservedCalendar";
 
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const hours = ['08:00-10:00', '10:01-12:00', '12:01-13:00', '13:01-15:00', '15:01-17:00'];
 const colors = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
+
+const getWeekPerDay = (indexDay: number) => {
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() - currentDate.getDay() + indexDay + 1); // set week from the day
+  const datestring = currentDate.toISOString().split('T')[0]
+  
+  return datestring;
+}
 
 const getColor = () => {
   try {
@@ -46,7 +54,7 @@ const Calendar = () => {
     <div className="">
       <HeaderAuth />
       <div className="flex md:flex-row flex-col my-[5%] lg:my-[1.5%] justify-center w-full h-full">
-          <Dashboard_navbar />
+        <Dashboard_navbar />
         <div className="overflow-x-auto md:mx-auto">
           <div className="bg-white rounded-t-xl lg:w-[1150px] w-[715px] md:my-4 md:mr-4 ml-4 md:ml-0">
             <div className="flex py-8 justify-center">
@@ -101,36 +109,18 @@ const Calendar = () => {
                         </svg>
                       </div>
                     </th>
-                    <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
-                      <div className="h-full flex items-center justify-center">
-                        <h1 className='text-[#6B7A99] font-bold my-auto'>Senin 12</h1>
-                      </div>
-                    </th>
-                    <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
-                      <div className="h-full flex items-center justify-center">
-                        <h1 className='text-[#6B7A99] font-bold my-auto'>Selasa 13</h1>
-                      </div>
-                    </th>
-                    <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
-                      <div className="h-full flex items-center justify-center">
-                        <h1 className='text-[#6B7A99] font-bold my-auto'>Rabu 14</h1>
-                      </div>
-                    </th>
-                    <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
-                      <div className="h-full flex items-center justify-center">
-                        <h1 className='text-[#6B7A99] font-bold my-auto'>Kamis 15</h1>
-                      </div>
-                    </th>
-                    <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
-                      <div className="h-full flex items-center justify-center">
-                        <h1 className='text-[#6B7A99] font-bold my-auto'>Jumat 16</h1>
-                      </div>
-                    </th>
-                    <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
-                      <div className="h-full flex items-center justify-center">
-                        <h1 className='text-[#6B7A99] font-bold my-auto'>Sabtu 17</h1>
-                      </div>
-                    </th>
+                    {days.map((day, index) => {
+                      // console.log(index)
+                      const getdate = getWeekPerDay(index)
+                      const pickday = getdate.split("-")[2]
+                      return (
+                        <th className="border-2 border-[#F5F6F7] text-[10px] lg:text-[14px]">
+                          <div className="h-full flex items-center justify-center">
+                            <h1 className='text-[#6B7A99] font-bold my-auto'>{day} {pickday}</h1>
+                          </div>
+                        </th>
+                      )
+                    })}
                   </tr>
                 </thead>
                 <tbody>
@@ -138,23 +128,12 @@ const Calendar = () => {
                     <tr>
                       <td className={"px-5 lg:text-[14px] text-[9px] text-[#ADB8CC] border-2 border-[#F5F6F7] font-bold text-sm flex justify-center " + (hour == '12:01-13:00' ? 'lg:py-9 py-4 bg-[#E4E7EC]' : 'lg:py-16 py-10')} >{hour}</td>
                       {days.map((day, index) => {
-                        let hexColor = getColor()
-                        const currentDate = new Date();
-                        currentDate.setDate(currentDate.getDate() - currentDate.getDay() + index + 1); // set week from the day
-                        const dateString = currentDate.toISOString().split('T')[0]
-                        const isreserved = reservationsMap[dateString]?.has(hour)
+                        let hexcolor = getColor()
+                        const datestring = getWeekPerDay(index)
+                        const isreserved = reservationsMap[datestring]?.has(hour)
                         return (
                           <td key={day} className={"border-2 border-[#F5F6F7] font-bold text-sm " + (hour == '12:01-13:00' ? 'bg-[#E4E7EC]' : '')} >
-                            {isreserved ? <div
-                              style={{ backgroundColor: `${hexColor}10`, borderColor: hexColor }}
-                              className="border-[3px] lg:py-[54px] py-8 rounded-lg h-full m-[2px]"
-                            >
-                              <div className="font-semibold p-1 px-2 text-sm text-center "
-                                style={{ color: hexColor }}
-                              >
-                                Reserved
-                              </div>
-                            </div> : ''}
+                            {isreserved ? <ReservedCalendar hexcolor={hexcolor}/> : ''}
                           </td>
                         )
                       })}

@@ -6,9 +6,12 @@ import ImageMapper from 'react-img-mapper';
 import { getReservationHourMap } from "@/app/component/calendar/calendartype";
 import { reservations } from "@/app/component/mock_data/reservations";
 import { filterData } from "@/app/component/FilterReservation";
+import ReservedHour from "./components/ReservedHour";
+import ButtonNotReserved from "./components/ButtonNotReserved";
 interface props {
   step?: () => void,
-  dur_arr: (val: string[]) => void,
+  reserveTable?: (val: string) => void,
+  timeSlot?: (val: string) => void
 }
 
 const tablearr = ['', '/image/table_img/table1.jpeg', '/image/table_img/table2.jpeg']
@@ -53,42 +56,52 @@ const infoTable = [
   }
 ]
 
-const renderDisplay = ({ step, dur_arr }: props) => {
+const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
   const durations = [
     '08:00-10:00', '10:01-12:00', '13:01-15:00', '15:01-17:00'
   ];
-  const [selectSeat, setSelectSeat] = useState('');
-  const [duration, setDuration] = useState('')
-  const [table, setTable] = useState('')
+  const [duration, setDuration] = useState<string>('')
+  const [table, setTable] = useState<string>('')
   const [reservationMap, setReservationMap] = useState(getReservationHourMap([]));
+
+  function clickToNotReserved(data: string) {
+    setDuration(data);
+    document.getElementById('my_modal_1')?.showModal()
+    // if(reserveTable){
+    //   reserveTable(table);
+    // }
+    // if(timeSlot){
+    //   timeSlot(data)
+    // }
+  }
 
   function itemTemplate(data: string) {
     if (reservationMap[data]) {
       return (
-        <div className="bg-[#f7deb8] relative md:py-[1.5%] md:pr-[2%] md:pl-[3%] pr-[1%] pl-[8%] py-[2%] md:rounded-2xl rounded-full flex items-center">
-          <div className="mr-auto">
-            <h1>{data}</h1>
-          </div>
-          <div className="bg-[#f7c06d] lg:w-[85%] w-[70%] md:rounded-xl rounded-full flex gap-2 px-[2%] py-[2%] md:py-[2%] md:mx-0 mx-[1.5%]">
-            <div className="bg-[#fe8630] md:rounded-lg rounded-full p-3"></div>
-            <p className="font-light">Reserved</p>
-          </div>
-        </div>
+        <ReservedHour data={data} />
       )
     }
 
     return (
-      <button
+      <ButtonNotReserved
         disabled={table ? false : true}
-        onClick={e => { setDuration(data); document.getElementById('my_modal_1')?.showModal(); }}
-        className={"relative md:py-[2.5%] md:pr-[2%] md:pl-[3%] pr-[1%] pl-[8%] py-[2%] md:rounded-2xl rounded-full flex items-center " + (table ? 'bg-[#d9d9d9] text-black hover:bg-blue-900 hover:text-white' : 'bg-[#d9d9d9]/[.5] text-black/[.5]')}
+        className={(table ? 'bg-[#d9d9d9] text-black hover:bg-blue-900 hover:text-white' : 'bg-[#d9d9d9]/[.5] text-black/[.5]')}
+        onClick={() => clickToNotReserved(data)}
       >
         {data}
-      </button>
+      </ButtonNotReserved>
     )
   }
 
   function onClick() {
+    if(reserveTable){
+      reserveTable(table)
+      console.log("memasuki set table!", table)
+    }
+    if(timeSlot){
+      timeSlot(duration)
+      console.log("memasuki timeslot!", duration)
+    }
     if (step) {
       step()
     }
@@ -98,9 +111,6 @@ const renderDisplay = ({ step, dur_arr }: props) => {
     setTable(e)
     setReservationMap(getReservationHourMap(filterData(reservations, e)))
   }
-  // useEffect(() => {
-
-  // }, [selectSeat])
   return (
     <div className="md:my-[3%] my-[5%]">
       <div className="flex flex-col md:gap-y-[10%]">
@@ -182,7 +192,7 @@ const renderDisplay = ({ step, dur_arr }: props) => {
                 <ImageMapper
                   width={1308}
                   height={736}
-                  onClick={e => changeTable(e.id || '')}
+                  onClick={e => {changeTable(e.id || '');}}
                   stayHighlighted={true}
                   // stayMultiHighlighted={true}
                   src={'/image/goatjo vs sukuna.jpg'}
@@ -234,7 +244,7 @@ const renderDisplay = ({ step, dur_arr }: props) => {
                     {/* <button onClick={e => document.getElementById('my_modal_1')?.showModal()} >Selanjutnya</button> */}
                   </div>
                   {/* END SECTION CALENDAR */}
-                  <div className="my-4 flex flex-col gap-4 h-[300px] overflow-y-scroll">
+                  <div className="my-4 flex flex-col gap-4 h-[300px]">
                     {durations.map(durr => (
                       itemTemplate(durr)
                     ))}
