@@ -8,6 +8,7 @@ import { reservations } from "@/app/component/mock_data/reservations";
 import { filterData } from "@/app/component/FilterReservation";
 import ReservedHour from "./components/ReservedHour";
 import ButtonNotReserved from "./components/ButtonNotReserved";
+import Image from "next/image";
 interface props {
   step?: () => void,
   reserveTable?: (val: string) => void,
@@ -94,11 +95,11 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
   }
 
   function onClick() {
-    if(reserveTable){
+    if (reserveTable) {
       reserveTable(table)
       console.log("memasuki set table!", table)
     }
-    if(timeSlot){
+    if (timeSlot) {
       timeSlot(duration)
       console.log("memasuki timeslot!", duration)
     }
@@ -192,9 +193,8 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
                 <ImageMapper
                   width={1308}
                   height={736}
-                  onClick={e => {changeTable(e.id || '');}}
+                  onClick={e => { changeTable(e.id || ''); }}
                   stayHighlighted={true}
-                  // stayMultiHighlighted={true}
                   src={'/image/goatjo vs sukuna.jpg'}
                   map={
                     {
@@ -216,8 +216,22 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
                   </div>
 
                   <div className="bg-white px-[5%] pt-[5%] pb-[2%] rounded-xl text-center">
-                    <img src={tablearr[parseInt(table)]} alt="Gambar meja" className="rounded-xl md:w-full mb-2" />
-                    <h1 className="font-bold text-sm">Table-01</h1>
+                    {table ?
+                    <div className="w-full">
+                      <Image
+                        src={tablearr[parseInt(table)]}
+                        alt={`Gambar meja ${table}`}
+                        style={{
+                          height: '100%',
+                          width: '100%'
+                        }}
+                        width={500}
+                        height={500}
+                      />
+                      <h1 className="font-bold text-sm mt-2">Table-01</h1>
+                    </div> :
+                    <div className="font-bold text-sm mt-2">Harap pilih foto terlebih dahulu!</div>
+                  }
                   </div>
                 </div>
                 {/* END SECTION GAMBAR MEJA */}

@@ -9,7 +9,7 @@ export const reservations: Reservation[] = [
 
 
 export const reservations2: Reservation[] = [
-  { id: 1, status: 1, reservation_type: 0, reservation_date: '2024-10-29', time_rents: '13:01-15:00', table: 'Table 01' },
-  { id: 2, status: 0, reservation_type: 1, reservation_date: '2024-10-28', time_rents: '10:01-12:00', table: 'Table 01' },
-  { id: 3, status: 0, reservation_type: 1, reservation_date: '2024-10-31', time_rents: '15:01-17:00', table: 'Table 04' },
+  { id: 1, status: 1, reservation_type: 0, reservation_date: '2024-11-04', time_rents: '13:01-15:00', table: 'Table 01' },
+  { id: 2, status: 0, reservation_type: 1, reservation_date: '2024-11-04', time_rents: '10:01-12:00', table: 'Table 01' },
+  { id: 3, status: 0, reservation_type: 1, reservation_date: '2024-11-05', time_rents: '15:01-17:00', table: 'Table 04' },
 ];

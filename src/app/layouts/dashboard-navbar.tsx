@@ -43,8 +43,8 @@ const Dashboard_navbar = () => {
               <CustomLink
                 href="/dashboard/calendar"
                 className="relative mt-4 w-full rounded-lg hover:bg-[#1e3a8b] hover:text-white p-4"
-                whenActive={"bg-[#1e3a8b] text-white"}
-                whenNonActive="text-black"
+                whenactive={"bg-[#1e3a8b] text-white"}
+                whennotactive="text-black"
               >
                 <div className="flex gap-x-4 items-center">
                   <svg width="17" height="17" viewBox="0 0 18 17" fill="#1e3a8b" xmlns="http://www.w3.org/2000/svg">
@@ -57,8 +57,8 @@ const Dashboard_navbar = () => {
             <div className="mt-4">
               <CustomLink
                 className="relative w-full rounded-lg hover:bg-[#1e3a8b] hover:text-white p-4"
-                whenActive={"bg-[#1e3a8b] text-white"}
-                whenNonActive="text-black"
+                whenactive={"bg-[#1e3a8b] text-white"}
+                whennotactive="text-black"
                 href="/dashboard/history"
               >
                 <div className="flex gap-x-4 items-center">

@@ -1,4 +1,3 @@
-import HeaderAuth from "../../template/header";
 // import Calendar from "@/app/component/calendar/Calendar";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { useState } from "react";
@@ -7,7 +6,6 @@ interface props {
     step?: () => void,
     status: string,
 }
-
 
 const renderDisplay = ({ step, status }: props) => {
     const renderStatus = () => {

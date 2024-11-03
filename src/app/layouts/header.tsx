@@ -14,8 +14,14 @@ const renderDisplay = () => {
     <div className="w-full">
       <div className="border-2 border-[rgb(236,238,239)] rounded-3xl m-4 bg-white hidden md:block">
         <div className="flex lg:mx-20 mx-5 relative items-center">
-          <div className="mr-auto">
-            <img src="/image/Bengkod_Logo.png" className="w-[220px] h-[90px]" alt="" />
+          <div className="mr-auto w-[220px] h-[90px]">
+            <Image src={"/image/Bengkod_Logo.png"}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              width={220}
+              height={90} alt="logo bengkod" />
           </div>
           <div className="flex mr-20 gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full items-center">
             <Navlink
@@ -32,13 +38,23 @@ const renderDisplay = () => {
             </Navlink>
           </div>
           <div className="my-auto flex gap-x-4 items-center">
-            <div className="">
-              <div className="p-1 bg-[#FFE3E3] border-[#E59898] italic font-normal border-2 rounded-xl text-[14px] text-[#667085]">
+            <div className="xl:block hidden">
+              <div className="p-1 bg-[#FFE3E3] border-[#E59898] italic font-normal border-2 rounded-xl text-[14px] text-wrap text-[#667085]">
                 Sisa waktu peminjaman tersisa 2 jam
               </div>
             </div>
-            <CustomLink href="/dashboard/profile">
-              <img src="/image/profile-image.jpeg" alt="" className="rounded-full w-[60px]" />
+            <CustomLink href="/dashboard/profile" showline={false}>
+              <div className="w-[60px]">
+                <Image src={"/image/profile-image.jpeg"}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  width={60}
+                  height={60} alt="logo profile" 
+                  className="rounded-full"
+                  />
+              </div>
             </CustomLink>
           </div>
         </div>
@@ -47,7 +63,16 @@ const renderDisplay = () => {
       <div className="flex m-3 items-center md:hidden">
         <div className="mr-auto">
 
-          <img src="/image/Bengkod_Logo.png" className="lg:hidden w-[150px]" alt="" />
+          {/* <img src="/image/Bengkod_Logo.png" className="lg:hidden w-[150px]" alt="" /> */}
+          <div className="lg:hidden w-[150px] h-auto">
+            <Image src={"/image/Bengkod_Logo.png"}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              width={150}
+              height={150} alt="logo bengkod" />
+          </div>
         </div>
         <div className="">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#1E3A8B" className="bi bi-list" viewBox="0 0 16 16">

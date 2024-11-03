@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import HeaderAuth from "../../template/header";
 import InputTextOrDate from "@/app/component/InputTextOrDate";
-import Button from "@/app/component/Button";
+import PrimaryButton from "@/app/component/PrimaryButton";
 import Label from "@/app/component/Label";
 import SelectInput from "@/app/component/SelectInput";
+import Image from "next/image";
 interface props {
   onClick?: () => void,
   reserveDate: (val: string) => void,
@@ -14,8 +14,8 @@ interface props {
 }
 
 const pesananType = [
-  {id: 1, name: "tim"},
-  {id: 2, name: "individu"},
+  { id: 1, name: "tim" },
+  { id: 2, name: "individu" },
 ]
 
 const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserveReason, ...props }: props) => {
@@ -185,7 +185,18 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
 
       <div className="bg-white rounded-2xl lg:mx-36 lg:mb-44 my-10 mx-4">
         <div className="lg:py-16 lg:px-14 py-10 px-7 md:flex block">
-          <img src="/img/test-cropped.jpg" alt="" className="xl:w-[650px] xl:h-[466px] w-[300px] lg:w-[400px]" />
+          <div className="xl:w-[650px] xl:h-[466px] w-[280px] lg:w-[400px] mx-auto">
+            <Image
+              src={"/img/test-cropped.jpg"}
+              alt="Foto meja"
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              width={650}
+              height={650} />
+          </div>
+          {/* <img src="/img/test-cropped.jpg" alt="" className="xl:w-[650px] xl:h-[466px] w-[300px] lg:w-[400px]" /> */}
           <div className="bg-[#f6f6f6] rounded-xl ml-auto lg:w-[375px]">
             <div className="pt-6 px-6 pb-9 h-full flex flex-col lg:mt-0 mt-6">
               <div className="mb-auto">
@@ -203,7 +214,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <Label>Tujuan</Label>
                   <div className="my-2">
                     <select name="" id="" className=
-                      "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10"
+                      "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10 focus:ring-primary-700 focus:ring-2"
                       value={reason}
                       onChange={(e) => { setReason(e.target.value); }}
                     >
@@ -218,7 +229,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <Label>Jenis pemesanan</Label>
                   <div className="my-2">
                     <select name="" id="" className=
-                      "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10"
+                      "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10 focus:ring-primary-700 focus:ring-2"
                       value={typereserve}
                       onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value) }}
                     >
@@ -226,12 +237,6 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                       <option value="individu">individu</option>
                       <option value="tim">Tim</option>
                     </select>
-                    {/* <SelectInput
-                      onChange={(result) => { setTypeReserve(String(result)); shownTeamInput(String(result)) }}
-                      value={typereserve}
-                      options={pesananType}
-                      mapLabel={()}
-                    /> */}
                   </div>
                 </div>
                 {isshown && <div className="my-2">
@@ -252,16 +257,16 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   </div>
                 </div>}
                 <div className="my-2">
-                <Label>Email pemesan</Label>
+                  <Label>Email pemesan</Label>
                   <div className="mt-2 mb-6">
                     {extraInput(numberinput)}
                   </div>
                 </div>
               </div>
               <div className="md:mt-auto">
-                <Button onClick={submitButton}>
+                <PrimaryButton onClick={submitButton}>
                   Selanjutnya
-                </Button>
+                </PrimaryButton>
               </div>
             </div>
           </div>
