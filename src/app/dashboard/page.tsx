@@ -1,6 +1,11 @@
+import Image from "next/image";
+import HeaderAuth from "../template/header";
+
 const renderDisplay = () => {
-    return(
-        <h1>Hello world</h1>
+    return (
+        <div className="">
+            <HeaderAuth />
+        </div>
     )
 }
 
