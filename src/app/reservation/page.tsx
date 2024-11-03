@@ -1,8 +1,8 @@
 'use client'
 import HeaderAuth from "../layouts/header";
-import Step1 from '@/app/reservation/form/step1';
-import Step2 from '@/app/reservation/form/step2';
-import Step3 from '@/app/reservation/form/step3';
+import Step1 from '@/app/reservation/fragments/step1';
+import Step2 from '@/app/reservation/fragments/step2';
+import Step3 from '@/app/reservation/fragments/step3';
 import axios from "axios";
 import { useRef, useState } from "react";
 
