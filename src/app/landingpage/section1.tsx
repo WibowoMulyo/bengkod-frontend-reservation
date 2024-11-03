@@ -1,35 +1,33 @@
 const firstSec = () => {
   return (
     <div className="my-10 md:mx-16" id="beranda">
-      <div className="items-center text-center justify-center">
-        <div className="my-[50px]">
-          <div className="text-[24px] md:text-[40px] font-bold">
-            <h1 className="mx-[64px]">
-              Ruang Belajar Privat dan Produktif, Hanya{" "}
-              <span className="bg-gradient-to-r from-[#1E3A8B] to-[#35C677] text-transparent bg-clip-text">
-                {" "}
-                Sekali Klik
-              </span>
-            </h1>
-          </div>
-          <h2 className="my-4 mx-6 text-[11px] md:text-[14px] md:text-xl md:mx-64 md:my-10">
-            Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
-            dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
-          </h2>
+      <div className="flex flex-col space-y-[2%] items-center text-center justify-center">
+        <div className="text-[24px] md:text-[45px] font-semibold">
+          <h1 className="mx-[64px]">
+            Ruang Belajar Privat dan Produktif,
+          </h1>
+          <h1>
+            Hanya
+            <span className="bg-gradient-to-r from-[#1E3A8B] to-[#35C677] text-transparent bg-clip-text">
+              {" "}Sekali Klik
+            </span>
+          </h1>
+        </div>
+        <h2 className="my-4 mx-6 text-[11px] md:text-[14px] md:text-xl md:mx-[120px]">
+          Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
+          dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
+        </h2>
         <button
-          className="text-white bg-[#1E3A8B] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-lg
-          text-[13px] max-h-[39px] max-w-[135px] min-h-[39px] min-w-[135px] me-2 mb-2
-          md:text-3xl md:py-4 md:h-[39px] md:w-[192px]
-        "
-        >
+          className="text-white bg-[#1E3A8B] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-xl
+          text-[13px] font-medium
+          md:text-xl p-4">
           Pesan Sekarang
         </button>
-        </div>
       </div>
 
-      <div className="hidden md:flex md:w-10/12 md:my-10">
+      <div className="hidden md:block md:w-10/12 md:my-10">
         <img
-          className="hidden md:flex md:items-center md:justify-center"
+          className=""
           src="./img/group20.png"
           alt="preview bengkel koding"
         />

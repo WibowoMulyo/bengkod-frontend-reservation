@@ -1,24 +1,23 @@
 const secondSec = () => {
   return (
-    <div className="mx-8 my-16">
-      <div className="md:flex md:flex-col-2">
-        <div className="text-center md:size-1/2 md:flex md:flex-col md:justify-center md:items-center md:mx-20">
-          <div className="md:flex md:flex-col md:justify-center md:items-center">
-            <h1 className="text-2xl font-bold md:text-5xl">Fasilitas Kami</h1>
-            <p className="text-[11px] my-4 md:text-xl md:my-8 md:text-left">
-              Butuh tempat nugas/belajar? Kami menyediakan fasilitas lengkap
-              yang akan membantu kamu fokus dan mencapai hasil maksimal. Nikmati
-              suasana belajar yang kondusif dengan fasilitas yang nyaman.
-            </p>
-            <img
-              className="hidden md:block"
-              src="./img/facility.png"
-              alt="fasilitas"
-            />
-          </div>
+    <div className="mx-[5%] my-16">
+      <div className="md:flex">
+        <div className="">
+          <h1 className="text-2xl font-semibold md:text-5xl">Fasilitas Kami</h1>
+          <p className="text-[11px] my-4 md:text-xl md:my-8 md:text-left">
+            Butuh tempat nugas/belajar? Kami menyediakan fasilitas lengkap
+            yang akan membantu kamu fokus dan mencapai hasil maksimal. Nikmati
+            suasana belajar yang kondusif dengan fasilitas yang nyaman.
+          </p>
+          <img
+            className="hidden md:block"
+            src="./img/facility.png"
+            alt="fasilitas"
+
+          />
         </div>
 
-        <div className="flex flex-col justify-center items-center md:mx-10">
+        <div className="flex flex-col justify-center items-center">
           <div className="flex my-2 space-x-6 items-center">
             <div>
               <img
