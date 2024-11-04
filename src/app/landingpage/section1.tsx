@@ -12,14 +12,14 @@ const firstSec = () => {
               </span>
             </h1>
           </div>
-          <h2 className="my-4 mx-6 text-[11px] md:text-[14px] md:text-xl md:mx-64 md:my-10">
+          <h2 className="my-4 mx-6 text-[11px] md:text-[14px] md:text-xl md:my-10">
             Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
             dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
           </h2>
         <button
           className="text-white bg-[#1E3A8B] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-lg
           text-[13px] max-h-[39px] max-w-[135px] min-h-[39px] min-w-[135px] me-2 mb-2
-          md:text-3xl md:py-4 md:h-[39px] md:w-[192px]
+          md:text-[14px] md:min-h-[42px] md:w-[192px]
         "
         >
           Pesan Sekarang
@@ -27,7 +27,7 @@ const firstSec = () => {
         </div>
       </div>
 
-      <div className="hidden md:flex md:w-10/12 md:my-10">
+      <div className="hidden lg:flex md:w-10/12 md:my-10">
         <img
           className="hidden md:flex md:items-center md:justify-center"
           src="./img/group20.png"
@@ -37,7 +37,7 @@ const firstSec = () => {
 
       <div
         id="default-carousel"
-        className="relative w-full my-12 md:hidden"
+        className="relative w-full my-12 lg:hidden"
         data-carousel="slide"
       >
         <div className="relative h-56 overflow-hidden rounded-lg md:h-96 mx-8">
