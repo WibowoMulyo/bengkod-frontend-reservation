@@ -1,100 +1,50 @@
+import Header from "./components/Header";
+import ResponsiveImage from "./components/ResponsiveImage";
+import UnorderedList from "./components/UnorderedList";
+
 const secondSec = () => {
   return (
-    <div className="mx-[5%] my-16">
-      <div className="md:flex">
-        <div className="">
-          <h1 className="text-2xl font-semibold md:text-5xl">Fasilitas Kami</h1>
-          <p className="text-[11px] my-4 md:text-xl md:my-8 md:text-left">
-            Butuh tempat nugas/belajar? Kami menyediakan fasilitas lengkap
-            yang akan membantu kamu fokus dan mencapai hasil maksimal. Nikmati
-            suasana belajar yang kondusif dengan fasilitas yang nyaman.
-          </p>
-          <img
-            className="hidden md:block"
-            src="./img/facility.png"
-            alt="fasilitas"
-
-          />
-        </div>
-
-        <div className="flex flex-col justify-center items-center">
-          <div className="flex my-2 space-x-6 items-center">
-            <div>
-              <img
-                className="min-w-[45px] max-w-[45px]"
-                src="./img/internet_cepat.png"
-                alt="internet cepat"
-              />
-            </div>
-            <div className="md:mx-4">
-              <h2 className="font-bold text-[16px] md:text-2xl">Internet Cepat</h2>
-              <p className="text-[10px] md:text-lg">
-                Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
+    <div className="my-24">
+      <div className="md:flex gap-x-10 justify-center">
+        <div className="flex flex-col lg:gap-y-1 gap-y-4">
+          {/* <h1 className="text-2xl font-semibold md:text-4xl lg:text-left text-center">Fasilitas Kami</h1> */}
+          <Header>Fasilitas kami</Header>
+          <div className="flex lg:space-x-[50px] space-y-[16px] lg:flex-row flex-col">
+            <div className="lg:w-[500px] w-[284px] lg:text-left text-center mx-auto ">
+              <p className="text-[11px] md:text-lg lg:my-8 text-wrap">
+                Butuh tempat nugas/belajar? Kami menyediakan fasilitas lengkap
+                yang akan membantu kamu fokus dan mencapai hasil maksimal. Nikmati
+                suasana belajar yang kondusif dengan fasilitas yang nyaman.
               </p>
+              <ResponsiveImage src="/img/facility.png" width={500} height={300} className="h-[290px] lg:block hidden" alt="foto desc" />
             </div>
-          </div>
 
-          <div className="flex my-2 space-x-6 items-center">
-            <div>
-              <img
-                className="min-w-[45px] max-w-[45px]"
-                src="./img/air_conditioner.png"
-                alt="internet cepat"
+            <div className="flex flex-col justify-center items-center gap-y-2 lg:w-[500px] mx-10">
+              <UnorderedList
+                srcImage="/img/internet_cepat.png"
+                header="Internet Cepat"
+                content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
-            </div>
-            <div className="md:mx-4">
-              <h2 className="font-bold text-[16px] md:text-2xl">Air Conditioner</h2>
-              <p className="text-[10px] md:text-lg">
-                Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
-              </p>
-            </div>
-          </div>
-
-          <div className="flex my-2 space-x-6 items-center">
-            <div>
-              <img
-                className="min-w-[45px] max-w-[45px]"
-                src="./img/stop_kontak.png"
-                alt="stop kontak"
+              <UnorderedList
+                srcImage="/img/air_conditioner.png"
+                header="Air Conditioner"
+                content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
-            </div>
-            <div className="md:mx-4">
-              <h2 className="font-bold text-[16px] md:text-2xl">Stop Kontak</h2>
-              <p className="text-xs md:text-lg">
-                Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
-              </p>
-            </div>
-          </div>
-
-          <div className="flex my-2 space-x-6 items-center">
-            <div>
-              <img
-                className="min-w-[45px] max-w-[45px]"
-                src="./img/televisi.png"
-                alt="televisi"
+              <UnorderedList
+                srcImage="/img/stop_kontak.png"
+                header="Stop kontak"
+                content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
-            </div>
-            <div className="md:mx-4">
-              <h2 className="font-bold text-[16px] md:text-2xl">Televisi</h2>
-              <p className="text-[10px] md:text-lg ">
-                Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
-              </p>
-            </div>
-          </div>
-
-          <div className="flex my-2 space-x-6 items-center">
-            <div>
-              <img
-                className="min-w-[45px] max-w-[45px]"
-                src="./img/meja_kursi.png"
-                alt="meja dan kursi belajar"
+              <UnorderedList
+                srcImage="/img/televisi.png"
+                header="Televisi"
+                content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
-            </div>
-            <div className="md:mx-4">
-              <h2 className="font-bold text-[16px] md:text-2xl">Meja dan Kursi BelajarI</h2>
-              <p className="text-[10px] md:text-lg ">
-                Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
-              </p>
+              <UnorderedList
+                srcImage="/img/meja_kursi.png"
+                header="Meja dan kursi belajar"
+                content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
+              />
             </div>
           </div>
         </div>
