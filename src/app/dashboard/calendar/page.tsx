@@ -9,7 +9,7 @@ import { filterData } from "@/app/component/FilterReservation";
 import ReservedCalendar from "../components/ReservedCalendar";
 
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const hours = ['08:00-10:00', '10:01-12:00', '12:01-13:00', '13:01-15:00', '15:01-17:00'];
 const colors = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
 

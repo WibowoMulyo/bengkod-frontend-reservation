@@ -25,7 +25,7 @@ const renderDisplay = () => {
           </div>
           <div className="flex mr-20 gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full items-center">
             <Navlink
-              statichref="/dashboard"
+              statichref="/dashboard/calendar"
               href="/dashboard/calendar"
             >
               Dashboard
@@ -43,19 +43,39 @@ const renderDisplay = () => {
                 Sisa waktu peminjaman tersisa 2 jam
               </div>
             </div>
-            <CustomLink href="/dashboard/profile" showline={false}>
-              <div className="w-[60px]">
-                <Image src={"/image/profile-image.jpeg"}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  width={60}
-                  height={60} alt="logo profile" 
-                  className="rounded-full"
-                  />
+            <div className="dropdown dropdown-end">
+              <div className="" tabIndex={0}>
+                <button>
+                  <div className="w-[60px]">
+                    <Image src={"/image/profile-image.jpeg"}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                      }}
+                      width={60}
+                      height={60} alt="logo profile"
+                      className="rounded-full"
+                    />
+                  </div>
+                </button>
+                <ul tabIndex={0} className="dropdown-content z-[1] w-52 p-2 shadow-md rounded-lg bg-white border-gray-100 border-2">
+                  <li>
+                    <CustomLink href="#" showline={false} className="font-semibold w-auto mb-2 p-2 hover:bg-primary-900 hover:text-white rounded-md" 
+                    whenactive="text-white bg-primary-900" whennotactive="text-gray-700">
+                      Notifikasi
+                    </CustomLink>
+                  </li>
+                  <li>
+                    <CustomLink href="/dashboard/profile" showline={false} className="font-semibold w-auto p-2 hover:bg-primary-900 hover:text-white rounded-md" whenactive="text-white bg-primary-900" whennotactive="text-gray-700">
+                      Profile
+                    </CustomLink>
+                  </li>
+                </ul>
               </div>
-            </CustomLink>
+            </div>
+
+            {/* <CustomLink href="/dashboard/profile" showline={false}>
+            </CustomLink> */}
           </div>
         </div>
       </div>

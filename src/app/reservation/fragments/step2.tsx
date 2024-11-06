@@ -274,7 +274,7 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
         <div className="modal-box w-[30%]">
           <div className="border-b-2 border-[#00000066]/[.4] flex items-center">
             <h3 className="font-bold text-lg pt-2 pb-4 mr-auto">Apakah kamu yakin?</h3>
-            <form method="dialog" className="flex gap-x-4">
+            <form method="dialog" className="flex gap-x-4 modal-backdrop">
               {/* if there is a button in form, it will close the modal */}
               <button>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
