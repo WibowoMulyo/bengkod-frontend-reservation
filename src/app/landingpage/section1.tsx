@@ -1,9 +1,9 @@
-import Image from "next/image";
+import LandingButton from "./components/LandingButton";
 import ResponsiveImage from "./components/ResponsiveImage";
 
 const firstSec = () => {
   return (
-    <div className="my-24 md:mx-16" id="beranda">
+    <div className="my-12 md:mx-16" id="beranda">
       <div className="flex flex-col space-y-[2%] items-center text-center justify-center">
         <div className="text-[24px] md:text-[45px] font-semibold">
           <h1 className="mx-[64px]">
@@ -20,12 +20,7 @@ const firstSec = () => {
           Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
           dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
         </h2>
-        <button
-          className="text-white bg-[#1E3A8B] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-xl
-          text-[13px] font-medium
-          md:text-lg px-4 py-3">
-          Pesan Sekarang
-        </button>
+        <LandingButton>Pesan Sekarang</LandingButton>
       </div>
 
       <div className="hidden md:flex md:my-10 justify-center">

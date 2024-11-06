@@ -1,42 +1,27 @@
-import Image from "next/image";
 import LandingButton from "./components/LandingButton";
 import ResponsiveImage from "./components/ResponsiveImage";
 
 const navbar = () => {
   return (
-    <header className="md:m-4 m-2 md:border-gray-200 md:rounded-3xl md:border-[3px]">
+    <header className="m-2 md:m-4 md:border-gray-200 md:rounded-3xl md:border-[3px]">
       <div className="md:flex hidden items-center mx-[5%]">
         <div className="my-auto mr-auto">
-          <ResponsiveImage src="/img/lp_icon_medium.png" width={300} height={300} alt="logo bengkod" className="hidden md:block w-[269px] h-[82px]" />
-
-          {/* <img
-            src="./img/lp_icon_medium.png"
-            className="hidden md:block min-h-[82px] min-w-[269px] max-h-[82px] max-w-[269px]"
-            alt="bengkel Koding Logo"
-          /> */}
-          {/* <img
-            src="./img/lp_icon_sm.png"
-            className="mx-2 min-h-[40px] min-w-[165px] max-h-[40px] max-w-[165px] md:hidden"
-            alt="bengkel Koding Logo"
-          /> */}
+          <ResponsiveImage
+            src="/img/lp_icon_medium.png"
+            width={300}
+            height={300}
+            alt="logo bengkod"
+            className="hidden md:block w-[269px] h-[82px]"
+          />
         </div>
         <div className="flex md:justify-between md:text-[16px] text-primary-900 font-semibold gap-x-[100px]">
-          <a
-            href="#beranda"
-            className=""
-          >
+          <a href="#beranda" className="">
             Beranda
           </a>
-          <a
-            href="#tentang_kami"
-            className=""
-          >
+          <a href="#tentang_kami" className="">
             Tentang Kami
           </a>
-          <a
-            href="#tutorial"
-            className=""
-          >
+          <a href="#tutorial" className="">
             Tutorial
           </a>
         </div>
@@ -48,7 +33,13 @@ const navbar = () => {
 
       {/* RUN IN MOBILE */}
       <div className="flex md:hidden flex-wrap items-center justify-between p-2">
-        <ResponsiveImage src="/img/lp_icon_sm.png"  width={150} height={40} alt="logo bengkod" className="md:hidden block w-[160px] h-[40px]"/>
+        <ResponsiveImage
+          src="/img/lp_icon_sm.png"
+          width={165}
+          height={40}
+          alt="logo bengkod"
+          className="md:hidden block w-[165px] h-[40px]"
+        />
         <button
           data-collapse-toggle="navbar-default"
           type="button"

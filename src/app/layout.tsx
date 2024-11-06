@@ -24,10 +24,10 @@ export default function RootLayout({
     <PrimeReactProvider>
       <html lang="en" className={inter.className}>
         <head>
-          <link
-            // href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+          {/* <link
+            href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
             rel="stylesheet"
-          />
+          /> */}
         </head>
         <body>
           {children}
