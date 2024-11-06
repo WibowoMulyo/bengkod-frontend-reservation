@@ -271,9 +271,9 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
         {/* END CONTENT FORM */}
       </div>
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box w-[30%]">
+        <div className="modal-box lg:w-[30%] w-11/12">
           <div className="border-b-2 border-[#00000066]/[.4] flex items-center">
-            <h3 className="font-bold text-lg pt-2 pb-4 mr-auto">Apakah kamu yakin?</h3>
+            <h3 className="font-bold lg:text-lg text-[14px] pt-2 pb-4 mr-auto">Apakah kamu yakin?</h3>
             <form method="dialog" className="flex gap-x-4 modal-backdrop">
               {/* if there is a button in form, it will close the modal */}
               <button>
@@ -283,8 +283,8 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
               </button>
             </form>
           </div>
-          <p className="py-4 font-normal">Pastikan pilihanmu tepat dan datang tepat waktu agar pengalaman reservasi tetap optimal</p>
-          <div className="py-2">
+          <p className="py-4 font-normal text-[14px]">Pastikan pilihanmu tepat dan datang tepat waktu agar pengalaman reservasi tetap optimal</p>
+          <div className="py-2 text-[14px]">
             <p>Detail transaksi: </p>
             <ul>
               <li>• Waktu: {duration}</li>

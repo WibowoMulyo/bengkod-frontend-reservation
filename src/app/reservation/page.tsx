@@ -19,7 +19,7 @@ const RenderStep = () => {
 
   const [status, setStatus] = useState('')
 
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
 
   const refform = useRef(0)
   function nextButt() {
@@ -27,6 +27,12 @@ const RenderStep = () => {
       setStep(step + 1)
     }
   }
+
+  useEffect(() => {
+    if (step === 0) {
+      document.getElementById('my_modal_peraturan')?.showModal()
+    }
+  }, [])
 
   function submit() {
     const formData = {
@@ -60,15 +66,13 @@ const RenderStep = () => {
 
 
 const renderDisplay = () => {
-  useEffect(() => {
-    document.getElementById('my_modal_1')?.showModal()
-  }, [])
+  
   return (
     <div className="">
       <HeaderAuth />
       <RenderStep />
 
-      <dialog id="my_modal_1" className="modal">
+      <dialog id="my_modal_peraturan" className="modal">
         <div className="rounded-2xl italic text-[14px] font-normal bg-primary-200 text-gray-700 modal-box max-w-[45%]">
           <div className="flex">
             <p className="mb-4">

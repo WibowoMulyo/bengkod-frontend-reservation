@@ -3,6 +3,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { useState } from "react";
 import StatusReservation from "./components/StatusReservation";
 import SimpleCard from "@/app/component/SimpleCard";
+import CountdownTimer from "@/app/component/CountdownTimer";
 
 interface props {
   step?: () => void,
@@ -154,61 +155,12 @@ const renderDisplay = ({ step, status }: props) => {
 
           {/* START RESERVATION SUMMARY */}
           <SimpleCard className="bg-white md:min-w-[450px] w-full">
-
-            <div className="border-[#e5e5e5] border-[3.5px] rounded-xl">
-              <div className="flex flex-col space-y-[5%]">
-                <h1 className="text-center font-medium text-[16px]">Waktu Konfirmasi</h1>
-                <h1 className="text-center font-medium text-[14px]">Batas waktu konfirmasi</h1>
+            <div className="border-[#e5e5e5] border-[3.5px] rounded-xl h-[473px]">
+              <div className="flex flex-col space-y-[5%] my-[5%]">
+                <h1 className="text-center font-medium text-xl">Waktu Konfirmasi</h1>
+                <CountdownTimer duration={10} size={250} strokeBgColor="#E9E9FF" strokeGradientStart="#1E3A8B" strokeGradientEnd="#FFFFFF" strokeWidth={20} />
+                <h1 className="text-center font-medium text-lg">Batas waktu konfirmasi</h1>
               </div>
-              {/* <div className="p-[3%]">
-                  <div className="flex">
-                    <div className="mr-auto flex flex-col md:gap-2 gap-1">
-                      <p className="md:text-sm text-[10px] font-bold text-[#ababab]">From</p>
-                      <p className="md:text-sm text-[10px] font-bold">Senin, 24 Oktober 2024</p>
-                      <p className="md:text-[15px] text-[12px] font-medium">Pukul 10:00 AM</p>
-                    </div>
-                    <div className="h-full border-r-[3px] border-[#b2b2b2] py-6 my-auto">
-                    </div>
-                    <div className="ml-auto flex flex-col md:gap-2 gap-1">
-                      <p className="md:text-sm text-[10px] font-bold text-[#ababab]">To</p>
-                      <p className="md:text-sm text-[10px] font-bold">Senin, 24 Oktober 2024</p>
-                      <p className="md:text-[15px] text-[12px] font-medium">Pukul 11:00 AM</p>
-                    </div>
-                  </div>
-
-                  <div className="flex mt-5">
-                    <div className="flex flex-col gap-3 mr-8">
-                      <div className="">
-                        <p className="md:text-sm text-[10px] font-bold text-[#ababab]">Total peminjam</p>
-                        <p className="md:text-[15px] text-[12px] font-medium">99+</p>
-                      </div>
-                      <div className="">
-                        <p className="md:text-sm text-[10px] font-bold text-[#ababab]">No meja</p>
-                        <p className="md:text-[15px] text-[12px] font-medium">T1</p>
-                      </div>
-                      <div className="">
-                        <p className="md:text-sm text-[10px] font-bold text-[#ababab]">Booking number</p>
-                        <p className="md:text-[15px] text-[12px] font-medium">123ASW</p>
-                      </div>
-                    </div>
-                    <div className="">
-                      <p className="md:text-sm text-[10px] font-bold text-[#ababab]">NIM</p>
-                      <div className="">
-                        <p className="md:text-[15px] text-[12px] font-medium">example@mail.com</p>
-                        <p className="md:text-[15px] text-[12px] font-medium">example@mail.com</p>
-                        <p className="md:text-[15px] text-[12px] font-medium">example@mail.com</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 w-full text-center">
-                    <button className="mx-auto">
-                      <div className="flex items-center">
-                        <h1 className="text-[11px] text-[#172688] mr-2">Kembali ke dashboard</h1>
-                      </div>
-                    </button>
-                  </div>
-                </div> */}
             </div>
           </SimpleCard>
           {/* END RESERVATION SUMMARY */}
