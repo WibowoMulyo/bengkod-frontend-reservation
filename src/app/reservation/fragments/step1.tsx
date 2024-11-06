@@ -108,6 +108,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
 
   useEffect(() => {
     setEmail(Array(numberinput).fill(''))
+    document.getElementById('my_modal_peraturan')?.showModal()
   }, [numberinput])
 
   return (
@@ -272,6 +273,28 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
           </div>
         </div>
       </div>
+      <dialog id="my_modal_peraturan" className="modal">
+        <div className="rounded-2xl italic text-[14px] font-normal bg-primary-200 text-gray-700 modal-box max-w-[45%]">
+          <div className="flex">
+            <p className="mb-4">
+              Peraturan pengguna:
+            </p>
+
+          </div>
+          <ol>
+            <li>1. Pengguna diperbolehkan meminjam meja 1 kali dalam 1 hari</li>
+            <li>2. Pengguna diperbolehkan meminjam meja maksimal untuk 2 hari kedepan</li>
+            <li>3. Pengguna dilarang membawa makan dan minum kedalam lobby H6</li>
+            <li>4. Bagi pengguna yang tidak mengikuti aturan akan dikenakan penalti selama 1  minggu</li>
+            <li>5. Jika pengguna sudah pesan tetapi tidak melakukan konfirmasi kehadiran selama 1 jam, akan terbatalkan secara sistem</li>
+          </ol>
+          {/* <PrimaryCard>
+          </PrimaryCard> */}
+        </div>
+        <form method="dialog" className="modal-backdrop h-screen w-screen">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
 
   )

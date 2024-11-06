@@ -9,6 +9,7 @@ interface countdowntimer {
   strokeColor?: string;
   strokeWidth?: number;
   onComplete?: VoidFunction;
+  initialDuration?: number
   strokeLinecap?: 'butt' | 'round' | 'square' | 'inherit' | undefined;
 }
 
@@ -21,19 +22,22 @@ const CountdownTimer = (
     strokeGradientEnd,
     strokeWidth,
     onComplete,
-    strokeLinecap = 'round'
+    strokeLinecap = 'round',
+    initialDuration=duration
   }: countdowntimer) => {
-  const milisecond = duration * 1000;
+  const totalmilisecond = duration * 1000;
   const radius = size / 2
   const circumference = size * Math.PI
 
-  const [countdown, setCountdown] = useState(milisecond)
+  const initialCountdown = initialDuration * 1000;
+  const [countdown, setCountdown] = useState(initialCountdown)
 
-  const strokeDashOffset = circumference - (countdown / milisecond) * circumference;
+  const strokeDashOffset = circumference - (countdown / totalmilisecond) * circumference;
 
   // const minute = Math.floor(duration % 60)
-  const minute = ((countdown / 1000) / 60).toFixed()
-  const seconds = (countdown / 1000).toFixed();
+  const totalSeconds = Math.ceil(countdown / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
 
 
   useEffect(() => {
@@ -50,7 +54,7 @@ const CountdownTimer = (
 
   return (
     <div className="flex relative justify-center items-center">
-      <label htmlFor="" className='absolute text-5xl font-bold'>{minute} : {seconds}</label>
+      <label htmlFor="" className='absolute text-5xl font-bold'>{minutes} : {seconds}</label>
       <div className="-rotate-90 ">
         <svg className='overflow-visible mt-5 ml-5' style={{height: size + 20, width : size + 20}}>
 
