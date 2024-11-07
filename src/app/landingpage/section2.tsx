@@ -10,8 +10,8 @@ const secondSec = () => {
           {/* <h1 className="text-2xl font-semibold md:text-4xl lg:text-left text-center">Fasilitas Kami</h1> */}
           <Header>Fasilitas kami</Header>
           <div className="flex lg:space-x-[50px] space-y-[16px] lg:flex-row flex-col">
-            <div className="lg:w-[500px] w-[284px] lg:text-left text-center mx-auto ">
-              <p className="text-[11px] md:text-lg lg:my-8 text-wrap">
+            <div className="w-5/6 text-center mx-auto lg:w-[500px] lg:text-left">
+              <p className="text-[11px] md:text-lg md:my-8 text-wrap">
                 Butuh tempat nugas/belajar? Kami menyediakan fasilitas lengkap
                 yang akan membantu kamu fokus dan mencapai hasil maksimal. Nikmati
                 suasana belajar yang kondusif dengan fasilitas yang nyaman.
@@ -19,7 +19,7 @@ const secondSec = () => {
               <ResponsiveImage src="/img/facility.png" width={500} height={300} className="h-[290px] lg:block hidden" alt="foto desc" />
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-y-2 lg:w-[500px] mx-10">
+            <div className="flex flex-col justify-center items-center mx-10 space-y-8 lg:w-[500px]">
               <UnorderedList
                 srcImage="/img/internet_cepat.png"
                 header="Internet Cepat"
