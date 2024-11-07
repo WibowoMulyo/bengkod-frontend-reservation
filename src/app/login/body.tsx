@@ -1,25 +1,37 @@
 'use client'
-
-import axios from "axios";
-import { useState } from "react";
-
-
+import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
+import InputError from "../component/InputError";
+import Cookies from 'js-cookie';
+import Router from 'next/router';
+import { redirect } from 'next/navigation'
+import { RequestHttp } from "../services/Request";
 const body = () => {
-  const [email_mhs, setEmailMhs] = useState<string>()
-  const [password, setPassword] = useState<string>()
-  
-  const sendRequest = () => {
-    axios.post('http://127.0.0.1:8000/api/login', {
-      email_mhs: email_mhs,
-      password: password
-    }).then((response) => {
-      console.log(response.data)
+  const [email_mhs, setEmailMhs] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<any | ''>({})
+
+  const sendRequest = async () => {
+    // setError()
+    const data = await RequestHttp({
+      type: 'post', 
+      url: `http://127.0.0.1:8000/api/login`,
+      datas: {email_mhs: email_mhs, password: password},
     })
+    if(data){
+      Cookies.set('token', data.data.token)
+    }
   }
-  function onSubmit(e: any){
+
+  function onSubmit(e: any) {
     e.preventDefault()
     sendRequest()
   }
+  useEffect(() => {
+    if (Cookies.get('token')) {
+      redirect('dashboard')
+    }
+  }, [])
 
   return (
     <div>
@@ -72,7 +84,7 @@ const body = () => {
                       type="email"
                       name="email"
                       value={email_mhs}
-                      onChange={(e) =>  setEmailMhs(e.target.value)}
+                      onChange={(e) => setEmailMhs(e.target.value)}
                       id="email"
                       className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Masukkan alamat email"
@@ -121,6 +133,9 @@ const body = () => {
                   >
                     Masuk
                   </button>
+                  <div className="flex justify-center">
+                    <InputError value={error.message} />
+                  </div>
                 </form>
               </div>
               <div className="md:w-1/2">

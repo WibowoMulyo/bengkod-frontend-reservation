@@ -3,7 +3,7 @@ import Navbar from "./navbar";
 import Body from "./body";
 import Footer from "./footer";
 
-export default function Home() {
+export default function page() {
   return (
     <div className="bg-gray-50">
       <Navbar />
