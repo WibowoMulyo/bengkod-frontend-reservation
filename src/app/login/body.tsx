@@ -1,4 +1,26 @@
+'use client'
+
+import axios from "axios";
+import { useState } from "react";
+
+
 const body = () => {
+  const [email_mhs, setEmailMhs] = useState<string>()
+  const [password, setPassword] = useState<string>()
+  
+  const sendRequest = () => {
+    axios.post('http://127.0.0.1:8000/api/login', {
+      email_mhs: email_mhs,
+      password: password
+    }).then((response) => {
+      console.log(response.data)
+    })
+  }
+  function onSubmit(e: any){
+    e.preventDefault()
+    sendRequest()
+  }
+
   return (
     <div>
       <div
@@ -32,7 +54,7 @@ const body = () => {
           <div className="w-full bg-white rounded-lg shadow">
             <div className="p-6 space-y-4 sm:p-8 flex md:m-10 md:space-x-10">
               <div className="md:w-1/2 md:space-y-6">
-                <form className="space-y-4 md:space-y-6" action="#">
+                <form className="space-y-4 md:space-y-6" method="POST" onSubmit={(e) => onSubmit(e)}>
                   <div className="items-center justify-center flex flex-col md:my-12">
                     <img className="w-20" src="./image/benlogo.png" alt="" />
                     <h1 className="text-2xl font-bold md:text-4xl md:my-4">
@@ -49,6 +71,8 @@ const body = () => {
                     <input
                       type="email"
                       name="email"
+                      value={email_mhs}
+                      onChange={(e) =>  setEmailMhs(e.target.value)}
                       id="email"
                       className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Masukkan alamat email"
@@ -61,6 +85,8 @@ const body = () => {
                     <input
                       type="password"
                       name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       id="password"
                       placeholder="Masukkan kata sandi"
                       className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -90,7 +116,7 @@ const body = () => {
                     </a>
                   </div>
                   <button
-                    type="submit"
+                    // type="submit"
                     className="w-full bg-blue-900 text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   >
                     Masuk
