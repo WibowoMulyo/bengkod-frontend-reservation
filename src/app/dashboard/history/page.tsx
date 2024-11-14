@@ -1,11 +1,11 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import HeaderAuth from "../../layouts/header";
-import Dashboard_navbar from "../../layouts/dashboard-navbar";
-import Footer from "../../layouts/footer";
-import ButtonDashboard from "../components/ButtonDashboard";
-import HeaderCellTable from "../components/HeaderCellTable";
-import ContentCellTable from "../components/ContentCellTable";
+import HeaderAuth from "../../component/layouts/header";
+import Dashboard_navbar from "../../component/layouts/dashboard-navbar";
+import Footer from "../../component/layouts/footer";
+import ButtonDashboard from "../../component/Button/ButtonDashboard";
+import HeaderCellTable from "../../component/Table/HeaderCellTable";
+import ContentCellTable from "../../component/Table/ContentCellTable";
 
 const getData = (navbar: props) => {
   const [data, setData] = useState([])

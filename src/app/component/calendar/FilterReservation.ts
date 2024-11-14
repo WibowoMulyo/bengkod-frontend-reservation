@@ -5,6 +5,6 @@ export const filterData = (reservationMap: Array<Reservation>, key: string ) => 
   if(!key) return [];
 
   return reservationMap.filter((x) =>
-    x.table.includes(key)
+    x.table_id.includes(key)
   )
 }

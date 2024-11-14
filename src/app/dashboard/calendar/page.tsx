@@ -1,23 +1,20 @@
 'use client'
-import Footer from "../../layouts/footer";
-import HeaderAuth from "../../layouts/header";
-import Dashboard_navbar from "../../layouts/dashboard-navbar";
+import Footer from "../../component/layouts/footer";
+import HeaderAuth from "../../component/layouts/header";
+import Dashboard_navbar from "../../component/layouts/dashboard-navbar";
 import { getDayOfWeek, getReservationsDateMap } from "@/app/component/calendar/calendartype";
 import React, { useEffect, useState } from 'react';
-import { reservations2 } from "@/app/component/mock_data/reservations";
-import { filterData } from "@/app/component/FilterReservation";
-import ReservedCalendar from "../components/ReservedCalendar";
-
-
+import ReservedCalendar from "../../component/Label/ReservedCalendar";
+import { RequestHttp } from "@/app/services/Request";
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const hours = ['08:00-10:00', '10:01-12:00', '12:01-13:00', '13:01-15:00', '15:01-17:00'];
+const hours = ['08:00-10:00', '10:00-12:00', '12:01-13:00', '13:00-15:00', '15:00-17:00'];
 const colors = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
 
 const getWeekPerDay = (indexDay: number) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() - currentDate.getDay() + indexDay + 1); // set week from the day
   const datestring = currentDate.toISOString().split('T')[0]
-  
+
   return datestring;
 }
 
@@ -34,29 +31,50 @@ const Calendar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const contents = ['Table 01', 'Table 02', 'Table 03', 'Table 04', 'Table 05', 'Table 06'];
-  const [reservationsMap, setReservationMap] = useState(getReservationsDateMap(filterData(reservations2, contents[0])))
+  const [reservationsMap, setReservationMap] = useState<any>()
+  const [animation, setAnimation] = useState(false)
 
   const handleNext = async () => {
     if (activeIndex < contents.length - 1) {
-      // setActiveIndex(prevIndex => prevIndex + 1);
+      console.log(activeIndex)
       setActiveIndex(prevIndex => prevIndex + 1)
-      setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex + 1])))
+      getData(activeIndex + 1)
+      // setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex + 1])))
     }
   };
 
   const handlePrevious = async () => {
     if (activeIndex > 0) {
       setActiveIndex(prevIndex => prevIndex - 1);
-      setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex - 1])))
+      getData(activeIndex - 1)
+      // setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex - 1])))
     }
   };
+
+  async function getData(id=1) {
+    setAnimation(false)
+    const getData = await RequestHttp({
+      type: 'get',
+      url: `http://127.0.0.1:8000/api/calendar`,
+      params: {
+        table_id: id
+      }
+    })
+    setReservationMap(getReservationsDateMap(getData.data.reservations))
+    setAnimation(true)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <div className="">
       <HeaderAuth />
       <div className="flex md:flex-row flex-col my-[5%] lg:my-[1.5%] justify-center w-full h-full">
         <Dashboard_navbar />
         <div className="overflow-x-auto md:mx-auto">
-          <div className="bg-white rounded-t-xl lg:w-[1150px] w-[715px] md:my-4 md:mr-4 ml-4 md:ml-0">
+          <div className="bg-white rounded-t-xl lg:w-[1150px] lg:h-[890px] w-[715px] md:my-4 md:mr-4 ml-4 md:ml-0">
             <div className="flex py-8 justify-center">
               {/* Tombol Kiri */}
               <button
@@ -98,7 +116,7 @@ const Calendar = () => {
                 </div>
               </button>
             </div>
-            <div className="">
+            {animation ?
               <table className="border-collapse w-full table-fixed">
                 <thead>
                   <tr>
@@ -110,7 +128,6 @@ const Calendar = () => {
                       </div>
                     </th>
                     {days.map((day, index) => {
-                      // console.log(index)
                       const getdate = getWeekPerDay(index)
                       const pickday = getdate.split("-")[2]
                       return (
@@ -124,25 +141,30 @@ const Calendar = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {hours.map((hour, index) =>
-                    <tr>
-                      <td className={"px-5 lg:text-[14px] text-[9px] text-gray-400 border-2 border-gray-100 font-bold text-sm flex justify-center " + (hour == '12:01-13:00' ? 'lg:py-9 py-4 bg-gray-300' : 'lg:py-16 py-10')} >{hour}</td>
-                      {days.map((day, index) => {
-                        let hexcolor = getColor()
-                        const datestring = getWeekPerDay(index)
-                        const isreserved = reservationsMap[datestring]?.has(hour)
-                        return (
-                          <td key={day} className={"border-2 border-gray-100 font-bold text-sm " + (hour == '12:01-13:00' ? 'bg-gray-300' : '')} >
-                            {isreserved ? <ReservedCalendar hexcolor={hexcolor}/> : ''}
-                          </td>
-                        )
-                      })}
-                    </tr>
-                  )
+                  {
+                    hours.map((hour, index) =>
+                      <tr key={index}>
+                        <td className={"px-5 lg:text-[14px] text-[9px] text-gray-400 border-2 border-gray-100 font-bold text-sm flex justify-center " + (hour == '12:01-13:00' ? 'lg:py-9 py-4 bg-gray-300' : 'lg:py-16 py-10')} >{hour}</td>
+                        {days.map((day, index) => {
+                          let hexcolor = getColor()
+                          const datestring = getWeekPerDay(index)
+                          const isreserved = reservationsMap[datestring]?.has(hour)
+                          return (
+                            <td key={index} className={"border-2 border-gray-100 font-bold text-sm " + (hour == '12:01-13:00' ? 'bg-gray-300' : '')} >
+                              {isreserved ? <ReservedCalendar hexcolor={hexcolor} /> : ''}
+                            </td>
+                          )
+                        })}
+                      </tr>
+                    )
                   }
                 </tbody>
               </table>
-            </div>
+              :
+              <div className="w-full h-full flex justify-center items-center">
+                <span className="loading loading-dots loading-lg"></span>
+              </div>
+            }
           </div>
         </div>
       </div>

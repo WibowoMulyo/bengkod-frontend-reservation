@@ -1,13 +1,13 @@
 'use client'
-import PrimaryButton from "@/app/component/PrimaryButton";
-import Dashboard_navbar from "../../layouts/dashboard-navbar";
-import Footer from "../../layouts/footer";
-import HeaderAuth from "../../layouts/header";
-import SecondaryButton from "@/app/component/SecondaryButton";
-import DangerButton from "@/app/component/DangerButton";
-import PrimaryCard from "../components/PrimaryCard";
-import Label from "@/app/component/Label";
-import GrayInput from "../components/GrayInput";
+import PrimaryButton from "@/app/component/Button/PrimaryButton";
+import Dashboard_navbar from "../../component/layouts/dashboard-navbar";
+import Footer from "../../component/layouts/footer";
+import HeaderAuth from "../../component/layouts/header";
+import SecondaryButton from "@/app/component/Button/SecondaryButton";
+import DangerButton from "@/app/component/Button/DangerButton";
+import PrimaryCard from "../../component/Card/PrimaryCard";
+import Label from "@/app/component/Label/Label";
+import GrayInput from "../../component/Input/GrayInput";
 import Image from "next/image";
 import ResponsiveImage from "@/app/component/ResponsiveImage";
 const renderDisplay = () => {
@@ -51,14 +51,14 @@ const renderDisplay = () => {
                 <div className="font-normal">
                   {/* <h1 className="text-sm">Nama profil</h1> */}
                   <Label className="capitalize text-sm">nama profil</Label>
-                  <GrayInput value={"Kaoruko Waguri"} />
+                  <GrayInput value={"Kaoruko Waguri"} className="pl-[1.5%] py-[1%] pr-[10%]"/>
                 </div>
 
                 <div className="flex items-center">
                   <div className="font-normal w-full mr-auto">
                     {/* <h1 className="text-sm">Email</h1> */}
                     <Label className="capitalize text-sm">email</Label>
-                    <GrayInput value={"Kaoruko Waguri"} errorValue={"Harus menggunakan email mahasiswa"} />
+                    <GrayInput value={"Kaoruko Waguri"} errorValue={"Harus menggunakan email mahasiswa"} className="pl-[1.5%] py-[1%] pr-[10%]"/>
                   </div>
                   <PrimaryButton className="py-2 px-3 capitalize font-medium">
                     simpan

@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import ImageMapper from 'react-img-mapper';
 import { getReservationHourMap } from "@/app/component/calendar/calendartype";
 import { reservations } from "@/app/component/mock_data/reservations";
-import { filterData } from "@/app/component/FilterReservation";
-import ReservedHour from "./components/ReservedHour";
-import ButtonNotReserved from "./components/ButtonNotReserved";
+import { filterData } from "@/app/component/calendar/FilterReservation";
+import ReservedHour from "@/app/component/Label/ReservedHour";
+import ButtonNotReserved from "@/app/component/Button/ButtonNotReserved";
 import Image from "next/image";
 interface props {
   step?: () => void,

@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation'
 import { useEffect } from "react";
 
 function Navlink({ className = '', children = '', href = '', statichref = '' }) {
-  useEffect(() => {
-    console.log(href)
-  }, [])
+  // useEffect(() => {
+  //   console.log(href)
+  // }, [])
   return (
     <Link
       href={href}

@@ -1,16 +1,14 @@
 import Image from "next/image";
-import HeaderAuth from "../template/header";
-import Calendar from "../dashboard/calendar/page";
-import History from "../dashboard/history/page";
-import Footer from "../template/footer";
+import Calendar from "../../dashboard/calendar/page";
+import History from "../../dashboard/history/page";
 import { useState } from "react";
-import Profile from "../dashboard/profile/page";
-import CustomLink from "../component/CustomLink";
+import Profile from "../../dashboard/profile/page";
+import CustomLink from "../Link/CustomLink";
 
 const Dashboard_navbar = () => {
   const [navbar, setNavbar] = useState(1)
   return (
-    <div className="md:flex block md:mt-[3.5%] mb-[6%] lg:mx-8 mx-auto">
+    <header className="md:flex block md:mt-[3.5%] mb-[6%] lg:mx-8 mx-auto">
       {/* HEADER CONTENT */}
       <div className="flex flex-col w-[250px]">
         <div className="text-center">
@@ -93,7 +91,7 @@ const Dashboard_navbar = () => {
         </div>
       </div>
 
-    </div>
+    </header>
   )
 }
 

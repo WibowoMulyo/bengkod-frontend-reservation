@@ -1,10 +1,10 @@
 'use client'
-import HeaderAuth from "../layouts/header";
+import HeaderAuth from "../component/layouts/header";
 import Step1 from '@/app/reservation/fragments/step1';
 import Step2 from '@/app/reservation/fragments/step2';
 import Step3 from '@/app/reservation/fragments/step3';
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const totalStep = [Step1, Step2, Step3];
 
@@ -17,11 +17,11 @@ const RenderStep = () => {
   const [code, setCode] = useState('')
   const [email, setEmail] = useState<string[]>([''])
 
-  const [status, setStatus] = useState('')
+    const [status, setStatus] = useState('')
 
   const [step, setStep] = useState(1);
 
-  const refform = useRef(0)
+  // const refform = useRef(0)
   function nextButt() {
     if (step < totalStep.length - 1) {
       setStep(step + 1)

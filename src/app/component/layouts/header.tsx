@@ -1,14 +1,11 @@
-"use client";
+'use client'
 
 import Image from "next/image";
 import Link from "next/link";
-// import NavLink from "@/pages/component/NavLink";
+import Navlink from "@/app/component/Link/NavLink";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import Navlink from "../component/NavLink";
-import CustomLink from "../component/CustomLink";
-
-// import { NavLink } from "@/app/component/NavLink";
+import { useRouter } from 'next/router';
+import CustomLink from "../Link/CustomLink";
 const renderDisplay = () => {
   return (
     <div className="w-full">

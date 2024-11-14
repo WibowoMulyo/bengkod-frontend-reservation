@@ -1,14 +1,16 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-interface input {
-  className?: string,
-  disabled?: boolean,
-  placeholder?: string,
-  type?: string,
-  value: string,
-  isFocused?: boolean
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import input from '../interface/Input';
+
+// interface input {
+//   className?: string,
+//   disabled?: boolean,
+//   placeholder?: string,
+//   type?: string,
+//   value: string,
+//   isFocused?: boolean
+//   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+// }
 
 
 const InputTextOrDate = forwardRef<HTMLInputElement, input>(function myInput({className, disabled, placeholder, type, value, isFocused, onChange, ...props}, ref){

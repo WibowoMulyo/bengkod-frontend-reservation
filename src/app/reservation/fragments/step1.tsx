@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import InputTextOrDate from "@/app/component/InputTextOrDate";
-import PrimaryButton from "@/app/component/PrimaryButton";
-import Label from "@/app/component/Label";
+import InputTextOrDate from "@/app/component/Input/InputTextOrDate";
+import PrimaryButton from "@/app/component/Button/PrimaryButton";
+import Label from "@/app/component/Label/Label";
 import SelectInput from "@/app/component/SelectInput";
 import Image from "next/image";
 interface props {
