@@ -5,18 +5,25 @@ import UnorderedList from "./components/UnorderedList";
 const secondSec = () => {
   return (
     <div className="my-24">
-      <div className="md:flex gap-x-10 justify-center">
-        <div className="flex flex-col lg:gap-y-1 gap-y-4">
+      <div className="flex gap-x-10 justify-center align-middle">
+        <div className="flex flex-col lg:gap-y-1 gap-y-4 w-5/6">
           {/* <h1 className="text-2xl font-semibold md:text-4xl lg:text-left text-center">Fasilitas Kami</h1> */}
           <Header>Fasilitas kami</Header>
-          <div className="flex lg:space-x-[50px] space-y-[16px] lg:flex-row flex-col">
-            <div className="w-5/6 text-center mx-auto lg:w-[500px] lg:text-left">
+          <div className="flex space-y-[16px] flex-col lg:flex-row lg:space-x-[50px]">
+            <div className="text-center mx-auto lg:w-[500px] lg:text-left">
               <p className="text-[11px] md:text-lg md:my-8 text-wrap">
                 Butuh tempat nugas/belajar? Kami menyediakan fasilitas lengkap
-                yang akan membantu kamu fokus dan mencapai hasil maksimal. Nikmati
-                suasana belajar yang kondusif dengan fasilitas yang nyaman.
+                yang akan membantu kamu fokus dan mencapai hasil maksimal.
+                Nikmati suasana belajar yang kondusif dengan fasilitas yang
+                nyaman.
               </p>
-              <ResponsiveImage src="/img/facility.png" width={500} height={300} className="h-[290px] lg:block hidden" alt="foto desc" />
+              <ResponsiveImage
+                src="/img/facility.png"
+                width={500}
+                height={300}
+                className="h-[290px] lg:block hidden"
+                alt="foto desc"
+              />
             </div>
 
             <div className="flex flex-col justify-center items-center mx-10 space-y-8 lg:w-[500px]">

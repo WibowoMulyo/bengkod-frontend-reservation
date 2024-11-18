@@ -4,8 +4,8 @@ import ResponsiveImage from "./components/ResponsiveImage";
 const firstSec = () => {
   return (
     <div className="md:mx-16" id="beranda">
-      <div className="flex my-12 flex-col space-y-[5%] items-center text-center justify-center">
-        <div className="text-[24px] md:text-[45px] font-semibold">
+      <div className="flex my-12 flex-col space-y-[2%] items-center text-center justify-center">
+        <div className="text-[24px] md:text-[40px] font-semibold">
           <h1 className="mx-[64px]">Ruang Belajar Privat dan Produktif,</h1>
           <h1>
             Hanya
@@ -15,13 +15,13 @@ const firstSec = () => {
             </span>
           </h1>
         </div>
-        <h2 className="mx-6 text-[11px] md:text-[14px] md:max-w-xl">
+        <h2 className="text-[11px] md:text-[14px] md:w-5/6">
           Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
           dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
         </h2>
         <LandingButton>Pesan Sekarang</LandingButton>
       </div>
-      <div className="flex justify-center carousel mx-auto w-[300px] h-[186px] md:w-[480px] md:h-[298px]">
+      <div className="flex justify-center carousel mx-auto w-[300px] h-[186px] md:w-[480px] md:h-[298px] lg:hidden">
         <div className="carousel-item">
           <img
             src="/img/carousel/pic1.png"
@@ -45,12 +45,12 @@ const firstSec = () => {
         </div>
       </div>
 
-      <div className="hidden lg:flex md:my-10">
+      <div className="hidden lg:flex md:my-10 justify-center">
         <ResponsiveImage
           src="/img/meja-pack.png"
-          width={300}
-          height={186}
-          className="w-[300px] h-[186px] md:w-[300px] md:h-[186px]"
+          width={825}
+          height={377}
+          className="min-w-[825px] minh-[377px]"
           alt="foto meja"
         />
       </div>
