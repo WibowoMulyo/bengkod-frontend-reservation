@@ -1,10 +1,8 @@
 import Image from 'next/image'
 import NavBar from "./navbar";
-import Section1 from "./section1";
-import Section2 from "./section2";
-import Section3 from "./section3";
-import Section4 from "./section4";
-import Footer from "../layouts/footer";
+import FirstSec from "./firstSection";
+import SecondSec from "./secondSection";
+import Footer from "../component/layouts/footer";
 
 export default function Home() {
   return (
@@ -14,10 +12,6 @@ export default function Home() {
       <Section1 />
 
       <Section2 />
-
-      <Section3 />
-      
-      <Section4 />
 
       <Footer />
     </div>

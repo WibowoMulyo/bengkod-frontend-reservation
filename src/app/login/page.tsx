@@ -1,33 +1,18 @@
-import NavBar from "./navbar";
+import Image from "next/image";
+import Navbar from "./navbar";
+import Body from "./body";
 import Footer from "./footer";
-import LandingButton from "./components/LandingButton";
-import ResponsiveImage from "./components/ResponsiveImage";
-import Form from "./components/Form";
 
-export default function Home() {
+export default function page() {
   return (
-    <div>
-      <NavBar />
-      <div className="w-5/6 h-40 bg-white rounded-[20px] flex flex-col justify-center items-center mx-auto">
-        <ResponsiveImage
-          src="/image/benlogo_white.png"
-          width={100}
-          height={100}
-          className="max-w-[80px] max-h-[80px]"
-          alt="foto meja"
-        />
+    <div className="bg-gray-50">
+      <Navbar />
 
-        <Form 
-          className=""
-          header="Email"
-          clue="Masukkan alamat email" 
-        />
+      <Body />
 
-        <Form className="" header="" clue=""/>
-
-        
+      <div className="hidden md:block">
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
