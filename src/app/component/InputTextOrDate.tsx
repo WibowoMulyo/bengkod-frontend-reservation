@@ -6,12 +6,14 @@ interface input {
   placeholder?: string,
   type?: string,
   value: string,
-  isFocused?: boolean
+  isFocused?: boolean,
+  min?: string,
+  max?: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
-const InputTextOrDate = forwardRef<HTMLInputElement, input>(function myInput({className, disabled, placeholder, type, value, isFocused, onChange, ...props}, ref){
+const InputTextOrDate = forwardRef<HTMLInputElement, input>(function myInput({className, disabled, placeholder, type, value, isFocused, onChange, min, max, ...props}, ref){
   const input = useRef<HTMLInputElement>(null)
 
   // if(input.current.focus')

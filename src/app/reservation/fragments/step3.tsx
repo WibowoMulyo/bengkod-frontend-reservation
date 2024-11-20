@@ -158,7 +158,7 @@ const renderDisplay = ({ step, status }: props) => {
             <div className="border-[#e5e5e5] border-[3.5px] rounded-xl h-[473px]">
               <div className="flex flex-col space-y-[5%] my-[5%]">
                 <h1 className="text-center font-medium text-xl">Waktu Konfirmasi</h1>
-                <CountdownTimer duration={60} initialDuration={21} size={250} strokeBgColor="#E9E9FF" strokeGradientStart="#1E3A8B" strokeGradientEnd="#FFFFFF" strokeWidth={20} />
+                <CountdownTimer duration={300} initialDuration={21} size={250} strokeBgColor="#E9E9FF" strokeGradientStart="#1E3A8B" strokeGradientEnd="#FFFFFF" strokeWidth={20} />
                 <h1 className="text-center font-medium text-lg">Batas waktu konfirmasi</h1>
               </div>
             </div>

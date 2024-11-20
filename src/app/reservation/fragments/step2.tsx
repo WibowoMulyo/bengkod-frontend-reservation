@@ -110,6 +110,7 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
 
   async function changeTable(e: string) {
     setTable(e)
+    // TARUH LINK API DISINI
     setReservationMap(getReservationHourMap(filterData(reservations, e)))
   }
   return (

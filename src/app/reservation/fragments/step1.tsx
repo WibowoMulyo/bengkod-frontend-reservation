@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import InputTextOrDate from "@/app/component/InputTextOrDate";
 import PrimaryButton from "@/app/component/PrimaryButton";
 import Label from "@/app/component/Label";
-import SelectInput from "@/app/component/SelectInput";
 import Image from "next/image";
+import { ValidationReservation } from "../Services/Validation";
+import { z } from "zod";
 interface props {
   onClick?: () => void,
   reserveDate: (val: string) => void,
@@ -13,23 +14,29 @@ interface props {
   // data: {}
 }
 
-const pesananType = [
-  { id: 1, name: "tim" },
-  { id: 2, name: "individu" },
-]
-
 const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserveReason, ...props }: props) => {
 
   const [date, setDate] = useState<string>('')
   const [email, setEmail] = useState<string[]>([''])
   const [typereserve, setTypeReserve] = useState('')
   const [reason, setReason] = useState('')
-  const [error, setError] = useState({})
+  const [error, setError] = useState<any>([])
   const [numberinput, setNumberInput] = useState(1)
   const [isshown, setShown] = useState(false)
 
+  // Format tanggal ke YYYY-MM-DD
+  const today = new Date()
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Bulan ditambahkan 1 karena dimulai dari 0
+  const ddnow = String(today.getDate()).padStart(2, '0');
+  const ddafter = String(today.getDate() + 3).padStart(2, '0');
+
+  const formattedToday = `${yyyy}-${mm}-${ddnow}`;
+  const threedayafter = `${yyyy}-${mm}-${ddafter}`
+
   function shownTeamInput(e: string) {
     if (e === 'tim') {
+      setNumberInput(2)
       setShown(true)
     }
     else {
@@ -67,49 +74,37 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
     return render
   }
 
-  function validation() {
-    const eror = { date: '', email: '', typereserve: '', reason: '' }
-
-
-    if (date.length < 1) {
-      eror.date = 'Please select a date'
-    }
-    email.map(data => {
-      if (data.length < 1) {
-        eror.email = 'Please enter an email'
-      }
-    }
-    )
-
-    if (typereserve == '') {
-      eror.typereserve = 'Please select an option'
-    }
-
-    if (reason == '') {
-      eror.reason = 'Please select a reason'
-    }
-
-    setError(eror)
-    return false
-  }
-
   function submitButton() {
     // validation()
-
-    reserveDate(date)
-    reserveEmail(email)
-    reserveOpt(typereserve)
-    reserveReason(reason)
-
-    if (onClick) {
-      onClick()
+    // console.log(error[0].message)
+    let data = { date: date, email: email, typereserve: typereserve, reason: reason }
+    let result: any = ValidationReservation({ type: 'step1', data: data }) || ''
+    if (result.success == false) {
+      console.log(result.error.issues)
+      setError(result.error.issues)
     }
+    if (result.success == true) {
+      // reserveDate(date)
+      // reserveEmail(email)
+      // reserveOpt(typereserve)
+      // reserveReason(reason)
+  
+      // if (onClick) {
+      //   onClick()
+      // }
+      setError([])
+      console.log("Berhasil! pindah page....")
+    }
+  }
+
+  function ChangeEmailInput(input?: number) {
+    setEmail(Array(numberinput).fill(''))
   }
 
   useEffect(() => {
-    setEmail(Array(numberinput).fill(''))
+    // setEmail(Array(numberinput).fill(''))
     document.getElementById('my_modal_peraturan')?.showModal()
-  }, [numberinput])
+  }, [])
 
   return (
     <div className="my-10" {...props}>
@@ -207,8 +202,11 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                     <InputTextOrDate
                       value={date}
                       type="date"
+                      min={formattedToday}
+                      max={threedayafter}
                       onChange={(e) => { setDate(e.target.value); debugCheck(e.target.value) }}
                     />
+                    {error[0] && <p className="font-light text-red-600 text-xs">{error[0].message}</p>}
                   </div>
                 </div>
                 <div className="my-2">
@@ -223,6 +221,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                       <option value="mandiri">Belajar mandiri</option>
                       <option value="santai">Nyantuy</option>
                     </select>
+                    {error[4] && <p className="font-light text-red-600 text-xs">{error[4].message}</p>}
                   </div>
                 </div>
                 <div className="my-2">
@@ -232,12 +231,13 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                     <select name="" id="" className=
                       "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10 focus:ring-primary-700 focus:ring-2"
                       value={typereserve}
-                      onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value) }}
+                      onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value); ChangeEmailInput }}
                     >
                       <option value="">--</option>
                       <option value="individu">individu</option>
                       <option value="tim">Tim</option>
                     </select>
+                    {error[3] && <p className="font-light text-red-600 text-xs">{error[3].message}</p>}
                   </div>
                 </div>
                 {isshown && <div className="my-2">
@@ -246,9 +246,9 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                     <select name="" id="" className=
                       "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10"
                       value={numberinput}
-                      onChange={(e) => { setNumberInput(parseInt(e.target.value)); debugCheck(numberinput) }}
+                      onChange={(e) => { setNumberInput(parseInt(e.target.value)); debugCheck(numberinput); ChangeEmailInput(parseInt(e.target.value)) }}
                     >
-                      <option value="1">1</option>
+                      {/* <option value="1">1</option> */}
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -261,6 +261,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <Label>Email pemesan</Label>
                   <div className="mt-2 mb-6">
                     {extraInput(numberinput)}
+                    {error[2] && <p className="font-light text-red-600 text-xs">{error[2].message}</p>}
                   </div>
                 </div>
               </div>
