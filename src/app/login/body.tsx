@@ -5,38 +5,46 @@ import InputError from "../component/Input/InputError";
 // import Cookies from 'js-cookie';
 import Cookies from 'js-cookie'
 import { redirect } from 'next/navigation'
-import { RequestHttp } from "../services/Request";
+import { RequestHttp } from "../services/core/Request";
 import SimpleCard from "../component/Card/SimpleCard";
 import CustomLink from "../component/Link/CustomLink";
 import GrayInput from "../component/Input/GrayInput";
 import Label from "../component/Label/Label";
+import { Login } from "../services/LoginServices";
 const body = () => {
   const [email_mhs, setEmailMhs] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<any | ''>({})
   var hour = new Date(new Date().getTime() + 60 * 60 * 1000);
-  const sendRequest = async () => {
-    // setError()
-    const data = await RequestHttp({
-      type: 'post',
-      url: `http://127.0.0.1:8000/api/login`,
-      datas: { email_mhs: email_mhs, password: password },
-    })
-    if (data.status == 'success') {
-      console.log(data.data.token)
-      Cookies.set('token', data.data.token, {
-        expires: hour,
-      })
-      redirect('dashboard/calendar')
-    }else if(data.status == 'error'){
-      // console.log(data.data.email_mhs)
-      setError(data)
-    }
-  }
+  // const sendRequest = async () => {
+  //   const data = await RequestHttp({
+  //     type: 'post',
+  //     url: `http://127.0.0.1:8000/api/login`,
+  //     datas: { email_mhs: email_mhs, password: password },
+  //   })
+  //   if (data.status == 'success') {
+  //     console.log(data.data.token)
+  //     Cookies.set('token', data.data.token, {
+  //       expires: hour,
+  //     })
+  //     console.log("Success login")
+  //   }else if(data.status == 'error'){
+  //     setError(data)
+  //   }
+  // } 
 
-  function onSubmit(e: any) {
+  async function OnSubmit(e: any) {
     e.preventDefault()
-    sendRequest()
+    const data = await Login({
+      user_data: { email_mhs: email_mhs, password: password }
+    }).then(response => {
+      console.log(response)
+      if(response == 'success'){
+        window.location.href = '/dashboard/calendar'
+      }else{
+        setError(response)
+      }
+    })
   }
 
   return (
@@ -55,7 +63,7 @@ const body = () => {
           <div className="w-full bg-white rounded-lg shadow">
             <div className="p-6 space-y-4 sm:p-8 flex md:m-10 md:space-x-10">
               <div className="md:w-1/2 md:space-y-6">
-                <form className="space-y-4 md:space-y-6" method="POST" onSubmit={(e) => onSubmit(e)}>
+                <form className="space-y-4 md:space-y-6" method="POST" onSubmit={(e) => OnSubmit(e)}>
                   <div className="items-center justify-center flex flex-col md:my-12">
                     <img className="w-20" src="./image/benlogo.png" alt="" />
                     <h1 className="text-2xl font-bold md:text-4xl md:my-4">

@@ -5,7 +5,9 @@ import Dashboard_navbar from "../../component/layouts/dashboard-navbar";
 import { getDayOfWeek, getReservationsDateMap } from "@/app/component/calendar/calendartype";
 import React, { useEffect, useState } from 'react';
 import ReservedCalendar from "../../component/Label/ReservedCalendar";
-import { RequestHttp } from "@/app/services/Request";
+import { RequestHttp } from "@/app/services/core/Request";
+import Cookies from 'js-cookie'
+import { getDataCalendar } from "@/app/services/CalendarServices";
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const hours = ['08:00-10:00', '10:00-12:00', '12:01-13:00', '13:00-15:00', '15:00-17:00'];
 const colors = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
@@ -39,33 +41,33 @@ const Calendar = () => {
       console.log(activeIndex)
       setActiveIndex(prevIndex => prevIndex + 1)
       getData(activeIndex + 1)
-      // setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex + 1])))
-    }
+                    }
   };
 
   const handlePrevious = async () => {
     if (activeIndex > 0) {
       setActiveIndex(prevIndex => prevIndex - 1);
       getData(activeIndex - 1)
-      // setReservationMap(getReservationsDateMap(filterData(reservations2, contents[activeIndex - 1])))
     }
   };
 
   async function getData(id=1) {
     setAnimation(false)
-    const getData = await RequestHttp({
-      type: 'get',
-      url: `http://127.0.0.1:8000/api/calendar`,
-      params: {
-        table_id: id
+    const data = await getDataCalendar(id).then(response => {
+      console.log(response)
+      if(response.status == 'success'){
+        setReservationMap(getReservationsDateMap(response.data.reservations))
+      }else if(response.status == 'error'){
+        throw new Error("Error fetch data calendar")
       }
     })
-    setReservationMap(getReservationsDateMap(getData.data.reservations))
+    // console.log(data)
     setAnimation(true)
   }
 
   useEffect(() => {
     getData()
+    // console.log(Cookies.get('token'))
   }, [])
 
   return (

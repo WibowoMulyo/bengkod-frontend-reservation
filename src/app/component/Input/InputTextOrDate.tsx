@@ -33,6 +33,7 @@ const InputTextOrDate = forwardRef<HTMLInputElement, input>(function myInput({cl
       placeholder={placeholder ? placeholder : ''}
       onChange={onChange}
       ref={input}
+      min={"2024-11-20"}
       {...props}
     />
   )

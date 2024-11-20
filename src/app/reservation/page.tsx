@@ -19,7 +19,7 @@ const RenderStep = () => {
 
     const [status, setStatus] = useState('')
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   // const refform = useRef(0)
   function nextButt() {

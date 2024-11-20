@@ -10,7 +10,15 @@ import Label from "@/app/component/Label/Label";
 import GrayInput from "../../component/Input/GrayInput";
 import Image from "next/image";
 import ResponsiveImage from "@/app/component/ResponsiveImage";
+import { getDataUser } from "@/app/services/UserServices";
 const renderDisplay = () => {
+
+  const data = getDataUser()
+  
+  function onClick(){
+    console.log(data)
+  }
+
   return (
     <div className="">
       <HeaderAuth />
@@ -31,7 +39,7 @@ const renderDisplay = () => {
                   </div>
                   <ResponsiveImage className="w-[110px]" photoclassName="rounded-full" src={"/image/profile-image.jpeg"} alt="Foto profile" width={110} height={110}/>
                 </div>
-                <SecondaryButton>ubah gambar</SecondaryButton>
+                <SecondaryButton onClick={onClick}>ubah gambar</SecondaryButton>
                 <DangerButton>hapus gambar</DangerButton>
               </div>
               <div className="flex flex-col mt-[4%] space-y-[1.5%]">

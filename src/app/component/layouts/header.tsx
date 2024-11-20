@@ -40,7 +40,31 @@ const renderDisplay = () => {
                 Sisa waktu peminjaman tersisa 2 jam
               </div>
             </div>
-            <CustomLink href="/dashboard/profile" showline={false}>
+            <div className="dropdown dropdown-end">
+              <div className="w-[60px]" role="button" tabIndex={0}>
+                <Image src={"/image/profile-image.jpeg"}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  width={60}
+                  height={60} alt="logo profile"
+                  className="rounded-full"
+                />
+              </div>
+              <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <CustomLink href="/dashboard/profile" className="font-semibold rounded-lg p-2" whennotactive="hover:bg-primary-900 hover:text-white" whenactive="bg-primary-900 text-white" showline={false}>
+                  Profile
+                </CustomLink>
+
+                <CustomLink href="/dashboard/profile" className="hover:bg-red-600 hover:text-white font-semibold rounded-lg p-2 mt-2" showline={false}>
+                  Logout
+                </CustomLink>
+
+                {/* <li><a>Logout</a></li> */}
+              </ul>
+            </div>
+            {/* <CustomLink href="/dashboard/profile" showline={false}>
               <div className="w-[60px]">
                 <Image src={"/image/profile-image.jpeg"}
                   style={{
@@ -48,11 +72,11 @@ const renderDisplay = () => {
                     height: '100%',
                   }}
                   width={60}
-                  height={60} alt="logo profile" 
+                  height={60} alt="logo profile"
                   className="rounded-full"
-                  />
+                />
               </div>
-            </CustomLink>
+            </CustomLink> */}
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ interface props {
   showline?: boolean
 }
 
-function CustomLink({ children, href, className, whenactive, whennotactive, getActive, showline=true, statichref = href }: props) {
+function CustomLink({ children, href, className, whenactive, whennotactive, getActive, showline=true, statichref = href, ...props }: props) {
   const pathname = usePathname()
 
   function onClick() {
@@ -28,6 +28,7 @@ function CustomLink({ children, href, className, whenactive, whennotactive, getA
     <Link
       href={href}
       onClick={onClick}
+      {...props}
     >
       <div className={className + ' ' + (pathname.startsWith(href) || pathname.startsWith(statichref) ? whenactive : whennotactive)}>
         {children}

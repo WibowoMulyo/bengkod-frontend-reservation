@@ -28,6 +28,17 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
   const [numberinput, setNumberInput] = useState(1)
   const [isshown, setShown] = useState(false)
 
+  const today = new Date();
+
+  // Format tanggal ke YYYY-MM-DD
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Bulan ditambahkan 1 karena dimulai dari 0
+  const ddnow = String(today.getDate()).padStart(2, '0');
+  const ddafter = String(today.getDate()+3).padStart(2, '0');
+
+  const formattedToday = `${yyyy}-${mm}-${ddnow}`;
+  const threedayafter =`${yyyy}-${mm}-${ddafter}`
+
   function shownTeamInput(e: string) {
     if (e === 'tim') {
       setShown(true)
@@ -204,6 +215,8 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <Label>Tanggal penggunaan</Label>
                   <div className="my-2 w-1/3">
                     <InputTextOrDate
+                    max={threedayafter}
+                    min={formattedToday}
                       value={date}
                       type="date"
                       onChange={(e) => { setDate(e.target.value); debugCheck(e.target.value) }}
