@@ -19,7 +19,9 @@ const firstSec = () => {
           Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang
           dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
         </h2>
-        <LandingButton>Pesan Sekarang</LandingButton>
+        <LandingButton className="lg:py-3 lg:px-4">
+          Pesan Sekarang
+        </LandingButton>
       </div>
       <div className="flex justify-center carousel mx-auto w-[300px] h-[186px] md:w-[480px] md:h-[298px] lg:hidden">
         <div className="carousel-item">
