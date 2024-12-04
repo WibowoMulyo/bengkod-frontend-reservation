@@ -79,13 +79,16 @@ const config: Config = {
           800: '#05603A',
           900: '#054F31',
         },
+      },
+      boxShadow: {
+        primary: '0px 6px 4px 0px rgba(0, 0, 0, 0.25)'
       }
 
     },
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    themes: ["light", "dark", "cupcake"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
     darkTheme: "light", // name of one of the included themes for dark mode
     base: false, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components

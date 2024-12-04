@@ -1,13 +1,7 @@
 import React from "react";
+import { button } from "../interface/Button";
 
-interface buttondashboard{
-  className?: string,
-  children: React.ReactNode,
-  onClick?: (e:  React.MouseEvent<HTMLButtonElement>) => void
-
-}
-
-const ButtonDashboard = ({className, children, onClick}: buttondashboard) => {
+const ButtonDashboard = ({className, children, onClick}: button) => {
   return(
     <button className={"rounded-full border-2 border-gray-100 text-gray-900 focus:border-primary-900 hover:border-primary-900 p-2 font-medium " + className}>{children}</button>
   )

@@ -8,11 +8,6 @@
 
 import { Reservation } from "../interface/Reservation";
 
-// Mock reservation data
-// const reservations: Reservation[] = [
-//   { table_id: 1, date: '2024-10-07', time_slot: '10:00' },
-// ];
-
 function getDayOfWeek(dateString: string): number {
   const date = new Date(dateString);
   return date.getDay(); 

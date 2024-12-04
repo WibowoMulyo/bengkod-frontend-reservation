@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { stringify } from "querystring";
-import { useState } from "react";
 
 interface props {
   children: React.ReactNode,

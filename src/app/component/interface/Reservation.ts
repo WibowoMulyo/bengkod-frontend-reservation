@@ -1,8 +1,10 @@
 export interface Reservation {
-  code: string;
-  // status: 0 | 1;
-  // reservation_type: 0 | 1;
-  date: string; // format 'YYYY-MM-DD'
-  time_slot: string; // format 'HH:mm'
-  table_id: string;
+  code?: string;
+  date: string;
+  type: string,
+  email: string[]; // format 'YYYY-MM-DD'
+  total_person?: number,
+  time_slot?: string; // format 'HH:mm'
+  reason?: string,
+  table_id?: string;
 }

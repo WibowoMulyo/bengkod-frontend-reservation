@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Navbar from "./navbar";
+import GuestNavbar from '@/app/component/layouts/guest-navbar';
 import Body from "./body";
 import Footer from "./footer";
 
 export default function page() {
   return (
     <div className="bg-gray-50">
-      <Navbar />
+      <GuestNavbar/>
 
       <Body />
 

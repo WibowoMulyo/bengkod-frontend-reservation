@@ -6,22 +6,25 @@ import Step3 from '@/app/reservation/fragments/step3';
 import axios from "axios";
 import { useState } from "react";
 
+import { Reservation } from "../component/interface/Reservation";
+import { mapitem } from "../component/interface/Map";
+
 const totalStep = [Step1, Step2, Step3];
 
 const RenderStep = () => {
-  const [reservationdate, setReservationDate] = useState('')
-  const [reservationtype, setReservationType] = useState('')
-  const [reservationreason, setReservationReason] = useState('')
-  const [table, setTable] = useState('')
-  const [timeslot, setTimeSlot] = useState('')
-  const [code, setCode] = useState('')
-  const [email, setEmail] = useState<string[]>([''])
-
-    const [status, setStatus] = useState('')
+  // const [reservationdate, setReservationDate] = useState('')
+  // const [reservationtype, setReservationType] = useState('')
+  // const [reservationreason, setReservationReason] = useState('')
+  // const [email, setEmail] = useState<string[]>([''])
+  const [formdatastep1, setFormData] = useState<Reservation>()
+  const [mapdata, setMapdata] = useState<mapitem[]>([])
+  const [result, setSetup] = useState<any>()
+  // const [table, setTable] = useState('')
+  // const [timeslot, setTimeSlot] = useState('')
+  // const [data, setData] = useState<any>()
 
   const [step, setStep] = useState(0);
 
-  // const refform = useRef(0)
   function nextButt() {
     if (step < totalStep.length - 1) {
       setStep(step + 1)
@@ -29,37 +32,31 @@ const RenderStep = () => {
   }
 
   function submit() {
-    const formData = {
-      reservationdate: reservationdate,
-      reservationtype: reservationtype,
-      reservationreason: reservationreason,
-      time: timeslot,
-      table: table,
-      email: email,
-    }
-    console.log(formData)
+    console.log(formdatastep1)
   }
+
   switch (step) {
     case 0:
       return <Step1
         onClick={nextButt}
-        reserveDate={setReservationDate}
-        reserveEmail={setEmail}
-        reserveOpt={setReservationType}
-        reserveReason={setReservationReason}
+        setFormData={setFormData}
+        setMapData={setMapdata}
       />
     case 1:
-      return <Step2 step={nextButt}
-        reserveTable={setTable}
-        timeSlot={setTimeSlot} />
+      // console.log(formdatastep1)
+      return mapdata ? <Step2 step={nextButt}
+      mapdata={mapdata}
+      formdata={formdatastep1} 
+         /> : ''
     case 2:
-      submit()
+      // submit()
       return <Step3 step={nextButt} status={'1'} />
   }
 }
 
 
 const renderDisplay = () => {
+
   return (
     <div className="">
       <HeaderAuth />

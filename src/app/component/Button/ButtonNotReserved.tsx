@@ -1,11 +1,6 @@
-interface buttonnotreserved{
-  disabled?: boolean,
-  className?: string,
-  children: React.ReactNode,
-  onClick?: () => void,
-}
+import { button } from "../interface/Button";
 
-const ButtonNotReserved = ({disabled=false, className, children, onClick} : buttonnotreserved) => {
+const ButtonNotReserved = ({disabled=false, className, children, onClick} : button) => {
   return(
     <button
         disabled={disabled}

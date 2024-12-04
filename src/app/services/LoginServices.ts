@@ -4,42 +4,89 @@ import Cookies from 'js-cookie'
 import { cookies } from 'next/headers'
 import { serialize } from 'cookie';
 import { NextResponse } from "next/server";
+import { getDataUser } from "./UserServices";
+import axios from "axios";
+import { ApiHandler } from "@/lib/apiHandler";
 interface login {
   user_data: any,
 }
 
-export async function Login({ user_data }: login) {
-  var hour = new Date(new Date().getTime() + 60 * 60 * 1000);
-  const data = await RequestHttp({
-    type: 'post',
-    url: `login`,
-    datas: { ...user_data }
-  })
-  if (data.status == 'success') {
-    
-    cookies().set('token', data.data.token, {
-      httpOnly: true,
-      maxAge: 60*60,
-      sameSite: 'strict'
-    })
+// export const LoginAPI = {
+//   Login: async function({user_data} : login){
+//     let data = await ApiHandler({
+//       requestfunc: () => RequestHttp({ type: "post", url: "login", ...user_data }),
+//     })
 
-    return data.status
-  } else if (data.status == 'error') {
-    return data
+//     try{
+//       cookies().set('token', data.data.token, {
+//         httpOnly: true,
+//         maxAge: 60 * 60,
+//         secure: process.env.NODE_ENV === "production",
+//         sameSite: 'strict',
+//         path: '/',
+//       })
+
+//       return {status: "success"}
+//     }catch(e){
+//       throw new Error("Kesalahan saat melakukan login")
+//     }
+//   },
+//   Logout: async function(){
+//     try{
+//       cookies().delete('token')
+//       return {status: "success"}
+//     }catch(e){
+//       throw new Error("Kesalahan saat melakukan logout")
+//     }
+//   }
+// }
+
+export async function Login({user_data}: login) {
+  let data = await ApiHandler({
+    requestfunc: () => RequestHttp({ type: "post", url: "login", datas:user_data }),
+  })
+  // let data = await RequestHttp({ type: "post", url: "login", datas:user_data })
+  // return data
+  try{
+    cookies().set('token', data.token, {
+      httpOnly: true,
+      maxAge: 60 * 60,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: 'strict',
+      path: '/',
+    })
+    return true
+  }catch(e){
+    throw new Error(`Kesalahan saat melakukan login, ${e}`)
   }
 }
 
+// export async function Login({ user_data }: login) {
+//   const res = await RequestHttp({
+//     type: 'post',
+//     url: 'login',
+//     datas: { ...user_data }
+//   })
+//   let final = ''
+//   if (res.status == 'success') {
+//     cookies().set('token', res.data.token, {
+//       httpOnly: true,
+//       maxAge: 60 * 60,
+//       secure: process.env.NODE_ENV === "production",
+//       sameSite: 'strict',
+//       path: '/',
+//     })
+//     final = await getDataUser
+//     return res
+//   }
+// }
+
 
 export async function Logout() {
-  try {
-    const data = await RequestHttp({
-      url: 'http://127.0.0.1:8000/api/logout',
-      type: 'get',
-    })
-    if (data.status == 'success') {
-      console.log("Success logout!")
-    }
-  } catch (e) {
-    throw new Error('Error logout')
+  try{
+    cookies().delete('token')
+    return {status: "success"}
+  }catch(e){
+    throw new Error("Kesalahan saat melakukan logout")
   }
 }

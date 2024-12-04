@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <PrimeReactProvider>
-      <html lang="en">
+      <html lang="en" data-theme="light">
         <body className={inter.className}>{children}</body>
       </html>
     </PrimeReactProvider>

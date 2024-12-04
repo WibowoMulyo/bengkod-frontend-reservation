@@ -1,10 +1,11 @@
 import { RequestHttp } from "./core/Request"
-
+import { ApiHandler } from "@/lib/apiHandler";
 export async function getDataCalendar(id=1) {
-  const getData = await RequestHttp({
-    type: 'get',
-    url: `calendar`,
-    params: {table_id : id}
+  let data = await ApiHandler({
+    requestfunc: () => RequestHttp({ 
+      type: 'get',
+      url: `calendar`,
+      params: {table_id : id} }),
   })
-  return getData
+  return data
 }

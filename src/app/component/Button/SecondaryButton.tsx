@@ -1,8 +1,5 @@
-interface button{
-  children: React.ReactNode,
-  className?: string,
-  onClick?: () => void,
-}
+import { button } from "../interface/Button";
+
 
 const SecondaryButton = ({children, className, onClick} : button) => {
   return(

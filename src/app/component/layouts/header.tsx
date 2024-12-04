@@ -6,7 +6,18 @@ import Navlink from "@/app/component/Link/NavLink";
 import { useEffect } from "react";
 import { useRouter } from 'next/router';
 import CustomLink from "../Link/CustomLink";
+import LogoutButton from "../Button/LogoutButton";
+import { Logout } from "@/app/services/LoginServices";
 const renderDisplay = () => {
+
+  async function logout() {
+    let response = await Logout()
+    // if(response.status =='success'){
+    //   window.location.href = '/'
+    // }
+    // console.log(response)
+  }
+
   return (
     <div className="w-full">
       <div className="border-2 border-[rgb(236,238,239)] rounded-3xl m-4 bg-white hidden md:block">
@@ -22,7 +33,7 @@ const renderDisplay = () => {
           </div>
           <div className="flex mr-20 gap-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full items-center">
             <Navlink
-              statichref="/dashboard"
+              statichref="/dashboard/calendar"
               href="/dashboard/calendar"
             >
               Dashboard
@@ -41,41 +52,39 @@ const renderDisplay = () => {
               </div>
             </div>
             <div className="dropdown dropdown-end">
-              <div className="w-[60px]" role="button" tabIndex={0}>
-                <Image src={"/image/profile-image.jpeg"}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  width={60}
-                  height={60} alt="logo profile"
-                  className="rounded-full"
-                />
+              <div className="" tabIndex={0}>
+                <button>
+                  <div className="w-[60px]">
+                    <Image src={"/image/profile-image.jpeg"}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                      }}
+                      width={60}
+                      height={60} alt="logo profile"
+                      className="rounded-full"
+                    />
+                  </div>
+                </button>
+                <ul tabIndex={0} className="dropdown-content z-[1] w-52 p-2 shadow-md rounded-lg bg-white border-gray-100 border-2">
+                  <li>
+                  <CustomLink href="/dashboard/profile" showline={false} className="font-semibold w-auto p-2 hover:bg-primary-900 hover:text-white rounded-md" whenactive="text-white bg-primary-900" whennotactive="text-gray-700">
+                      Profile
+                    </CustomLink>
+                  </li>
+                  <li>
+                    {/* <CustomLink href="#" onClick showline={false} className="font-semibold w-auto p-2 hover:bg-red-600 hover:text-white rounded-md" whennotactive="text-gray-700">
+                      Logout
+                    </CustomLink> */}
+                    <LogoutButton onClick={logout} className="w-full text-left">
+                      Logout
+                    </LogoutButton>
+                  </li>
+                </ul>
               </div>
-              <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <CustomLink href="/dashboard/profile" className="font-semibold rounded-lg p-2" whennotactive="hover:bg-primary-900 hover:text-white" whenactive="bg-primary-900 text-white" showline={false}>
-                  Profile
-                </CustomLink>
-
-                <CustomLink href="/dashboard/profile" className="hover:bg-red-600 hover:text-white font-semibold rounded-lg p-2 mt-2" showline={false}>
-                  Logout
-                </CustomLink>
-
-                {/* <li><a>Logout</a></li> */}
-              </ul>
             </div>
+
             {/* <CustomLink href="/dashboard/profile" showline={false}>
-              <div className="w-[60px]">
-                <Image src={"/image/profile-image.jpeg"}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  width={60}
-                  height={60} alt="logo profile"
-                  className="rounded-full"
-                />
-              </div>
             </CustomLink> */}
           </div>
         </div>

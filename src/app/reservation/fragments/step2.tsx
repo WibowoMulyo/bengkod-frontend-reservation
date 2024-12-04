@@ -9,10 +9,14 @@ import { filterData } from "@/app/component/calendar/FilterReservation";
 import ReservedHour from "@/app/component/Label/ReservedHour";
 import ButtonNotReserved from "@/app/component/Button/ButtonNotReserved";
 import Image from "next/image";
+import { Reservation } from "@/app/component/interface/Reservation";
+import { getDataCalendar } from "@/app/services/CalendarServices";
+import { addReservation } from "@/app/services/ReservationServices";
 interface props {
   step?: () => void,
-  reserveTable?: (val: string) => void,
-  timeSlot?: (val: string) => void
+  mapdata?: Array<any>,
+  formdata?: Reservation,
+  setResult: (val: any) => void,
 }
 
 const tablearr = ['', '/image/table_img/table1.jpeg', '/image/table_img/table2.jpeg']
@@ -57,23 +61,23 @@ const infoTable = [
   }
 ]
 
-const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
+const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
   const durations = [
     '08:00-10:00', '10:01-12:00', '13:01-15:00', '15:01-17:00'
   ];
   const [duration, setDuration] = useState<string>('')
   const [table, setTable] = useState<string>('')
   const [reservationMap, setReservationMap] = useState(getReservationHourMap([]));
+  const [formfinal, setFormFinal] = useState<any>({})
 
   function clickToNotReserved(data: string) {
     setDuration(data);
     document.getElementById('my_modal_1')?.showModal()
-    // if(reserveTable){
-    //   reserveTable(table);
-    // }
-    // if(timeSlot){
-    //   timeSlot(data)
-    // }
+    setFormFinal((prev:any) => ({
+      ...prev,
+      duration: data,
+      table: table
+    }))
   }
 
   function itemTemplate(data: string) {
@@ -94,23 +98,28 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
     )
   }
 
-  function onClick() {
-    if (reserveTable) {
-      reserveTable(table)
-      console.log("memasuki set table!", table)
-    }
-    if (timeSlot) {
-      timeSlot(duration)
-      console.log("memasuki timeslot!", duration)
-    }
+  async function onClick() {
     if (step) {
-      step()
+      // console.log(formdata)
+      // console.log(duration)
+      // console.log(table)
+      console.log(formfinal)
+      // step()
     }
   }
 
   async function changeTable(e: string) {
     setTable(e)
-    setReservationMap(getReservationHourMap(filterData(reservations, e)))
+    // TARUH LINK API DISINI
+    await getDataCalendar(parseInt(e)).then(response => {
+      console.log(response)
+      if(response.status == 'success'){
+        setReservationMap(getReservationHourMap(response.data.reservations))
+      }else if(response.status == 'error'){
+        throw new Error("Error fetch data calendar")
+      }
+    })
+    // setReservationMap(getReservationHourMap(await ))
   }
   return (
     <div className="md:my-[3%] my-[5%]">
@@ -189,26 +198,40 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
           <div className="flex flex-col">
             {/* START SECTION SEAT */}
             <div className="overflow-x-auto">
-              <div className="mb-10 min-w-[1360px]">
+                {mapdata ? <div className="mb-10 min-w-[1360px] relative">
                 <ImageMapper
-                  width={1308}
-                  height={736}
+                  width={1351}
+                  height={416}
                   onClick={e => { changeTable(e.id || ''); }}
                   stayHighlighted={true}
-                  src={'/image/goatjo vs sukuna.jpg'}
+                  src={'/image/mapping.png'}
                   map={
                     {
-                      name: 'https://raw.githubusercontent.com/img-mapper/react-docs/master/src/assets/example.jpg',
-                      areas: infoTable
+                      name: 'Meja image',
+                      areas: mapdata
                     }
                   }
                 />
-              </div>
+                {mapdata.map((area) => (
+                  <span
+                  key={area.id}
+                  className="tooltip absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    top: area.center.y,
+                    left: area.center.x,
+                    zIndex: 1000
+                  }}
+                  
+                >
+                  {area.title}
+                </span>
+                ))}
+              </div> : ''}
             </div>
             {/* END SECTION SEAT*/}
 
             <div className="my-5">
-              <div className="flex flex-col md:flex-row gap-y-[3vh] md:gap-0">
+              <div className="flex flex-col md:flex-row gap-y-[3vh] md:gap-[3vh]">
                 {/* START SECTION GAMBAR MEJA */}
                 <div className="md:w-[540px] w-full mr-auto flex flex-col">
                   <div className="bg-white rounded-xl py-[3%] px-[4%] text-black border-black/[.3] border-2 font-normal mb-4 text-sm md:text-lg italic ">
@@ -217,21 +240,21 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
 
                   <div className="bg-white px-[5%] pt-[5%] pb-[2%] rounded-xl text-center">
                     {table ?
-                    <div className="w-full">
-                      <Image
-                        src={tablearr[parseInt(table)]}
-                        alt={`Gambar meja ${table}`}
-                        style={{
-                          height: '100%',
-                          width: '100%'
-                        }}
-                        width={500}
-                        height={500}
-                      />
-                      <h1 className="font-bold text-sm mt-2">Table-01</h1>
-                    </div> :
-                    <div className="font-bold text-sm mt-2">Harap pilih foto terlebih dahulu!</div>
-                  }
+                      <div className="w-full">
+                        <Image
+                          src={tablearr[parseInt(table)]}
+                          alt={`Gambar meja ${table}`}
+                          style={{
+                            height: '100%',
+                            width: '100%'
+                          }}
+                          width={500}
+                          height={500}
+                        />
+                        <h1 className="font-bold text-sm mt-2">Table-01</h1>
+                      </div> :
+                      <div className="font-bold text-sm mt-2">Harap pilih foto terlebih dahulu!</div>
+                    }
                   </div>
                 </div>
                 {/* END SECTION GAMBAR MEJA */}
@@ -271,20 +294,20 @@ const renderDisplay = ({ step, reserveTable, timeSlot }: props) => {
         {/* END CONTENT FORM */}
       </div>
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box w-[30%]">
+        <div className="modal-box lg:w-[30%] w-11/12">
           <div className="border-b-2 border-[#00000066]/[.4] flex items-center">
-            <h3 className="font-bold text-lg pt-2 pb-4 mr-auto">Apakah kamu yakin?</h3>
-            <form method="dialog" className="flex gap-x-4">
-              {/* if there is a button in form, it will close the modal */}
+            <h3 className="font-bold lg:text-lg text-[14px] pt-2 pb-4 mr-auto">Apakah kamu yakin?</h3>
+            <form method="dialog" className="">
               <button>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.31382 5.89982L10.8488 2.36382C10.9443 2.27157 11.0205 2.16123 11.0729 2.03922C11.1253 1.91722 11.1529 1.786 11.1541 1.65322C11.1552 1.52044 11.1299 1.38876 11.0796 1.26587C11.0294 1.14297 10.9551 1.03132 10.8612 0.937425C10.7673 0.843532 10.6557 0.769279 10.5328 0.718998C10.4099 0.668717 10.2782 0.643415 10.1454 0.644569C10.0126 0.645723 9.88142 0.673309 9.75942 0.725718C9.63741 0.778127 9.52707 0.854309 9.43482 0.949819L5.89882 4.48482L2.36382 0.949819C2.27157 0.854309 2.16123 0.778127 2.03922 0.725718C1.91722 0.673309 1.786 0.645723 1.65322 0.644569C1.52044 0.643415 1.38876 0.668717 1.26587 0.718998C1.14297 0.769279 1.03132 0.843532 0.937425 0.937425C0.843532 1.03132 0.769279 1.14297 0.718998 1.26587C0.668717 1.38876 0.643415 1.52044 0.644569 1.65322C0.645723 1.786 0.673309 1.91722 0.725718 2.03922C0.778127 2.16123 0.854309 2.27157 0.949819 2.36382L4.48482 5.89882L0.949819 9.43482C0.854309 9.52707 0.778127 9.63741 0.725718 9.75942C0.673309 9.88142 0.645723 10.0126 0.644569 10.1454C0.643415 10.2782 0.668717 10.4099 0.718998 10.5328C0.769279 10.6557 0.843532 10.7673 0.937425 10.8612C1.03132 10.9551 1.14297 11.0294 1.26587 11.0796C1.38876 11.1299 1.52044 11.1552 1.65322 11.1541C1.786 11.1529 1.91722 11.1253 2.03922 11.0729C2.16123 11.0205 2.27157 10.9443 2.36382 10.8488L5.89882 7.31382L9.43482 10.8488C9.52707 10.9443 9.63741 11.0205 9.75942 11.0729C9.88142 11.1253 10.0126 11.1529 10.1454 11.1541C10.2782 11.1552 10.4099 11.1299 10.5328 11.0796C10.6557 11.0294 10.7673 10.9551 10.8612 10.8612C10.9551 10.7673 11.0294 10.6557 11.0796 10.5328C11.1299 10.4099 11.1552 10.2782 11.1541 10.1454C11.1529 10.0126 11.1253 9.88142 11.0729 9.75942C11.0205 9.63741 10.9443 9.52707 10.8488 9.43482L7.31382 5.89882V5.89982Z" fill="#98A2B3" />
                 </svg>
               </button>
+              {/* if there is a button in form, it will close the modal */}
             </form>
           </div>
-          <p className="py-4 font-normal">Pastikan pilihanmu tepat dan datang tepat waktu agar pengalaman reservasi tetap optimal</p>
-          <div className="py-2">
+          <p className="py-4 font-normal text-[14px]">Pastikan pilihanmu tepat dan datang tepat waktu agar pengalaman reservasi tetap optimal</p>
+          <div className="py-2 text-[14px]">
             <p>Detail transaksi: </p>
             <ul>
               <li>• Waktu: {duration}</li>

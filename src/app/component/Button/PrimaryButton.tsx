@@ -1,12 +1,8 @@
 import { ppid } from "process";
 import React, { ReactElement, useState } from "react";
+import { button } from "../interface/Button";
 
-interface button extends React.PropsWithChildren {
-    children: React.ReactNode,
-    className?: string,
-    onClick?: (e: any) => void,
-    disabled?: boolean,
-}
+
 
 const PrimaryButton = ({children, className, onClick} : button) => {
   return(

@@ -53,15 +53,8 @@ const Calendar = () => {
 
   async function getData(id=1) {
     setAnimation(false)
-    const data = await getDataCalendar(id).then(response => {
-      console.log(response)
-      if(response.status == 'success'){
-        setReservationMap(getReservationsDateMap(response.data.reservations))
-      }else if(response.status == 'error'){
-        throw new Error("Error fetch data calendar")
-      }
-    })
-    // console.log(data)
+    const data = await getDataCalendar(id)
+    setReservationMap(getReservationsDateMap(data.reservations))
     setAnimation(true)
   }
 

@@ -2,63 +2,43 @@
 import axios, { AxiosError } from "axios";
 // import Cookies from 'js-cookie'
 import { cookies } from "next/headers";
+import type { NextRequest } from 'next/server'
+// import axios from "./BaseRequest";
 interface requestparams {
-  type: 'get' | 'post' | 'put' | 'delete',
+  type: 'get' | 'post' | 'put' | 'delete' | 'patch',
   url?: string,
   datas?: { [key: string]: any },
   headers?: string,
   params?: { [key: string]: any },
 }
 
-async function getCookie(name='token'){
-  return 
-}
-
-export async function RequestHttp({type = 'get', url = '', datas={}, headers = 'application/json', params={}}: requestparams): Promise<any> {
-  
-  // let authkey = Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : ''
+export async function RequestHttp({ type = 'get', url = '', datas = {}, headers = 'application/json', params = {} }: requestparams): Promise<any> {
   const authkey = cookies().get('token')?.value ?? "";
   // return authkey
+  const config = {
+    method: type,
+    url: process.env.NEXT_PUBLIC_API_BASE_URL+url,
+    headers: {
+      'Content-Type': headers,
+      Authorization: `Bearer ${authkey}`,
+    },
+    params: {...params},
+    data: datas,
+  };
   try {
     switch (type) {
       case 'get':
-        const a = await axios.get('http://127.0.0.1:8000/api/' + url, {
-          headers: { 'Content-Type': headers, 'Authorization' : 'Bearer '+authkey},
-          params: {
-            ...params
-          }
-        })
-        return a.data
+        return (await axios.request(config)).data
       case 'put':
-        const b = await axios.put('http://127.0.0.1:8000/api/' + url, {
-          headers: { 'Content-Type': headers, 'Authorization' : authkey},
-          ...datas,
-          params: {
-            id: ''
-          }
-        })
-        return b.data
+        return (await axios.request(config)).data
       case 'post':
-        const c = await axios.post('http://127.0.0.1:8000/api/' + url, {
-          headers: { 'Content-Type': headers, 'Authorization' : authkey},
-          ...datas,
-          params: {
-            id: ''
-          }
-        })
-        return c.data
+        return (await axios.request(config)).data
       case 'delete':
-        const d = await axios.put('http://127.0.0.1:8000/api/' + url, {
-          headers: { 'Content-Type': headers, 'Authorization' : authkey},
-          ...datas,
-          params: {
-            id: ''
-          }
-        })
-        return d.data
-
+        return (await axios.request(config)).data
+      case 'patch':
+        return (await axios.request(config)).data
       default:
-        throw "Error requestparams method"
+        throw new Error(`Metode HTTP '${type}' tidak dikenali.`);
     }
   } catch (err) {
     const errorAxios = err as AxiosError
@@ -88,12 +68,10 @@ export async function RequestHttp({type = 'get', url = '', datas={}, headers = '
       }
     } else if (errorAxios.request) {
       // No response received from the server
-      console.error("No response from server:", errorAxios.message);
       throw new Error("No response from server - Check network connection.");
     } else {
       // Other errors (e.g., setting up the requestparams)
-      console.error("Error setting up requestparams:", errorAxios.message);
-      throw new Error("Request setup failed - Check configuration.");
+      throw new Error(`Request setup failed - Check configuration, ${errorAxios.message}`);
     }
   }
 }

@@ -9,6 +9,7 @@ const GrayInput = ({ className, value, onChange, errorValue, type = 'text', plac
        value={value} 
        onChange={onChange}
        placeholder={placeholder}
+       {...props}
        />
 
        {errorValue && <div className="text-red-500 text-sm mt-1">

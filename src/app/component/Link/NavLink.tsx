@@ -6,13 +6,10 @@ import { usePathname } from 'next/navigation'
 import { useEffect } from "react";
 
 function Navlink({ className = '', children = '', href = '', statichref = '' }) {
-  // useEffect(() => {
-  //   console.log(href)
-  // }, [])
   return (
     <Link
       href={href}
-      className={"" + (usePathname().startsWith(href) || usePathname().startsWith(statichref) ? 'font-bold text-[#1E3A8B] border-b-4 border-b-[#1E3A8B] pb-3' : 'font-bold text-[#667085] ') + className}
+      className={"" + (usePathname().startsWith(href) || usePathname().startsWith(statichref) ? 'font-bold text-primary-900 border-b-4 border-b-primary-900 pb-3' : 'font-bold text-[#667085] ') + className}
     >
       {children}
     </Link>

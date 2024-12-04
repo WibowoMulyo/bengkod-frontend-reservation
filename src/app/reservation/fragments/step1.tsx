@@ -2,30 +2,25 @@ import { useEffect, useState } from "react";
 import InputTextOrDate from "@/app/component/Input/InputTextOrDate";
 import PrimaryButton from "@/app/component/Button/PrimaryButton";
 import Label from "@/app/component/Label/Label";
-import SelectInput from "@/app/component/SelectInput";
 import Image from "next/image";
+import { ValidationReservation } from "../../services/validation/Validation";
+import { Reservation } from "@/app/component/interface/Reservation";
+import InputErrorLight from "@/app/component/Input/InputErrorLight";
+import { getDataAvalaible } from "../../services/ReservationServices";
 interface props {
   onClick?: () => void,
-  reserveDate: (val: string) => void,
-  reserveEmail: (val: string[]) => void,
-  reserveOpt: (val: string) => void,
-  reserveReason: (val: string) => void,
-  // data: {}
+  setFormData?: (val: Reservation) => void,
+  setMapData?: (val: any) => void,
 }
 
-const pesananType = [
-  { id: 1, name: "tim" },
-  { id: 2, name: "individu" },
-]
-
-const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserveReason, ...props }: props) => {
+const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => {
 
   const [date, setDate] = useState<string>('')
   const [email, setEmail] = useState<string[]>([''])
-  const [typereserve, setTypeReserve] = useState('')
+  const [type, setTypeReserve] = useState('')
   const [reason, setReason] = useState('')
-  const [error, setError] = useState({})
-  const [numberinput, setNumberInput] = useState(1)
+  const [error, setError] = useState<any>([''])
+  const [totalperson, setTotalPerson] = useState(1)
   const [isshown, setShown] = useState(false)
 
   const today = new Date();
@@ -34,17 +29,18 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0'); // Bulan ditambahkan 1 karena dimulai dari 0
   const ddnow = String(today.getDate()).padStart(2, '0');
-  const ddafter = String(today.getDate()+3).padStart(2, '0');
+  const ddafter = String(today.getDate() + 2).padStart(2, '0');
 
   const formattedToday = `${yyyy}-${mm}-${ddnow}`;
-  const threedayafter =`${yyyy}-${mm}-${ddafter}`
+  const threedayafter = `${yyyy}-${mm}-${ddafter}`
 
   function shownTeamInput(e: string) {
-    if (e === 'tim') {
+    if (e.toLowerCase() === 'tim') {
+      setTotalPerson(2)
       setShown(true)
     }
     else {
-      setNumberInput(1)
+      setTotalPerson(1)
       setShown(false)
     }
   }
@@ -64,7 +60,7 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
     let render = []
     for (let index = 0; index < e; index++) {
       render.push(
-        <div className="my-2">
+        <div className="my-2" key={index}>
           <InputTextOrDate
             value={email[index]}
             className="px-2"
@@ -78,48 +74,53 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
     return render
   }
 
-  function validation() {
-    const eror = { date: '', email: '', typereserve: '', reason: '' }
-
-
-    if (date.length < 1) {
-      eror.date = 'Please select a date'
+  async function getAvalaibleReservation(){
+    let data = await getDataAvalaible({
+      params:{
+        date: date,
+        type: type,
+        total_seats: totalperson
+      }
+    })
+    // console.log(data) 
+    return data
+  }
+  
+  async function submitButton() {
+    let data = { date: date, email: email, type: type, reason: reason, totalperson:totalperson }
+    let result: any = ValidationReservation({ type: 'step1', data: data }) || ''
+    setError([])
+    if (result.success == false) {
+      setError(result.data)
     }
-    email.map(data => {
-      if (data.length < 1) {
-        eror.email = 'Please enter an email'
+    if (result.success == true) {
+      if (setFormData && setMapData) {
+        const datareservation = await getAvalaibleReservation()
+        setMapData(datareservation)
+        setFormData(
+          {
+            date: date,
+            email: email,
+            type: type,
+            reason: reason,
+            total_person: totalperson
+          }
+        )
+      }
+      if(onClick){
+        onClick()
       }
     }
-    )
-
-    if (typereserve == '') {
-      eror.typereserve = 'Please select an option'
-    }
-
-    if (reason == '') {
-      eror.reason = 'Please select a reason'
-    }
-
-    setError(eror)
-    return false
   }
 
-  function submitButton() {
-    // validation()
-
-    reserveDate(date)
-    reserveEmail(email)
-    reserveOpt(typereserve)
-    reserveReason(reason)
-
-    if (onClick) {
-      onClick()
-    }
+  function ChangeEmailInput(input?: number) {
+    setEmail(Array(totalperson).fill(''))
   }
 
   useEffect(() => {
-    setEmail(Array(numberinput).fill(''))
-  }, [numberinput])
+    // setEmail(Array(totalperson).fill(''))
+    document.getElementById('my_modal_peraturan')?.showModal()
+  }, [])
 
   return (
     <div className="my-10" {...props}>
@@ -215,10 +216,11 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <Label>Tanggal penggunaan</Label>
                   <div className="my-2 w-1/3">
                     <InputTextOrDate
-                    max={threedayafter}
-                    min={formattedToday}
+                      max={threedayafter}
+                      min={formattedToday}
                       value={date}
                       type="date"
+                      errorValue={error.date ? error.date[0].message : ''}
                       onChange={(e) => { setDate(e.target.value); debugCheck(e.target.value) }}
                     />
                   </div>
@@ -235,6 +237,8 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                       <option value="mandiri">Belajar mandiri</option>
                       <option value="santai">Nyantuy</option>
                     </select>
+                    {/* {error.reason ? <p className="font-light text-red-600 text-xs">{error.reason}</p> : ''} */}
+                    <InputErrorLight errorValue={error.reason ? error.reason[0].message : ''} value=""/>
                   </div>
                 </div>
                 <div className="my-2">
@@ -243,13 +247,14 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <div className="my-2">
                     <select name="" id="" className=
                       "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10 focus:ring-primary-700 focus:ring-2"
-                      value={typereserve}
-                      onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value) }}
+                      value={type}
+                      onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value); ChangeEmailInput }}
                     >
                       <option value="">--</option>
-                      <option value="individu">individu</option>
-                      <option value="tim">Tim</option>
+                      <option value="Individu">individu</option>
+                      <option value="Tim">Tim</option>
                     </select>
+                    <InputErrorLight errorValue={error.type ? error.type[0].message : ''} value=""/>
                   </div>
                 </div>
                 {isshown && <div className="my-2">
@@ -257,22 +262,23 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
                   <div className="my-2">
                     <select name="" id="" className=
                       "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10"
-                      value={numberinput}
-                      onChange={(e) => { setNumberInput(parseInt(e.target.value)); debugCheck(numberinput) }}
+                      value={totalperson}
+                      onChange={(e) => { setTotalPerson(parseInt(e.target.value)); debugCheck(totalperson); ChangeEmailInput(parseInt(e.target.value)) }}
                     >
-                      <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
                       <option value="6">6</option>
                     </select>
+                    <InputErrorLight errorValue={error.totalperson ? error.totalperson[0].message : ''} value=""/>
                   </div>
                 </div>}
                 <div className="my-2">
                   <Label>Email pemesan</Label>
                   <div className="mt-2 mb-6">
-                    {extraInput(numberinput)}
+                    {extraInput(totalperson)}
+                    <InputErrorLight errorValue={error.email ? error.email[0].message : ''} value=""/>
                   </div>
                 </div>
               </div>
@@ -285,6 +291,28 @@ const renderDisplay = ({ onClick, reserveDate, reserveEmail, reserveOpt, reserve
           </div>
         </div>
       </div>
+      <dialog id="my_modal_peraturan" className="modal">
+        <div className="rounded-2xl italic text-[14px] font-normal bg-primary-200 text-gray-700 modal-box max-w-[45%]">
+          <div className="flex">
+            <p className="mb-4">
+              Peraturan pengguna:
+            </p>
+
+          </div>
+          <ol>
+            <li>1. Pengguna diperbolehkan meminjam meja 1 kali dalam 1 hari</li>
+            <li>2. Pengguna diperbolehkan meminjam meja maksimal untuk 2 hari kedepan</li>
+            <li>3. Pengguna dilarang membawa makan dan minum kedalam lobby H6</li>
+            <li>4. Bagi pengguna yang tidak mengikuti aturan akan dikenakan penalti selama 1  minggu</li>
+            <li>5. Jika pengguna sudah pesan tetapi tidak melakukan konfirmasi kehadiran selama 1 jam, akan terbatalkan secara sistem</li>
+          </ol>
+          {/* <PrimaryCard>
+          </PrimaryCard> */}
+        </div>
+        <form method="dialog" className="modal-backdrop h-screen w-screen">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
 
   )

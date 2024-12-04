@@ -2,49 +2,36 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import InputError from "../component/Input/InputError";
+import { FormEvent } from 'react'
 // import Cookies from 'js-cookie';
-import Cookies from 'js-cookie'
-import { redirect } from 'next/navigation'
-import { RequestHttp } from "../services/core/Request";
 import SimpleCard from "../component/Card/SimpleCard";
 import CustomLink from "../component/Link/CustomLink";
 import GrayInput from "../component/Input/GrayInput";
 import Label from "../component/Label/Label";
+// import { useFormState, useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { Login } from "../services/LoginServices";
 const body = () => {
-  const [email_mhs, setEmailMhs] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  // const [email_mhs, setEmailMhs] = useState<string>('')
+  // const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<any | ''>({})
-  var hour = new Date(new Date().getTime() + 60 * 60 * 1000);
-  // const sendRequest = async () => {
-  //   const data = await RequestHttp({
-  //     type: 'post',
-  //     url: `http://127.0.0.1:8000/api/login`,
-  //     datas: { email_mhs: email_mhs, password: password },
-  //   })
-  //   if (data.status == 'success') {
-  //     console.log(data.data.token)
-  //     Cookies.set('token', data.data.token, {
-  //       expires: hour,
-  //     })
-  //     console.log("Success login")
-  //   }else if(data.status == 'error'){
-  //     setError(data)
-  //   }
-  // } 
+  const {pending} = useFormStatus()
 
-  async function OnSubmit(e: any) {
+  async function OnSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const data = await Login({
-      user_data: { email_mhs: email_mhs, password: password }
-    }).then(response => {
-      console.log(response)
-      if(response == 'success'){
-        window.location.href = '/dashboard/calendar'
-      }else{
-        setError(response)
-      }
-    })
+    const formdata = new FormData(e.currentTarget)
+    let email_mhs = formdata.get("email_mhs")
+    let password = formdata.get("password")
+
+    let dict = {email_mhs: email_mhs, password: password}
+    let res = await Login({user_data: dict})
+    // console.log(res)
+    if(res){
+      window.location.replace('/dashboard/calendar')
+    }
+    // if(res.status == 'success'){
+    //   window.location.replace('/dashboard/calendar')
+    // }
   }
 
   return (
@@ -63,7 +50,7 @@ const body = () => {
           <div className="w-full bg-white rounded-lg shadow">
             <div className="p-6 space-y-4 sm:p-8 flex md:m-10 md:space-x-10">
               <div className="md:w-1/2 md:space-y-6">
-                <form className="space-y-4 md:space-y-6" method="POST" onSubmit={(e) => OnSubmit(e)}>
+                <form className="space-y-4 md:space-y-6" method="POST" onSubmit={OnSubmit}>
                   <div className="items-center justify-center flex flex-col md:my-12">
                     <img className="w-20" src="./image/benlogo.png" alt="" />
                     <h1 className="text-2xl font-bold md:text-4xl md:my-4">
@@ -78,18 +65,20 @@ const body = () => {
                     <GrayInput
                       type="email"
                       className="bg-primary-100 w-full p-3"
-                      value={email_mhs}
-                      onChange={(e) => setEmailMhs(e.target.value)}
+                      // value=""
+                      name="email_mhs"
+                      // onChange={(e) => setEmailMhs(e.target.value)}
                       placeholder="Masukkan alamat email"
-                      errorValue={error.data ? error.data.email_mhs : ''}
+                      // errorValue={state?.data ? state.data.email_mhs : ''}
                     />
                   </div>
                   <div>
                     <Label>Password</Label>
                     <GrayInput
                       type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      // value=""
+                      name="password"
+                      // onChange={(e) => setPassword(e.target.value)}
                       placeholder="Masukkan alamat email"
                       className="bg-primary-100 w-full p-3"
                       errorValue={error.data ? error.data.password : ''}
@@ -120,6 +109,7 @@ const body = () => {
                   </div>
                   <button
                     // type="submit"
+                    disabled={pending}
                     className="w-full bg-blue-900 text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   >
                     Masuk
