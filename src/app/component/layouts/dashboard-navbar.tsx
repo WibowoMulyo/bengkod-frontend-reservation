@@ -1,18 +1,22 @@
 import Image from "next/image";
 import Calendar from "../../dashboard/calendar/page";
 import History from "../../dashboard/history/page";
-import { useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 import Profile from "../../dashboard/profile/page";
 import CustomLink from "../Link/CustomLink";
 
+
+
 const Dashboard_navbar = () => {
+  
+
   const [navbar, setNavbar] = useState(1)
   return (
     <header className="md:flex block md:mt-[3.5%] mb-[6%] lg:mx-8 mx-auto">
       {/* HEADER CONTENT */}
       <div className="flex flex-col w-[250px]">
         <div className="text-center">
-          <h1 className="text-[#6b7a99] font-bold capitalize text-2xl text-wrap">halo, kaoruko waguri!</h1>
+          <h1 className="text-[#6b7a99] font-bold capitalize text-2xl text-wrap">halo, kaoruka-san!</h1>
           <p className="text-[#adb8cc] font-bold text-xs mt-2">examplemhs@mhs.dinus.ac.id</p>
         </div>
         <div className="bg-white rounded-xl p-3 mt-8 md:mx-4  shadow-[1px_5px_50px_4px_rgba(0,0,0,0.05)] lg:shadow-none mx-auto">

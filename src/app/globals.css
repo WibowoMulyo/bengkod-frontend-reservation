@@ -12,12 +12,6 @@ body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom,
       transparent,
-<<<<<<<<< Temporary merge branch 1
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-=========
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 

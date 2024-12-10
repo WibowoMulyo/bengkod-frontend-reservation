@@ -6,7 +6,7 @@ const secondSec = () => {
   return (
     <div className="my-24">
       <div className="flex gap-x-10 justify-center align-middle">
-        <div className="flex flex-col lg:gap-y-1 gap-y-4 w-5/6">
+        <div className="flex flex-col lg:gap-y-1 gap-y-4 w-5/6 lg:w-[1000px]">
           {/* <h1 className="text-2xl font-semibold md:text-4xl lg:text-left text-center">Fasilitas Kami</h1> */}
           <Header>Fasilitas kami</Header>
           <div className="flex space-y-[16px] flex-col lg:flex-row lg:space-x-[50px]">

@@ -24,21 +24,21 @@ const firstSec = () => {
       <div className="flex justify-center carousel mx-auto w-[300px] h-[186px] md:w-[480px] md:h-[298px] lg:hidden">
         <div className="carousel-item">
           <img
-            src="/img/carousel/pic1.png"
+            src="/image/carousel/pic1.png"
             alt="Carousel 1"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="carousel-item">
           <img
-            src="/img/carousel/pic2.png"
+            src="/image/carousel/pic2.png"
             alt="Carousel 2"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="carousel-item">
           <img
-            src="/img/carousel/pic3.png"
+            src="/image/carousel/pic3.png"
             alt="Carousel 3"
             className="w-full h-full object-cover"
           />
@@ -47,7 +47,7 @@ const firstSec = () => {
 
       <div className="hidden lg:flex md:my-10 justify-center">
         <ResponsiveImage
-          src="/img/meja-pack.png"
+          src="/image/meja-pack.png"
           width={825}
           height={377}
           className="min-w-[825px] minh-[377px]"

@@ -37,7 +37,7 @@ export async function RequestHttp({type = 'get', url = '', datas={}, headers = '
           headers: { 'Content-Type': headers, 'Authorization' : authkey},
           ...datas,
           params: {
-            id: ''
+            id:''
           }
         })
         return c.data

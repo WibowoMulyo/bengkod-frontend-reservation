@@ -1,10 +1,11 @@
 import ResponsiveImage from "./components/ResponsiveImage";
+import YoutubeEmbedded from "./components/YoutubeEmbedded";
 
 const forthSec = () => {
   return (
     <div className="my-24 mx-6" id="tutorial">
       <div
-        className="flex flex-col justify-center items-center mx-auto sm:w-sm p-4 bg-white border border-gray-200 rounded-3xl shadow
+        className="flex flex-col justify-center items-center md:space-y-2 mx-auto sm:w-sm p-4 bg-white border border-gray-200 rounded-3xl shadow
           md:max-w-4xl"
       >
         <ResponsiveImage
@@ -22,13 +23,18 @@ const forthSec = () => {
           koding
         </p>
 
-        <div className="aspect-w-16 aspect-h-9 my-12">
-          <iframe
-            className="w-full h-full md:h-[360px] rounded-lg"
-            src="https://www.youtube.com/embed/u61F_qvdid0?si=vZugcyC2QBNNZku-"
-            title="YouTube video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
+        <div className="w-full my-6">
+          <div className="aspect-w-16 aspect-h-9">
+            <iframe
+              src="https://www.youtube.com/embed/_0972HfmXO0?si=swaNRPgU_rK-5NPa"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;   
+ picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-full lg:min-h-[480px]"
+            />
+          </div>
         </div>
       </div>
     </div>

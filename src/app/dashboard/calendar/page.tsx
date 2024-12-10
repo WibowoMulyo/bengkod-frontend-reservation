@@ -60,7 +60,7 @@ const Calendar = () => {
         table_id: id
       }
     })
-    setReservationMap(getReservationsDateMap(getData.data.reservations))
+    setReservationMap(getReservationsDateMap(getData.data.reservations2))
     setAnimation(true)
   }
 
