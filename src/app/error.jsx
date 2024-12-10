@@ -3,9 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import HeaderAuth from "../app/component/layouts/header";
-import ResponsiveImage from "../app/component/ResponsiveImage";
-import Footer from "../app/component/layouts/footer"
+import ResponsiveImage from "@/components/ResponsiveImage";
 
 export default function Error({ error, reset }) {
   const router = useRouter();
@@ -16,7 +14,6 @@ export default function Error({ error, reset }) {
 
   return (
     <section className="">
-        <HeaderAuth />
         <div className="flex justify-center items-center my-auto h-[637px]">
           <div className="font-normal text-[22px] w-[580px] flex flex-col gap-y-4">
             <p className="">500 internal server error</p>
@@ -32,7 +29,6 @@ export default function Error({ error, reset }) {
             height={490}
           />
         </div>
-        <Footer/>
     </section>
   )
 }

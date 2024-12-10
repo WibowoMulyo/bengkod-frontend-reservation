@@ -1,6 +1,6 @@
-import HeaderAuth from "../component/layouts/header";
-import ResponsiveImage from "../component/ResponsiveImage";
-import Footer from "../component/layouts/footer"
+import HeaderAuth from "../../components/layouts/AuthHeader";
+import ResponsiveImage from "../../components/ResponsiveImage";
+import Footer from "../../components/layouts/footer"
 const maintenance = () => {
   return (
     <section className="">

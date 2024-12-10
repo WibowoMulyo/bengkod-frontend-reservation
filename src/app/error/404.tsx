@@ -1,7 +1,7 @@
 // import HeaderAuth from "../component/layouts/header";
-import GuestNavbar from "../component/layouts/guest-navbar";
-import ResponsiveImage from "../component/ResponsiveImage";
-import Footer from "../component/layouts/footer"
+import GuestNavbar from "../../components/layouts/GuestHeader";
+import ResponsiveImage from "../../components/ResponsiveImage";
+import Footer from "../../components/layouts/footer"
 const error_ui = () => {
   return (
     <section className="">

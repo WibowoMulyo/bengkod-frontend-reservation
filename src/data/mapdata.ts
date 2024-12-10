@@ -1,4 +1,4 @@
-import { mapdictionary } from "@/app/component/interface/Map"
+import { mapdictionary } from "@/components/interface/Map"
 export const mapdata : mapdictionary = {
   "Table-01": {
     id: '1',

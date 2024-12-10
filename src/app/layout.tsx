@@ -4,8 +4,9 @@ import './globals.css'
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import localFont from 'next/font/local'
 import { BrowserRouter } from 'react-router-dom';
+import ReduxProvider from '@/providers/redux';
 
-const inter = Poppins({ 
+const inter = Poppins({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 })
@@ -24,10 +25,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <PrimeReactProvider>
-      <html lang="en" data-theme="light">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </PrimeReactProvider>
+    <html lang="en" data-theme="light">
+      <PrimeReactProvider>
+        <body className={inter.className}>
+          <ReduxProvider>
+            {children}
+          </ReduxProvider>
+        </body>
+      </PrimeReactProvider>
+    </html>
   )
 }
