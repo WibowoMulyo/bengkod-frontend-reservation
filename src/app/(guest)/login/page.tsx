@@ -1,10 +1,10 @@
-'use client'
+'use server'
 import Image from "next/image";
 import GuestNavbar from '@/components/layouts/GuestHeader';
 import Body from "./fragments/body";
 import Footer from "@/components/layouts/footer";
 
-export default function page() {
+export default async function page() {
   return (
     <div className="bg-gray-50">
       <GuestNavbar/>

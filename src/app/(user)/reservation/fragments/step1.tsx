@@ -7,6 +7,7 @@ import { ValidationReservation } from "../../../../services/validation/Validatio
 import { Reservation } from "@/components/interface/Reservation";
 import InputErrorLight from "@/components/input/InputErrorLight";
 import { getDataAvalaible } from "../../../../services/ReservationServices";
+import { useSession } from "next-auth/react";
 interface props {
   onClick?: () => void,
   setFormData?: (val: Reservation) => void,
@@ -14,14 +15,16 @@ interface props {
 }
 
 const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => {
+  const {data: session} = useSession()
 
   const [date, setDate] = useState<string>('')
-  const [email, setEmail] = useState<string[]>([''])
+  const [email, setEmail] = useState<string[]>([session?.user ? session.user.email_mhs : ''])
   const [type, setTypeReserve] = useState('')
   const [reason, setReason] = useState('')
   const [error, setError] = useState<any>([''])
   const [totalperson, setTotalPerson] = useState(1)
   const [isshown, setShown] = useState(false)
+
 
   const today = new Date();
 
@@ -64,6 +67,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
           <InputTextOrDate
             value={email[index]}
             className="px-2"
+            disabled={index == 0 ? true : false}
             placeholder="example@mhs.ac.id"
             onChange={(e) => handleInputChange(index, e.target.value)}
           />
@@ -115,6 +119,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
 
   function ChangeEmailInput(input?: number) {
     setEmail(Array(totalperson).fill(''))
+    setEmail([session?.user ? session.user.email_mhs : ''])
   }
 
   useEffect(() => {

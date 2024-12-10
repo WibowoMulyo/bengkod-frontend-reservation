@@ -31,6 +31,7 @@ const body = () => {
     let dict = { email_mhs: email_mhs, password: password }
 
     let res = await login(dict).unwrap()
+    console.log(res)
     if (res.status == 'success') {
       let user = res.data
       const loginres = await signIn("credentials", {
@@ -39,7 +40,7 @@ const body = () => {
         name: user.name,
         token: user.token,
         callbackUrl: searchParams.get('callbackUrl') || '/',
-        redirect: false
+        redirect: false,
       })
       // window.location.replace(loginres?.url || '/dashboard/calendar')
     }else if(res.errors){

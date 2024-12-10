@@ -28,7 +28,7 @@ const Profile = ({ data }: profile) => {
 
   return (
     <section className="mx-auto">
-      <WhiteCard className="lg:min-w-[1000px]">
+      <WhiteCard className="lg:min-w-[1000px] min-h-[890px]">
         <div className="font-bold text-xl p-8">
           <h1>Pengaturan</h1>
         </div>

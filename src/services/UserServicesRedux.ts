@@ -2,21 +2,21 @@ import { apiSlice } from "@/services/core/BaseQuery";
 
 export const reservationApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMap: builder.query({
+    getUser: builder.query({
       query: (params) => ({
-        url: 'reservasi',
+        url: 'profil',
         method: 'GET',
         params: params
       })
     }),
-    addReservation: builder.mutation({
+    updateReservation: builder.mutation({
       query: (data) => ({
-        url: 'reservasi',
-        method: 'POST',
+        url: 'profil',
+        method: 'PATCH',
         body: data
       })
     })
   })
 })
 
-export const {useGetMapQuery, useAddReservationMutation} = reservationApi
+export const {useGetUserQuery, useUpdateReservationMutation} = reservationApi

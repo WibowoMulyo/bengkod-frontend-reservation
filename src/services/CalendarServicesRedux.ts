@@ -4,19 +4,12 @@ export const calendarApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCalendar: builder.query({
       query: (params) => ({
-        url: 'map',
+        url: 'kalender',
         method: 'GET',
         params: params
       })
     }),
-    addReservation: builder.mutation({
-      query: (data) => ({
-        url: 'reservations',
-        method: 'POST',
-        body: data
-      })
-    })
   })
 })
 
-export const { useGetCalendarQuery, useAddReservationMutation } = calendarApi;
+export const { useGetCalendarQuery } = calendarApi;

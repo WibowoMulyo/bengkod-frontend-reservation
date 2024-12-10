@@ -1,17 +1,17 @@
 import { apiSlice } from "@/services/core/BaseQuery";
 
-export const reservationApi = apiSlice.injectEndpoints({
+export const calendarApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getMap: builder.query({
+    getHistory: builder.query({
       query: (params) => ({
-        url: 'reservasi',
+        url: 'riwayat',
         method: 'GET',
         params: params
       })
     }),
-    addReservation: builder.mutation({
+    confirmReservation: builder.mutation({
       query: (data) => ({
-        url: 'reservasi',
+        url: 'riwayat',
         method: 'POST',
         body: data
       })
@@ -19,4 +19,4 @@ export const reservationApi = apiSlice.injectEndpoints({
   })
 })
 
-export const {useGetMapQuery, useAddReservationMutation} = reservationApi
+export const { useGetHistoryQuery } = calendarApi;

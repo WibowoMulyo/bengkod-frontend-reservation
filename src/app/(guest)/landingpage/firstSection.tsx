@@ -5,16 +5,16 @@ const firstSec = () => {
         <div className="mx-6 my-4">
           <div className="font-poppins font-bold text-2xl mx-8 md:text-5xl md:mx-40">
           <h1 className="">
-          Ruang Belajar Privat dan Produktif, Hanya <span className="bg-gradient-to-r from-blue-800 to-green-500 text-transparent bg-clip-text"> Sekali Klik</span>
+          Ruang Belajar Privat dan Produktif, Hanya <span className="bg-gradient-to-r from-primary-800 to-green-500 text-transparent bg-clip-text"> Sekali Klik</span>
           </h1>
           </div>
           <h2 className="my-2 text-xs mx-4 md:text-xl md:mx-40 md:my-10">
             Temukan ruang belajar yang sesuai dengan kebutuhanmu. Pesan sekarang dan dapatkan konfirmasi ketersediaan dalam 1 kali klik.
           </h2>
         </div>
-      <button className="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
-        text-sm px-3 py-1.5 me-2 mb-2
-        md:text-3xl md:py-4
+      <button className="text-white bg-primary-800 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg
+        text-sm px-5 py-1 me-2 mb-2
+        md:text-xl md:py-4
       ">
         Pesan Sekarang
       </button>

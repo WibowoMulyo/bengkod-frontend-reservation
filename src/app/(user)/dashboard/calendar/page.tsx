@@ -61,7 +61,6 @@ const Calendar = () => {
     if(data){
       console.log(data)
       if(data.data.total_reservations > 0){
-        console.log("Melakukan perubahan data......")
         setReservationMap(getReservationsDateMap(data.data.reservations))
       }
     }
