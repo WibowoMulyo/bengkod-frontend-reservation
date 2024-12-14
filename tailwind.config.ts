@@ -79,6 +79,8 @@ const config: Config = {
           800: '#05603A',
           900: '#054F31',
         },
+        success: '#1DA082',
+        black: '#29292C'
       },
       boxShadow: {
         primary: '0px 6px 4px 0px rgba(0, 0, 0, 0.25)'

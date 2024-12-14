@@ -39,7 +39,16 @@ export function ValidationReservation({ type, data }: validation) {
       
       return {success: result.success, data:grouped}
     case 'step2':
-      return reservation2.safeParse(data)
+      let result2 = reservation2.safeParse(data)
+      let grouped2 = result2.error?.issues.reduce((acc: any, item: any) => {
+        let key = item.path ? item.path.join("index") : 'no-path';
+
+        if (!acc[key]) acc[key] = [];
+        if (acc[key]) acc[key] = [];
+        acc[key].push(item);
+        return acc;
+      }, {})
+      return {success: result2.success, data:grouped2}
     case 'all':
       return [reservation1.safeParse(data), reservation2.safeParse(data)]
   }

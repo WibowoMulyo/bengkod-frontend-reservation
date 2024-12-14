@@ -30,6 +30,11 @@ export const authOption: AuthOptions = {
       }
     })
   ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60
+  }
+  ,
   callbacks: {
     jwt: async ({user, token}) => {
       if(user){
@@ -47,6 +52,7 @@ export const authOption: AuthOptions = {
         session.user.token = token.token as string
         session.user.email_mhs = token.email_mhs as string
       }
+      
       return session
     }
   }

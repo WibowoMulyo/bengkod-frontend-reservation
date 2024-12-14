@@ -11,11 +11,12 @@ import { mapitem } from "@/components/interface/Map";
 const totalStep = [Step1, Step2, Step3];
 
 const RenderStep = () => {
+
   const [formdatastep1, setFormData] = useState<Reservation>()
   const [mapdata, setMapdata] = useState<mapitem[]>([])
-  const [result, setSetup] = useState<any>()
+  const [result, setResult] = useState<any>()
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
 
   function nextButt() {
     if (step < totalStep.length - 1) {
@@ -38,7 +39,7 @@ const RenderStep = () => {
       // console.log(formdatastep1)
       return mapdata ? <Step2 step={nextButt}
       mapdata={mapdata}
-      // setResult={}
+      setResult={setResult}
       formdata={formdatastep1} 
          /> : ''
     case 2:

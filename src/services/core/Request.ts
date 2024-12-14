@@ -22,11 +22,12 @@ export async function RequestHttp({ type = 'get', url = '', datas = {}, headers 
     url: process.env.NEXT_SECRET_API_BACKEND_URL+url,
     headers: {
       'Content-Type': headers,
-      Authorization: `Bearer ${session?.user.token}`,
+      'Authorization': `Bearer ${session?.user.token}`,
     },
     params: {...params},
     data: datas,
   };
+  // return {status: 'error', data: config};
   try {
     switch (type) {
       case 'get':

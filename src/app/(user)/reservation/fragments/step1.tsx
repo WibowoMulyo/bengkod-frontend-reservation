@@ -8,6 +8,9 @@ import { Reservation } from "@/components/interface/Reservation";
 import InputErrorLight from "@/components/input/InputErrorLight";
 import { getDataAvalaible } from "../../../../services/ReservationServices";
 import { useSession } from "next-auth/react";
+import { useGetMapQuery } from "@/services/ReservationServicesRedux";
+import { GetCenterCoord } from "@/lib/Coordinate";
+import { reservationData2Map } from "@/lib/changeToMap";
 interface props {
   onClick?: () => void,
   setFormData?: (val: Reservation) => void,
@@ -18,12 +21,17 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   const {data: session} = useSession()
 
   const [date, setDate] = useState<string>('')
-  const [email, setEmail] = useState<string[]>([session?.user ? session.user.email_mhs : ''])
+  const [email_mhs, setEmail] = useState<any[]>([''])
   const [type, setTypeReserve] = useState('')
   const [reason, setReason] = useState('')
   const [error, setError] = useState<any>([''])
   const [totalperson, setTotalPerson] = useState(1)
   const [isshown, setShown] = useState(false)
+  const { data, isLoading } = useGetMapQuery({
+    date: date,
+    type: type,
+    total_seats: totalperson
+  })
 
 
   const today = new Date();
@@ -38,7 +46,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   const threedayafter = `${yyyy}-${mm}-${ddafter}`
 
   function shownTeamInput(e: string) {
-    if (e.toLowerCase() === 'tim') {
+    if (e === 'Kelompok') {
       setTotalPerson(2)
       setShown(true)
     }
@@ -49,7 +57,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   }
 
   function handleInputChange(index: number, content: string) {
-    const loadEmail = [...email]
+    const loadEmail = [...email_mhs]
 
     loadEmail[index] = content
     setEmail(loadEmail)
@@ -65,7 +73,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
       render.push(
         <div className="my-2" key={index}>
           <InputTextOrDate
-            value={email[index]}
+            value={email_mhs[index]}
             className="px-2"
             disabled={index == 0 ? true : false}
             placeholder="example@mhs.ac.id"
@@ -91,20 +99,23 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   }
   
   async function submitButton() {
-    let data = { date: date, email: email, type: type, reason: reason, totalperson:totalperson }
-    let result: any = ValidationReservation({ type: 'step1', data: data }) || ''
+    let body = { date: date, email: email_mhs, type: type, reason: reason, totalperson:totalperson }
+    let result: any = ValidationReservation({ type: 'step1', data: body }) || ''
+    
     setError([])
+    // console.log(body)
     if (result.success == false) {
       setError(result.data)
     }
     if (result.success == true) {
       if (setFormData && setMapData) {
-        const datareservation = await getAvalaibleReservation()
-        setMapData(datareservation)
+        console.log(data)
+        let datamap = GetCenterCoord(reservationData2Map({datas: data}))
+        setMapData(datamap)
         setFormData(
           {
             date: date,
-            email: email,
+            email_mhs: email_mhs,
             type: type,
             reason: reason,
             total_person: totalperson
@@ -124,8 +135,11 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
 
   useEffect(() => {
     // setEmail(Array(totalperson).fill(''))
+    if (session?.user.email_mhs) {
+      setEmail([session.user.email_mhs]); // Mengisi email pertama dari sesi
+    }
     document.getElementById('my_modal_peraturan')?.showModal()
-  }, [])
+  }, [session])
 
   return (
     <div className="my-10" {...props}>
@@ -257,7 +271,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
                     >
                       <option value="">--</option>
                       <option value="Individu">individu</option>
-                      <option value="Tim">Tim</option>
+                      <option value="Kelompok">Kelompok</option>
                     </select>
                     <InputErrorLight errorValue={error.type ? error.type[0].message : ''} value=""/>
                   </div>

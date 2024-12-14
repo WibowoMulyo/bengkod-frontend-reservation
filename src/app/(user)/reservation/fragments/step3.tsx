@@ -1,6 +1,6 @@
 // import Calendar from "@/app/component/calendar/Calendar";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StatusReservation from "@/components/StatusReservation";
 import SimpleCard from "@/components/card/SimpleCard";
 import CountdownTimer from "@/components/CountdownTimer";
@@ -8,9 +8,16 @@ import CountdownTimer from "@/components/CountdownTimer";
 interface props {
   step?: () => void,
   status: string,
+  // result: any
 }
 
 const renderDisplay = ({ step, status }: props) => {
+  // const end = result.end_time
+  const date = new Date()
+  const now = date.getMinutes()
+  useEffect(() => {
+    console.log(now)
+  }, [])
   return (
     <div className="my-[3.5%]">
       <div className="flex flex-col md:gap-y-[10%]">

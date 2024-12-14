@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeaderCard from "../card/HeaderCard";
 
 interface headerlayout{
   children: React.ReactNode,
@@ -8,10 +9,12 @@ interface headerlayout{
 const HeaderLayout = ({children, className} : headerlayout) => {
   return (
     <nav className={"w-full " + className}>
-      <div className="border-2 border-[rgb(236,238,239)] rounded-3xl m-4 bg-white hidden md:block">
+      {/* <div className="border-2 border-[rgb(236,238,239)] rounded-3xl m-4 bg-white hidden md:block">
         {children}
-      </div>
-
+      </div> */}
+      <HeaderCard>
+        {children}
+      </HeaderCard>
       <div className="flex m-3 items-center md:hidden">
         <div className="mr-auto">
 

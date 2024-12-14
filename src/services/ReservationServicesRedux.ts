@@ -15,8 +15,15 @@ export const reservationApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data
       })
+    }),
+    getDetailTable: builder.query({
+      query: (params) => ({
+        url: 'table',
+        method: 'GET',
+        params: params
+      })
     })
   })
 })
 
-export const {useGetMapQuery, useAddReservationMutation} = reservationApi
+export const {useGetMapQuery, useAddReservationMutation, useGetDetailTableQuery} = reservationApi

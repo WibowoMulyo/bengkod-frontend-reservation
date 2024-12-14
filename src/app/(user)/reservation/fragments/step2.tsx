@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import ImageMapper from 'react-img-mapper';
 import { getReservationHourMap } from "@/lib/SetCalendar";
 import { reservations } from "@/components/mock_data/reservations";
-import { filterData } from "@/lib/FilterReservation";
 import ReservedHour from "@/components/label/ReservedHour";
 import ButtonNotReserved from "@/components/button/ButtonNotReserved";
 import Image from "next/image";
 import { Reservation } from "@/components/interface/Reservation";
 import { getDataCalendar } from "@/services/CalendarServices";
-import { addReservation } from "@/services/ReservationServices";
+import { useAddReservationMutation, useGetDetailTableQuery } from "@/services/ReservationServicesRedux";
+import { useGetCalendarQuery } from "@/services/CalendarServicesRedux";
 interface props {
   step?: () => void,
   mapdata?: Array<any>,
@@ -66,14 +66,20 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
     '08:00-10:00', '10:01-12:00', '13:01-15:00', '15:01-17:00'
   ];
   const [duration, setDuration] = useState<string>('')
-  const [table, setTable] = useState<string>('')
+  const [table, setTable] = useState<number>(0)
   const [reservationMap, setReservationMap] = useState(getReservationHourMap([]));
-  const [formfinal, setFormFinal] = useState<any>({})
-
+  const [formfinal, setFormFinal] = useState<any>(formdata)
+  const [addReservation, { isLoading }] = useAddReservationMutation()
+  const { data, error } = useGetDetailTableQuery(
+    { date: formfinal.date, type: formfinal.type, tableId: table },
+    {skip: table == 0}
+    // Jangan panggil query jika tableId null
+  );
+  // const { data, error } = useGetCalendarQuery({ table_id: table }, {skip: table == null || table == 0});
   function clickToNotReserved(data: string) {
     setDuration(data);
     document.getElementById('my_modal_1')?.showModal()
-    setFormFinal((prev:any) => ({
+    setFormFinal((prev: any) => ({
       ...prev,
       duration: data,
       table: table
@@ -83,13 +89,14 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
   function itemTemplate(data: string) {
     if (reservationMap[data]) {
       return (
-        <ReservedHour data={data} />
+        <ReservedHour data={data} key={data} />
       )
     }
 
     return (
       <ButtonNotReserved
         disabled={table ? false : true}
+        key={data}
         className={(table ? 'bg-[#d9d9d9] text-black hover:bg-blue-900 hover:text-white' : 'bg-[#d9d9d9]/[.5] text-black/[.5]')}
         onClick={() => clickToNotReserved(data)}
       >
@@ -99,28 +106,48 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
   }
 
   async function onClick() {
-    if (step) {
-      // console.log(formdata)
-      // console.log(duration)
-      // console.log(table)
-      console.log(formfinal)
-      // step()
+    console.log(formfinal)
+    let res = await addReservation(formfinal).unwrap()
+    if (res.status == 'error') {
+
+    } else {
+      if(setResult){
+        setResult(res)
+      }
+      if (step) {
+        step()
+      }
     }
+    console.log(res)
   }
 
   async function changeTable(e: string) {
-    setTable(e)
+    setTable(parseInt(e))
     // TARUH LINK API DISINI
-    await getDataCalendar(parseInt(e)).then(response => {
-      console.log(response)
-      if(response.status == 'success'){
-        setReservationMap(getReservationHourMap(response.data.reservations))
-      }else if(response.status == 'error'){
-        throw new Error("Error fetch data calendar")
-      }
-    })
+
+    // let params = {date: formfinal.date, type: formfinal.type, table_id: parseInt(e)}
+    // await getDataCalendar(params).then(response => {
+    //   console.log(response)
+    //   if(response.status == 'success'){
+    //     setReservationMap(getReservationHourMap(response.data.reservations))
+    //   }else if(response.status == 'error'){
+    //     throw new Error("Error fetch data calendar")
+    //   }
+    // })
     // setReservationMap(getReservationHourMap(await ))
   }
+
+  useEffect(() => {
+    console.log(data)
+    if (data) {
+      if (data.status == 'error') {
+        throw new Error("Error fetch data calendar")
+      } else {
+        setReservationMap(getReservationHourMap(data.reservations))
+      }
+    }
+  }, [data])
+
   return (
     <div className="md:my-[3%] my-[5%]">
       <div className="flex flex-col md:gap-y-[10%]">
@@ -198,7 +225,7 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
           <div className="flex flex-col">
             {/* START SECTION SEAT */}
             <div className="overflow-x-auto">
-                {mapdata ? <div className="mb-10 min-w-[1360px] relative">
+              {mapdata ? <div className="mb-10 min-w-[1360px] relative">
                 <ImageMapper
                   width={1351}
                   height={416}
@@ -214,17 +241,17 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
                 />
                 {mapdata.map((area) => (
                   <span
-                  key={area.id}
-                  className="tooltip absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    top: area.center.y,
-                    left: area.center.x,
-                    zIndex: 1000
-                  }}
-                  
-                >
-                  {area.title}
-                </span>
+                    key={area.id}
+                    className="tooltip absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      top: area.center.y,
+                      left: area.center.x,
+                      zIndex: 1000
+                    }}
+
+                  >
+                    {area.title}
+                  </span>
                 ))}
               </div> : ''}
             </div>
@@ -242,7 +269,7 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
                     {table ?
                       <div className="w-full">
                         <Image
-                          src={tablearr[parseInt(table)]}
+                          src={tablearr[table]}
                           alt={`Gambar meja ${table}`}
                           style={{
                             height: '100%',
@@ -267,12 +294,12 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
                     <div className="flex justify-center gap-2 items-center border-[2px] rounded-full py-[2%] px-[3%] lg:py-[1%] lg:px[2%]">
                       <div className="hidden md:block">
                         <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.5 12.75C4.91667 12.75 4.42361 12.5486 4.02083 12.1458C3.61806 11.743 3.41667 11.25 3.41667 10.6666C3.41667 10.0833 3.61806 9.59024 4.02083 9.18746C4.42361 8.78468 4.91667 8.58329 5.5 8.58329C6.08333 8.58329 6.57639 8.78468 6.97917 9.18746C7.38194 9.59024 7.58333 10.0833 7.58333 10.6666C7.58333 11.25 7.38194 11.743 6.97917 12.1458C6.57639 12.5486 6.08333 12.75 5.5 12.75ZM2.16667 17.3333C1.70833 17.3333 1.31597 17.1701 0.989583 16.8437C0.663194 16.5173 0.5 16.125 0.5 15.6666V3.99996C0.5 3.54163 0.663194 3.14926 0.989583 2.82288C1.31597 2.49649 1.70833 2.33329 2.16667 2.33329H3V1.49996C3 1.26385 3.07986 1.06593 3.23958 0.906209C3.39931 0.746487 3.59722 0.666626 3.83333 0.666626C4.06944 0.666626 4.26736 0.746487 4.42708 0.906209C4.58681 1.06593 4.66667 1.26385 4.66667 1.49996V2.33329H11.3333V1.49996C11.3333 1.26385 11.4132 1.06593 11.5729 0.906209C11.7326 0.746487 11.9306 0.666626 12.1667 0.666626C12.4028 0.666626 12.6007 0.746487 12.7604 0.906209C12.9201 1.06593 13 1.26385 13 1.49996V2.33329H13.8333C14.2917 2.33329 14.684 2.49649 15.0104 2.82288C15.3368 3.14926 15.5 3.54163 15.5 3.99996V15.6666C15.5 16.125 15.3368 16.5173 15.0104 16.8437C14.684 17.1701 14.2917 17.3333 13.8333 17.3333H2.16667ZM2.16667 15.6666H13.8333V7.33329H2.16667V15.6666ZM2.16667 5.66663H13.8333V3.99996H2.16667V5.66663Z" fill="black" fill-opacity="0.8" />
+                          <path d="M5.5 12.75C4.91667 12.75 4.42361 12.5486 4.02083 12.1458C3.61806 11.743 3.41667 11.25 3.41667 10.6666C3.41667 10.0833 3.61806 9.59024 4.02083 9.18746C4.42361 8.78468 4.91667 8.58329 5.5 8.58329C6.08333 8.58329 6.57639 8.78468 6.97917 9.18746C7.38194 9.59024 7.58333 10.0833 7.58333 10.6666C7.58333 11.25 7.38194 11.743 6.97917 12.1458C6.57639 12.5486 6.08333 12.75 5.5 12.75ZM2.16667 17.3333C1.70833 17.3333 1.31597 17.1701 0.989583 16.8437C0.663194 16.5173 0.5 16.125 0.5 15.6666V3.99996C0.5 3.54163 0.663194 3.14926 0.989583 2.82288C1.31597 2.49649 1.70833 2.33329 2.16667 2.33329H3V1.49996C3 1.26385 3.07986 1.06593 3.23958 0.906209C3.39931 0.746487 3.59722 0.666626 3.83333 0.666626C4.06944 0.666626 4.26736 0.746487 4.42708 0.906209C4.58681 1.06593 4.66667 1.26385 4.66667 1.49996V2.33329H11.3333V1.49996C11.3333 1.26385 11.4132 1.06593 11.5729 0.906209C11.7326 0.746487 11.9306 0.666626 12.1667 0.666626C12.4028 0.666626 12.6007 0.746487 12.7604 0.906209C12.9201 1.06593 13 1.26385 13 1.49996V2.33329H13.8333C14.2917 2.33329 14.684 2.49649 15.0104 2.82288C15.3368 3.14926 15.5 3.54163 15.5 3.99996V15.6666C15.5 16.125 15.3368 16.5173 15.0104 16.8437C14.684 17.1701 14.2917 17.3333 13.8333 17.3333H2.16667ZM2.16667 15.6666H13.8333V7.33329H2.16667V15.6666ZM2.16667 5.66663H13.8333V3.99996H2.16667V5.66663Z" fill="black" fillOpacity="0.8" />
                         </svg>
                       </div>
                       <div className="block md:hidden">
                         <svg width="13" height="15" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.5 12.75C4.91667 12.75 4.42361 12.5486 4.02083 12.1458C3.61806 11.743 3.41667 11.25 3.41667 10.6666C3.41667 10.0833 3.61806 9.59024 4.02083 9.18746C4.42361 8.78468 4.91667 8.58329 5.5 8.58329C6.08333 8.58329 6.57639 8.78468 6.97917 9.18746C7.38194 9.59024 7.58333 10.0833 7.58333 10.6666C7.58333 11.25 7.38194 11.743 6.97917 12.1458C6.57639 12.5486 6.08333 12.75 5.5 12.75ZM2.16667 17.3333C1.70833 17.3333 1.31597 17.1701 0.989583 16.8437C0.663194 16.5173 0.5 16.125 0.5 15.6666V3.99996C0.5 3.54163 0.663194 3.14926 0.989583 2.82288C1.31597 2.49649 1.70833 2.33329 2.16667 2.33329H3V1.49996C3 1.26385 3.07986 1.06593 3.23958 0.906209C3.39931 0.746487 3.59722 0.666626 3.83333 0.666626C4.06944 0.666626 4.26736 0.746487 4.42708 0.906209C4.58681 1.06593 4.66667 1.26385 4.66667 1.49996V2.33329H11.3333V1.49996C11.3333 1.26385 11.4132 1.06593 11.5729 0.906209C11.7326 0.746487 11.9306 0.666626 12.1667 0.666626C12.4028 0.666626 12.6007 0.746487 12.7604 0.906209C12.9201 1.06593 13 1.26385 13 1.49996V2.33329H13.8333C14.2917 2.33329 14.684 2.49649 15.0104 2.82288C15.3368 3.14926 15.5 3.54163 15.5 3.99996V15.6666C15.5 16.125 15.3368 16.5173 15.0104 16.8437C14.684 17.1701 14.2917 17.3333 13.8333 17.3333H2.16667ZM2.16667 15.6666H13.8333V7.33329H2.16667V15.6666ZM2.16667 5.66663H13.8333V3.99996H2.16667V5.66663Z" fill="black" fill-opacity="0.8" />
+                          <path d="M5.5 12.75C4.91667 12.75 4.42361 12.5486 4.02083 12.1458C3.61806 11.743 3.41667 11.25 3.41667 10.6666C3.41667 10.0833 3.61806 9.59024 4.02083 9.18746C4.42361 8.78468 4.91667 8.58329 5.5 8.58329C6.08333 8.58329 6.57639 8.78468 6.97917 9.18746C7.38194 9.59024 7.58333 10.0833 7.58333 10.6666C7.58333 11.25 7.38194 11.743 6.97917 12.1458C6.57639 12.5486 6.08333 12.75 5.5 12.75ZM2.16667 17.3333C1.70833 17.3333 1.31597 17.1701 0.989583 16.8437C0.663194 16.5173 0.5 16.125 0.5 15.6666V3.99996C0.5 3.54163 0.663194 3.14926 0.989583 2.82288C1.31597 2.49649 1.70833 2.33329 2.16667 2.33329H3V1.49996C3 1.26385 3.07986 1.06593 3.23958 0.906209C3.39931 0.746487 3.59722 0.666626 3.83333 0.666626C4.06944 0.666626 4.26736 0.746487 4.42708 0.906209C4.58681 1.06593 4.66667 1.26385 4.66667 1.49996V2.33329H11.3333V1.49996C11.3333 1.26385 11.4132 1.06593 11.5729 0.906209C11.7326 0.746487 11.9306 0.666626 12.1667 0.666626C12.4028 0.666626 12.6007 0.746487 12.7604 0.906209C12.9201 1.06593 13 1.26385 13 1.49996V2.33329H13.8333C14.2917 2.33329 14.684 2.49649 15.0104 2.82288C15.3368 3.14926 15.5 3.54163 15.5 3.99996V15.6666C15.5 16.125 15.3368 16.5173 15.0104 16.8437C14.684 17.1701 14.2917 17.3333 13.8333 17.3333H2.16667ZM2.16667 15.6666H13.8333V7.33329H2.16667V15.6666ZM2.16667 5.66663H13.8333V3.99996H2.16667V5.66663Z" fill="black" fillOpacity="0.8" />
                         </svg>
                       </div>
                       <h1 className="md:text-sm text-xs">Today</h1>

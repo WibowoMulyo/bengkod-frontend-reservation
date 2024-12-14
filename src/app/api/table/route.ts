@@ -7,17 +7,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const params = Object.fromEntries(searchParams.entries());
   let data = await ApiHandler({
-    requestfunc: () => RequestHttp({ type: "get", url: "user" }),
-  })
-
-  return NextResponse.json(data)
-}
-
-export async function PATCH(request: Request) {
-  // Parse body request
-  const body = await request.json()
-  let data = await ApiHandler({
-    requestfunc: () => RequestHttp({ type: "post", url: "user-update", datas: body }),
+    requestfunc: () => RequestHttp({ type: "get", params: params, url: 'detail-reservation-table' }),
   })
 
   return NextResponse.json(data)

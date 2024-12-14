@@ -6,7 +6,7 @@ import Footer from "@/components/layouts/footer";
 
 export default async function page() {
   return (
-    <div className="bg-gray-50">
+    <section className="bg-gray-50">
       <GuestNavbar/>
 
       <Body />
@@ -14,6 +14,6 @@ export default async function page() {
       <div className="hidden md:block">
         <Footer />
       </div>
-    </div>
+    </section>
   );
 }

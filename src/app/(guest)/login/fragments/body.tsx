@@ -14,16 +14,13 @@ import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { set } from "zod";
 const body = () => {
-  // const [email_mhs, setEmailMhs] = useState<string>('')
-  // const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<any | ''>({})
   const searchParams = useSearchParams()
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const { pending } = useFormStatus()
 
   async function OnSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    // const router = useRouter()
     const formdata = new FormData(e.currentTarget)
 
     let email_mhs = formdata.get("email_mhs")
@@ -32,8 +29,10 @@ const body = () => {
 
     let res = await login(dict).unwrap()
     console.log(res)
-    if (res.status == 'success') {
-      let user = res.data
+    if (res.status == 'error') {
+      setError(res)
+    }else{
+      let user = res
       const loginres = await signIn("credentials", {
         id: user.id,
         email_mhs: user.email_mhs,
@@ -42,9 +41,7 @@ const body = () => {
         callbackUrl: searchParams.get('callbackUrl') || '/',
         redirect: false,
       })
-      // window.location.replace(loginres?.url || '/dashboard/calendar')
-    }else if(res.errors){
-      setError(res)
+      window.location.replace('/dashboard/calendar')
     }
   }
 

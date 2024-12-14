@@ -6,7 +6,7 @@ import CustomLink from "@/components/link/CustomLink";
 
 const GuestNavbar = () => {
   return(
-    <HeaderLayout className="m-4">
+    <HeaderLayout className="">
       <div className="flex lg:mx-20 mx-5 relative items-center">
         <div className="mr-auto w-[220px] h-[90px]">
           <CustomLink href="/" showline={false}>
@@ -45,7 +45,7 @@ const GuestNavbar = () => {
               Masuk
             </PrimaryButton>
           </CustomLink>
-          <CustomLink href="#" showline={false}>
+          <CustomLink href="/register" showline={false}>
             <PrimaryButton className="font-normal px-4">
               Daftar
             </PrimaryButton>

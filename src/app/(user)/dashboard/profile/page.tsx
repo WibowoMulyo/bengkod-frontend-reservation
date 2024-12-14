@@ -11,7 +11,7 @@ const renderDisplay = async () => {
     <div className="">
       <HeaderAuth />
       <div className="flex md:flex-row flex-col">
-        <Dashboard_navbar data={session?.user}/>
+        <Dashboard_navbar/>
         <Profile data={session?.user}/>
       </div>
       <Footer />

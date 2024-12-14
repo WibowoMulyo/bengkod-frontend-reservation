@@ -5,10 +5,8 @@ import Dashboard_navbar from "@/components/layouts/dashboard-navbar";
 import { getDayOfWeek, getReservationsDateMap } from "@/lib/SetCalendar";
 import React, { useEffect, useState } from 'react';
 import ReservedCalendar from "@/components/label/ReservedCalendar";
-import { getDataCalendar } from "@/services/CalendarServices";
 import WhiteCard from "@/components/card/WhiteCard";
 import { useGetCalendarQuery } from "@/services/CalendarServicesRedux";
-import { getSession } from "next-auth/react";
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const hours = ['08:00-10:00', '10:00-12:00', '12:01-13:00', '13:00-15:00', '15:00-17:00'];
 const colors = ['#29CC39', '#FF6633', '#8833FF', '#33BFFF', '#FFCB33']
@@ -37,7 +35,8 @@ const Calendar = () => {
   // const [calendar, {isLoading}] = useGetCalendarQuery({tabel_id:1})
   const [reservationsMap, setReservationMap] = useState<any>()
   
-  const { data, error, isLoading } = useGetCalendarQuery({ table_id: activeIndex + 1 });
+  const { data, error } = useGetCalendarQuery({ table_id: activeIndex + 1 });
+  
   const [animation, setAnimation] = useState(false)
 
   const handleNext = async () => {
@@ -57,11 +56,12 @@ const Calendar = () => {
   async function getData() {
     setAnimation(false)
     setReservationMap([])
+    // console.log(activeIndex)
     console.log(data)
     if(data){
       console.log(data)
-      if(data.data.total_reservations > 0){
-        setReservationMap(getReservationsDateMap(data.data.reservations))
+      if(data.total_reservations > 0){
+        setReservationMap(getReservationsDateMap(data.reservations))
       }
     }
     setAnimation(true)

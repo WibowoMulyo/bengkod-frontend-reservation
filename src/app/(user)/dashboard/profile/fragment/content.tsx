@@ -7,23 +7,27 @@ import GrayInput from "@/components/input/GrayInput";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import { updateDataUser } from "@/services/UserServices";
 import { profile } from "@/components/interface/Profile";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import WhiteCard from "@/components/card/WhiteCard";
+import { useUpdateUserMutation } from "@/services/UserServicesRedux";
 
 const Profile = ({ data }: profile) => {
   const [name, setName] = useState(data.name)
   const [emailMhs, setEmailMhs] = useState(data.email_mhs)
+  const [update, { isLoading }] = useUpdateUserMutation()
 
-  async function submit(e: any) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
     // e.preventDefault()
-    let result = await updateDataUser({
-      data: {
-        name: name,
-      },
-      user_id: data.id,
-    }).then(response => {
-      console.log(response)
-    })
+    e.preventDefault()
+    let formdata = new FormData(e.currentTarget)
+    let body = {
+      name : formdata.get('name'),
+      email_mhs : formdata.get('email_mhs'),
+      password: formdata.get('password'),
+      password_confirmation: formdata.get('confirmation')
+    }
+    let res = await update({id: data.iid, data: body})
+    console.log(res)
   }
 
   return (
@@ -34,7 +38,7 @@ const Profile = ({ data }: profile) => {
         </div>
         <hr className="text-gray-50 w-full border-2" />
         <div className="md:py-[6%] md:px-[10%]">
-          <form action="">
+          <form action="" onSubmit={submit}>
             <div className="flex items-center space-x-[2.5%]">
               <div className="capitalize text-sm relative">
                 <div className="absolute -top-9 left-0 text-nowrap">
@@ -49,16 +53,30 @@ const Profile = ({ data }: profile) => {
               <div className="font-normal">
                 {/* <h1 className="text-sm">Nama profil</h1> */}
                 <Label className="capitalize text-sm">nama profil</Label>
-                <GrayInput value={name} className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setName(e.target.value)} />
+                <GrayInput value={name} name="name" 
+                className="pl-[1.5%] py-[1%] pr-[10%]" 
+                onChange={e => setName(e.target.value)} />
               </div>
-
+              <div className="font-normal w-full mr-auto">
+                <Label className="capitalize text-sm">email</Label>
+                <GrayInput value={data.email_mhs} name="email_mhs" 
+                errorValue="" 
+                className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setEmailMhs(e.target.value)} />
+              </div>
+              <div className="font-normal w-full mr-auto">
+                <Label className="capitalize text-sm">Password</Label>
+                <GrayInput value="" type="password" 
+                name="password" errorValue="" 
+                className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setEmailMhs(e.target.value)} />
+              </div>
+              <div className="font-normal w-full mr-auto">
+                <Label className="capitalize text-sm">Konfirmasi Password</Label>
+                <GrayInput value="" type="password" 
+                name="password_confirmation" errorValue="" 
+                className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setEmailMhs(e.target.value)} />
+              </div>
               <div className="flex items-center">
-                <div className="font-normal w-full mr-auto">
-                  {/* <h1 className="text-sm">Email</h1> */}
-                  <Label className="capitalize text-sm">email</Label>
-                  <GrayInput value={data.email_mhs} errorValue={"Harus menggunakan email mahasiswa"} className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setEmailMhs(e.target.value)} />
-                </div>
-                <PrimaryButton className="py-2 px-3 capitalize font-medium" onClick={e => submit(e)}>
+                <PrimaryButton className="py-2 px-3 capitalize font-medium">
                   simpan
                 </PrimaryButton>
               </div>
