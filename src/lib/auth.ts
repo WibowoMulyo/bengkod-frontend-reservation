@@ -29,11 +29,7 @@ export const authOption: AuthOptions = {
         return credentials || null
       }
     })
-  ],
-  session: {
-    strategy: 'jwt',
-    maxAge: 60 * 60
-  }
+  ]
   ,
   callbacks: {
     jwt: async ({user, token}) => {

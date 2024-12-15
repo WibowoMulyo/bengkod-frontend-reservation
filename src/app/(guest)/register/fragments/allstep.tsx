@@ -27,7 +27,7 @@ const RenderStep = () => {
     case 1:
       return <Step2 data={registerdata} onPrevious={prevAction} onSubmit={nextAction}/>
     case 2:
-      return <Step3/>
+      return <Step3 email={registerdata?.email_mhs || ''}/>
     default:
   }
 

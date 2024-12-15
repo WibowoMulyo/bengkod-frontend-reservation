@@ -1,19 +1,9 @@
 'use client'
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
+import { link } from "../interface/Link";
 
-interface props {
-  children: React.ReactNode,
-  href: string,
-  className?: string,
-  statichref?: string,
-  whenactive?: string,
-  whennotactive?: string,
-  getActive?: (value: boolean) => void,
-  showline?: boolean
-}
-
-function CustomLink({ children, href, className, whenactive, whennotactive, getActive, showline=true, statichref = href, ...props }: props) {
+function CustomLink({ children, href, className, whenactive, whennotactive, getActive, showline=true, statichref = href, ...props }: link) {
   const pathname = usePathname()
 
   function onClick() {

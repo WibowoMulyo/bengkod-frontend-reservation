@@ -1,17 +1,28 @@
 import PrimaryButton from "@/components/button/PrimaryButton";
-import SecondaryButton from "@/components/button/SecondaryButton";
 import HeaderCard from "@/components/card/HeaderCard";
 import GrayInput from "@/components/input/GrayInput";
 import Label from "@/components/label/Label";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import { register } from "@/components/interface/Register";
-
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import Link from "next/link";
+import PrimaryLink from "@/components/link/PrimaryLink";
 interface props{
   onClick?: () => void,
   setFormData?: (val: register) => void,
+  email: string
 }
 
-const Step3 = ({setFormData} : props) => {
+const Step3 = ({email} : props) => {
+  const router = useRouter();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push("login"); // Ganti "/target-page" dengan URL tujuan
+    }, 5000); // Timer dalam milidetik (3 detik)
+
+    return () => clearTimeout(timer); // Membersihkan timer saat komponen dilepas
+  }, [router])
   return (
     <section>
       <HeaderCard className="w-[1200px] mx-auto">
@@ -70,7 +81,7 @@ const Step3 = ({setFormData} : props) => {
               />
             </div>
             <h1 className="text-black font-bold text-2xl">Bengkel Koding</h1>
-            <p className="text-gray-600 font-light">Selamat akunmu berhasil dibuat!</p>
+            <p className="text-gray-600 font-light">Selamat akunmu berhasil dibuat! kamu akan dialihkan ke halaman login beberapa saat. Klik <span className="text-primary-700 underline">login</span> jika tidak berhasil</p>
           </div>
 
           <div className="flex flex-col gap-y-3">
@@ -78,18 +89,18 @@ const Step3 = ({setFormData} : props) => {
               <Label>
                 Alamat email <span className="text-red-500">*</span>
               </Label>
-              <GrayInput name="email_mhs" errorValue="" value="exampleemail@mhs.dinus.ac.id" disabled className="w-full p-3 bg-gray-50 text-sm" placeholder="Gunakan Alamat email mahasiswa!" />
-            </div>
-            <div className="flex flex-col w-full">
-              <Label>
-                Password <span className="text-red-500">*</span>
-              </Label>
-              <GrayInput name="password" type='password' errorValue="" value="*******" disabled className="w-full p-3 bg-gray-50 text-sm" placeholder="Nama lengkap anda" />
+              <GrayInput name="email_mhs" errorValue="" value={email} disabled className="w-full p-3 bg-gray-50 text-sm" placeholder="Gunakan Alamat email mahasiswa!" />
             </div>
           </div>
-          <PrimaryButton className="font-medium mt-8 px-4">
-            Masuk Sekarang
-          </PrimaryButton>
+          {/* <PrimaryButton className="font-medium mt-8 px-4">
+            Login
+          </PrimaryButton> */}
+          {/* <Link href={"login"} className="bg-primary-900 hover:bg-primary-800 ease-in duration-200 rounded-lg p-2 text-[#f7f7f7] font-semibold ">
+            Login
+          </Link> */}
+          <PrimaryLink href="login" className="font-medium mt-8 px-4">
+            Login
+          </PrimaryLink>
         </div>
       </HeaderCard>
     </section>

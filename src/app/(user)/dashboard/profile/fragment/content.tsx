@@ -26,8 +26,11 @@ const Profile = ({ data }: profile) => {
       password: formdata.get('password'),
       password_confirmation: formdata.get('confirmation')
     }
-    let res = await update({id: data.iid, data: body})
+    let res = await update({id: data.iid, data: body}).unwrap()
     console.log(res)
+    if(res.status == 'success'){
+      console.log("do something here...")
+    }
   }
 
   return (

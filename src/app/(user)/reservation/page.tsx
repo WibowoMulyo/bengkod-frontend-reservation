@@ -16,7 +16,7 @@ const RenderStep = () => {
   const [mapdata, setMapdata] = useState<mapitem[]>([])
   const [result, setResult] = useState<any>()
 
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
 
   function nextButt() {
     if (step < totalStep.length - 1) {

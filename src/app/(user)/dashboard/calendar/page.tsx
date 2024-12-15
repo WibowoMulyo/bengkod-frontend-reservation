@@ -59,9 +59,8 @@ const Calendar = () => {
     // console.log(activeIndex)
     console.log(data)
     if(data){
-      console.log(data)
-      if(data.total_reservations > 0){
-        setReservationMap(getReservationsDateMap(data.reservations))
+      if(data.data.total_reservations > 0){
+        setReservationMap(getReservationsDateMap(data.data.reservations))
       }
     }
     setAnimation(true)

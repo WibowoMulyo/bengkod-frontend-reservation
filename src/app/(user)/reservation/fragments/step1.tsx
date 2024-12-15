@@ -85,18 +85,6 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
 
     return render
   }
-
-  async function getAvalaibleReservation(){
-    let data = await getDataAvalaible({
-      params:{
-        date: date,
-        type: type,
-        total_seats: totalperson
-      }
-    })
-    // console.log(data) 
-    return data
-  }
   
   async function submitButton() {
     let body = { date: date, email: email_mhs, type: type, reason: reason, totalperson:totalperson }
@@ -110,6 +98,9 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
     if (result.success == true) {
       if (setFormData && setMapData) {
         console.log(data)
+        if(data.status == 'error'){
+          throw new Error(data.message)
+        }
         let datamap = GetCenterCoord(reservationData2Map({datas: data}))
         setMapData(datamap)
         setFormData(

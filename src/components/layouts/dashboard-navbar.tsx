@@ -12,26 +12,6 @@ const Dashboard_navbar = () => {
           <h1 className="text-[#6b7a99] font-bold capitalize text-2xl text-wrap">{session?.user.name}</h1>
           <p className="text-[#adb8cc] font-bold text-xs mt-2">{session?.user.email_mhs}</p>
         </div>
-        <div className="bg-white rounded-xl p-3 mt-8 md:mx-4  shadow-[1px_5px_50px_4px_rgba(0,0,0,0.05)] lg:shadow-none mx-auto">
-          <div className="flex w-full">
-            <div className="mr-auto">
-              <h1 className="text-[#202224] font-normal text-sm">Total reservation</h1>
-              <p className="text-xl font-semibold mt-2">40,689</p>
-            </div>
-            <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path opacity="0.21" fill-rule="evenodd" clip-rule="evenodd" d="M46.7864 23.1144C46.7864 35.7621 36.5334 46.0152 23.8856 46.0152C11.2379 46.0152 0.984863 35.7621 0.984863 23.1144C0.984863 10.4666 11.2379 0.213623 23.8856 0.213623C36.5334 0.213623 46.7864 10.4666 46.7864 23.1144Z" fill="#8280FF" />
-              <path opacity="0.587821" fill-rule="evenodd" clip-rule="evenodd" d="M16.7607 18.0253C16.7607 20.2738 18.5835 22.0966 20.832 22.0966C23.0805 22.0966 24.9032 20.2738 24.9032 18.0253C24.9032 15.7769 23.0805 13.9541 20.832 13.9541C18.5835 13.9541 16.7607 15.7769 16.7607 18.0253ZM26.9389 22.0968C26.9389 23.7831 28.3059 25.1502 29.9923 25.1502C31.6787 25.1502 33.0457 23.7831 33.0457 22.0968C33.0457 20.4104 31.6787 19.0433 29.9923 19.0433C28.3059 19.0433 26.9389 20.4104 26.9389 22.0968Z" fill="#8280FF" />
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8152 24.1323C16.0097 24.1323 12.067 26.6021 11.6725 31.4598C11.651 31.7244 12.1571 32.2748 12.4123 32.2748H29.2258C29.9904 32.2748 30.0022 31.6595 29.9904 31.4606C29.6921 26.4664 25.6884 24.1323 20.8152 24.1323ZM35.5455 32.2747H31.6209V32.2746C31.6209 29.9836 30.864 27.8695 29.5866 26.1685C33.0537 26.2064 35.8847 27.9594 36.0977 31.6641C36.1063 31.8133 36.0977 32.2747 35.5455 32.2747Z" fill="#8280FF" />
-            </svg>
-          </div>
-          <div className="flex gap-x-1.5 text-xs mt-8 items-center">
-            <svg width="16" height="16" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.4277 0.946533L13.1758 2.69462L9.45065 6.41982L6.39721 3.36638L0.740723 9.0305L1.81706 10.1068L6.39721 5.52669L9.45065 8.58012L14.2598 3.77859L16.0079 5.52669V0.946533H11.4277Z" fill="#00B69B" />
-            </svg>
-            <p className="text-[#00B69B]">8,5%</p>
-            <p className="text-[#202224]">Up from yesterday</p>
-          </div>
-        </div>
         <div className="hidden md:flex flex-col h-full mt-[6%]">
           <div className=" mx-2">
             <div className="">

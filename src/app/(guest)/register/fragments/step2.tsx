@@ -17,11 +17,12 @@ interface props {
 const Step2 = ({ onSubmit, onPrevious, data }: props) => {
   const [register, { isLoading }] = useRegisterMutation()
   const [error, setError] = useState<any>([''])
+  const [checkable, setCheckable] = useState(false)
   async function submit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    console.log(isLoading)
     let res = await register(data).unwrap()
+    console.log(res)
     if (res.status == 'error') {
       setError(res.data)
     }
@@ -36,6 +37,10 @@ const Step2 = ({ onSubmit, onPrevious, data }: props) => {
     if (onPrevious) {
       onPrevious()
     }
+  }
+
+  function onCheck(){
+    setCheckable(!checkable)
   }
 
   return (
@@ -119,12 +124,12 @@ const Step2 = ({ onSubmit, onPrevious, data }: props) => {
               <GrayInput name="password" type='password' errorValue="" value={data?.password} disabled className="w-full p-3 bg-gray-50 text-sm" placeholder="Nama lengkap anda" />
             </div>
             <div className="border-2 border-gray-200 p-4 flex gap-x-2 text-black rounded-xl">
-              <input type="checkbox" className="p-2 border-2 border-gray-400" />
+              <input type="checkbox" className="p-2 border-2 border-gray-400" checked={checkable} onChange={onCheck}/>
               <p>Saya menyetujui bahwa data yang telah dimasukkan adalah Benar dan dapat dipertanggung jawabkan</p>
             </div>
           </div>
           <SecondaryButton className="px-8 font-medium mr-4" onClick={previousAct}>Ubah data</SecondaryButton>
-          <PrimaryButton className="font-medium mt-8 px-10" onClick={e => submit(e)}>
+          <PrimaryButton className="font-medium mt-8 px-10" onClick={e => submit(e)} disabled={!checkable}>
             Daftar
           </PrimaryButton>
         </div>

@@ -3,7 +3,6 @@ import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import localFont from 'next/font/local'
-import { BrowserRouter } from 'react-router-dom';
 import ReduxProvider from '@/providers/redux';
 
 const inter = Poppins({

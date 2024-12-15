@@ -12,7 +12,6 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useLoginMutation } from "@/services/AuthServicesRedux";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { set } from "zod";
 const body = () => {
   const [error, setError] = useState<any | ''>({})
   const searchParams = useSearchParams()
@@ -31,7 +30,7 @@ const body = () => {
     console.log(res)
     if (res.status == 'error') {
       setError(res)
-    }else{
+    }else if(res.status == 'success'){
       let user = res
       const loginres = await signIn("credentials", {
         id: user.id,

@@ -14,7 +14,7 @@ interface requestparams {
 }
 
 export async function RequestHttp({ type = 'get', url = '', datas = {}, headers = 'application/json', params = {} }: requestparams): Promise<any> {
-  const authkey = cookies().get('token')?.value ?? "";
+  // const authkey = cookies().get('token')?.value ?? "";
   const session = await getServerSession(authOption);
   // return authkey
   const config = {

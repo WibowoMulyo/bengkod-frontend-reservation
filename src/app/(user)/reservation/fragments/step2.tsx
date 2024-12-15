@@ -109,7 +109,7 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
     console.log(formfinal)
     let res = await addReservation(formfinal).unwrap()
     if (res.status == 'error') {
-
+      throw new Error(res.message)
     } else {
       if(setResult){
         setResult(res)
@@ -143,7 +143,7 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
       if (data.status == 'error') {
         throw new Error("Error fetch data calendar")
       } else {
-        setReservationMap(getReservationHourMap(data.reservations))
+        setReservationMap(getReservationHourMap(data.data.reservations))
       }
     }
   }, [data])
