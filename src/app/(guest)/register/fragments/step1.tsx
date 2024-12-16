@@ -72,7 +72,7 @@ const Step1 = ({ onClick, setFormData, data }: props) => {
               </div>
               <div className="relative w-1/4">
                 <div className="flex flex-row">
-                  <div className="border-gray-100 text-gray-400 border-2 rounded-[50%] p-2 h-[40px] w-[40px] flex flex-col justify-center items-center">
+                  <div className="border-gray-100 text-gray-400 border-2 p-4 rounded-[50%] h-[40px] w-[40px] flex flex-col justify-center items-center">
                     <p>2</p>
                   </div>
                   <div className="w-full border-gray-100 border-t-[2px] my-auto">

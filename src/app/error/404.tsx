@@ -1,5 +1,5 @@
 // import HeaderAuth from "../component/layouts/header";
-import GuestNavbar from "../../components/layouts/GuestHeader";
+import GuestNavbar from "@/components/layouts/header/GuestHeader";
 import ResponsiveImage from "../../components/ResponsiveImage";
 import Footer from "../../components/layouts/footer"
 const error_ui = () => {

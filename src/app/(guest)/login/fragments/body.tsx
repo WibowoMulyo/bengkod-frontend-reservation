@@ -31,7 +31,7 @@ const body = () => {
     if (res.status == 'error') {
       setError(res)
     }else if(res.status == 'success'){
-      let user = res
+      let user = res.data
       const loginres = await signIn("credentials", {
         id: user.id,
         email_mhs: user.email_mhs,

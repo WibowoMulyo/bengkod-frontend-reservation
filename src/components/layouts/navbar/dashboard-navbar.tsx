@@ -1,7 +1,7 @@
 'use client'
 import CustomLink from "@/components/link/CustomLink";
 import { useSession } from "next-auth/react";
-import { profile } from "../interface/Profile";
+import { profile } from "../../interface/Profile";
 const Dashboard_navbar = () => {
   const {data: session} = useSession()
   return (

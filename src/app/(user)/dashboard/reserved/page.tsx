@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import HeaderAuth from "@/components/layouts/AuthHeader";
-import Dashboard_navbar from "@/components/layouts/dashboard-navbar";
+import Dashboard_navbar from "@/components/layouts/navbar/dashboard-navbar";
 import Footer from "@/components/layouts/footer";
 import SimpleCard from "@/components/card/SimpleCard";
 import MiniCard from "@/components/card/minicard";

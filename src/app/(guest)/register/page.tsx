@@ -1,5 +1,5 @@
 
-import GuestNavbar from "@/components/layouts/GuestHeader";
+import GuestNavbar from '@/components/layouts/header/GuestHeader';
 
 import RenderStep from "./fragments/allstep";
 import Footer from "@/components/layouts/footer";

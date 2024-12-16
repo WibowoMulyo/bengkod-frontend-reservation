@@ -1,5 +1,5 @@
 'use client'
-import HeaderAuth from "@/components/layouts/AuthHeader";
+import HeaderAuth from "@/components/layouts/header/AuthHeader";
 import Step1 from '@/app/(user)/reservation/fragments/step1';
 import Step2 from '@/app/(user)/reservation/fragments/step2';
 import Step3 from '@/app/(user)/reservation/fragments/step3';

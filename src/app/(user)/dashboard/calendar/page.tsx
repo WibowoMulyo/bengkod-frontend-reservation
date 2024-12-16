@@ -1,7 +1,7 @@
 'use client'
 import Footer from "@/components/layouts/footer";
-import HeaderAuth from "@/components/layouts/AuthHeader";
-import Dashboard_navbar from "@/components/layouts/dashboard-navbar";
+import HeaderAuth from "@/components/layouts/header/AuthHeader";
+import Dashboard_navbar from "@/components/layouts/navbar/dashboard-navbar";
 import { getDayOfWeek, getReservationsDateMap } from "@/lib/SetCalendar";
 import React, { useEffect, useState } from 'react';
 import ReservedCalendar from "@/components/label/ReservedCalendar";

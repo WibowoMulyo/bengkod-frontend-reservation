@@ -1,7 +1,7 @@
 'use server'
-import Dashboard_navbar from "@/components/layouts/dashboard-navbar";
+import Dashboard_navbar from "@/components/layouts/navbar/dashboard-navbar";
 import Footer from "@/components/layouts/footer";
-import HeaderAuth from "@/components/layouts/AuthHeader";
+import HeaderAuth from "@/components/layouts/header/AuthHeader";
 import Profile from "./fragment/content";
 import { getServerSession } from "next-auth";
 import { authOption } from "../../../../lib/auth";
