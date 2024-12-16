@@ -6,7 +6,7 @@ const thirdSec = () => {
     <div className="mx-10 my-24">
       <div className="flex flex-col justify-center items-center md:my-24 gap-y-4">
         <Header>Peraturan Kami</Header>
-        <div className="text-center flex flex-col w-5/6">
+        <div className="text-center flex flex-col max-w-[698px]">
           <p className="text-[10px] text-wrap md:text-[14px] md:my-2">
             Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini
             untuk kenyamanan bersama saat menggunakan fasilitas bersama.
@@ -16,26 +16,26 @@ const thirdSec = () => {
           {[
             [
               {
-                srcImage: "/img/time_management.png",
+                srcImage: "/image/time_management.png",
                 header: "Waktu Penggunaan",
                 content:
                   "Patuhi jam operasional ruang belajar yang sudah ditetapkan.",
               },
               {
-                srcImage: "/img/ketenangan.png",
+                srcImage: "/image/ketenangan.png",
                 header: "Ketenangan",
                 content:
                   "Jaga suasana tenang. Hindari suara berisik yang mengganggu pengguna lain.",
               },
 
               {
-                srcImage: "/img/no_bever.png",
+                srcImage: "/image/no_bever.png",
                 header: "Makanan & Minuman",
                 content:
                   "Dilarang makan makanan berat yang berbau menyengat di dalam ruangan.",
               },
               {
-                srcImage: "/img/clean.png",
+                srcImage: "/image/clean.png",
                 header: "Kebersihan",
                 content:
                   "Jaga kebersihan lingkungan sekitar. Buang sampah pada tempatnya.",
@@ -44,7 +44,7 @@ const thirdSec = () => {
           ].map((column, columnIndex) => (
             <div
               key={columnIndex}
-              className="flex flex-col md:grid md:grid-cols-2 md:gap-x-4 gap-y-4"
+              className="flex flex-col md:grid md:grid-cols-2 md:gap-x-[80px] gap-y-4"
             >
               {column.map((card, index) => (
                 <Card

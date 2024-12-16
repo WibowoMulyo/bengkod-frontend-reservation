@@ -1,9 +1,10 @@
 import LandingButton from "./components/LandingButton";
 import ResponsiveImage from "./components/ResponsiveImage";
+import Image from "next/image";
 
 const firstSec = () => {
   return (
-    <div className="md:mx-16" id="beranda">
+    <div className="md:mx-16 mt-[160px]" id="beranda">
       <div className="flex my-12 flex-col space-y-[2%] items-center text-center justify-center">
         <div className="text-[24px] md:text-[40px] font-semibold">
           <h1 className="mx-[64px]">Ruang Belajar Privat dan Produktif,</h1>
@@ -47,7 +48,7 @@ const firstSec = () => {
 
       <div className="hidden lg:flex md:my-10 justify-center">
         <ResponsiveImage
-          src="/image/meja-pack.png"
+          src="/img/meja-pack.png"
           width={825}
           height={377}
           className="min-w-[825px] minh-[377px]"

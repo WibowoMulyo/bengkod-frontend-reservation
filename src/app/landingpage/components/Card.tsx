@@ -18,7 +18,7 @@ const Card = ({
   return (
     <div
       className={
-        "text-center items-center p-4 bg-white rounded-2xl flex flex-col w-[239px] h-[240px]" +
+        "text-center items-center p-4 bg-white rounded-2xl flex flex-col w-[362px] h-[429px]" +
         className
       }
     >

@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import ResponsiveImage from "./components/ResponsiveImage";
 import UnorderedList from "./components/UnorderedList";
+import Image from "next/image";
 
 const secondSec = () => {
   return (
@@ -18,7 +19,7 @@ const secondSec = () => {
                 nyaman.
               </p>
               <ResponsiveImage
-                src="/img/facility.png"
+                src="/image/facility.png"
                 width={500}
                 height={300}
                 className="h-[290px] lg:block hidden"
@@ -28,27 +29,27 @@ const secondSec = () => {
 
             <div className="flex flex-col justify-center items-center mx-10 space-y-8 lg:w-[500px]">
               <UnorderedList
-                srcImage="/img/internet_cepat.png"
+                srcImage="/image/internet_cepat.png"
                 header="Internet Cepat"
                 content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
               <UnorderedList
-                srcImage="/img/air_conditioner.png"
+                srcImage="/image/air_conditioner.png"
                 header="Air Conditioner"
                 content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
               <UnorderedList
-                srcImage="/img/stop_kontak.png"
+                srcImage="/image/stop_kontak.png"
                 header="Stop kontak"
                 content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
               <UnorderedList
-                srcImage="/img/televisi.png"
+                srcImage="/image/televisi.png"
                 header="Televisi"
                 content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />
               <UnorderedList
-                srcImage="/img/meja_kursi.png"
+                srcImage="/image/meja_kursi.png"
                 header="Meja dan kursi belajar"
                 content="Hai Dinusian harap memperhatikan beberapa peraturan dibawah ini"
               />

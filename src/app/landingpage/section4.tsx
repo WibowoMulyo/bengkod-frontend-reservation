@@ -9,7 +9,7 @@ const forthSec = () => {
           md:max-w-4xl"
       >
         <ResponsiveImage
-          src="/img/benlogo.png"
+          src="/image/benlogo.png"
           width={80}
           height={80}
           className="w-[80px] h-[80px] mt-8 md:mt-4"
@@ -26,7 +26,8 @@ const forthSec = () => {
         <div className="w-full my-6">
           <div className="aspect-w-16 aspect-h-9">
             <iframe
-              src="https://www.youtube.com/embed/_0972HfmXO0?si=swaNRPgU_rK-5NPa"
+              // src="https://www.youtube.com/embed/_0972HfmXO0?si=swaNRPgU_rK-5NPa"
+              src="https://www.youtube.com/embed/BOQS01WfcQs?si=5oKHhXeqhPciy9WJ"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;   
