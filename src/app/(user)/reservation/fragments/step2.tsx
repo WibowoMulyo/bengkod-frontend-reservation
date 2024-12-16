@@ -11,7 +11,6 @@ import Image from "next/image";
 import { Reservation } from "@/components/interface/Reservation";
 import { getDataCalendar } from "@/services/CalendarServices";
 import { useAddReservationMutation, useGetDetailTableQuery } from "@/services/ReservationServicesRedux";
-import { useGetCalendarQuery } from "@/services/CalendarServicesRedux";
 interface props {
   step?: () => void,
   mapdata?: Array<any>,
@@ -19,60 +18,24 @@ interface props {
   setResult?: (val: any) => void,
 }
 
-const tablearr = ['', '/image/table_img/table1.jpeg', '/image/table_img/table2.jpeg']
+const tablearr = ['', '/image/table_img/meja1.jpg', '/image/table_img/meja2.jpg', '/image/table_img/meja3.jpg', '/image/table_img/meja3.jpg']
 
-const infoTable = [
-  {
-    "id": "1",
-    "shape": "poly",
-    "title": "gojomok",
-    "alt": "gojomok",
-    "coords": [
-      377, 42, 329, 46, 304, 64, 306, 84, 306, 93, 319, 111,
-      324, 123, 295, 133, 256, 136, 209, 149, 200, 162, 181,
-      166, 161, 176, 98, 215, 78, 356, 69, 410, 93, 453, 134, 430,
-      123, 364, 135, 252, 187, 238, 205, 252, 209, 277, 188, 296, 167,
-      364, 151, 438, 120, 513, 99, 519, 24, 608, 64, 686, 43, 729, 98,
-      728, 109, 698, 131, 707, 213, 663, 228, 572, 250, 549, 309,
-      527, 369, 536, 404, 559, 384, 592, 436, 669, 426, 685, 453,
-      722, 504, 727, 523, 726, 501, 681, 561, 655, 571, 601, 517,
-      476, 366, 332, 402, 336, 392, 323, 362, 318, 392, 302, 383,
-      275, 359, 282, 348, 309, 345, 281, 375, 239, 396, 272, 455,
-      313, 487, 304, 458, 223, 462, 189, 448, 169, 429, 138, 426,
-      170, 411, 165, 395, 150, 402, 131, 426, 126, 430, 101, 421,
-      73, 392, 45, 337, 37
-    ],
-    "strokeColor": "black",
-    "fillColor": "#eab54d4d",
-    // "disabled" : true
-  },
-  {
-    "id": "2",
-    "shape": "poly",
-    "title": "sukuna",
-    "alt": "sukuna",
-    "coords": [
-      1003, 50, 997, 65, 994, 78, 983, 108, 995, 90, 1003, 111,
-      993, 180, 1016, 176, 1020, 161, 1026, 169, 1053, 161, 1025,
-      107, 1027, 90, 1016, 73
-    ],
-    "strokeColor": "black",
-    "fillColor": "#eab54d4d"
-  }
-]
+const now = new Date(); // Waktu sekarang
+const currentTime = now.getHours() * 60 + now.getMinutes();
 
 const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
   const durations = [
-    '08:00-10:00', '10:01-12:00', '13:01-15:00', '15:01-17:00'
+    '08:00-10:00', '10:00-12:00', '13:00-15:00', '15:00-17:00'
   ];
   const [duration, setDuration] = useState<string>('')
   const [table, setTable] = useState<number>(0)
+  const [error, setError] = useState<any>('')
   const [reservationMap, setReservationMap] = useState(getReservationHourMap([]));
   const [formfinal, setFormFinal] = useState<any>(formdata)
   const [addReservation, { isLoading }] = useAddReservationMutation()
-  const { data, error } = useGetDetailTableQuery(
+  const { data } = useGetDetailTableQuery(
     { date: formfinal.date, type: formfinal.type, tableId: table },
-    {skip: table == 0}
+    { skip: table == 0 }
     // Jangan panggil query jika tableId null
   );
   // const { data, error } = useGetCalendarQuery({ table_id: table }, {skip: table == null || table == 0});
@@ -81,8 +44,8 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
     document.getElementById('my_modal_1')?.showModal()
     setFormFinal((prev: any) => ({
       ...prev,
-      duration: data,
-      table: table
+      time_slot: data,
+      table_id: table
     }))
   }
 
@@ -90,6 +53,24 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
     if (reservationMap[data]) {
       return (
         <ReservedHour data={data} key={data} />
+      )
+    }
+
+    const [start, end] = data.split('-'); // Pisahkan start dan end
+    const [startHours, startMinutes] = start.split(':').map(Number);
+    const startTime = startHours * 60 + startMinutes;
+
+    if (currentTime >= startTime) {
+      console.log("Melewati jam!")
+      return (
+        <ButtonNotReserved
+          disabled={true}
+          key={data}
+          className={'bg-[#d9d9d9]/[.5] text-black/[.5]'}
+        // onClick={() => clickToNotReserved(data)}
+        >
+          {data}
+        </ButtonNotReserved>
       )
     }
 
@@ -108,40 +89,30 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
   async function onClick() {
     console.log(formfinal)
     let res = await addReservation(formfinal).unwrap()
+    console.log(res)
     if (res.status == 'error') {
-      throw new Error(res.message)
+      setError(res.message)
+      document.getElementById('alert')?.showModal()
+      // throw new Error(res.message)
     } else {
-      if(setResult){
+      if (setResult) {
         setResult(res)
       }
       if (step) {
         step()
       }
     }
-    console.log(res)
   }
 
   async function changeTable(e: string) {
     setTable(parseInt(e))
-    // TARUH LINK API DISINI
-
-    // let params = {date: formfinal.date, type: formfinal.type, table_id: parseInt(e)}
-    // await getDataCalendar(params).then(response => {
-    //   console.log(response)
-    //   if(response.status == 'success'){
-    //     setReservationMap(getReservationHourMap(response.data.reservations))
-    //   }else if(response.status == 'error'){
-    //     throw new Error("Error fetch data calendar")
-    //   }
-    // })
-    // setReservationMap(getReservationHourMap(await ))
   }
 
   useEffect(() => {
-    console.log(data)
     if (data) {
+      console.log(data)
       if (data.status == 'error') {
-        throw new Error("Error fetch data calendar")
+        throw new Error("Error fetch data reservasi")
       } else {
         setReservationMap(getReservationHourMap(data.data.reservations))
       }
@@ -250,7 +221,8 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
                     }}
 
                   >
-                    {area.title}
+                    {/* {area.title} */}
+                    {!area.is_avalaible ? area.title : <p className="text-red-600 font-semibold">PENUH</p>}
                   </span>
                 ))}
               </div> : ''}
@@ -309,9 +281,13 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
                   </div>
                   {/* END SECTION CALENDAR */}
                   <div className="my-4 flex flex-col gap-4 h-[300px]">
-                    {durations.map(durr => (
+                    {data ? durations.map(durr => (
                       itemTemplate(durr)
-                    ))}
+                    )) :
+                      <div className="w-full h-full flex justify-center items-center">
+                        <span className="loading loading-dots loading-lg"></span>
+                      </div>
+                    }
                   </div>
                 </div>
               </div>
@@ -345,6 +321,26 @@ const renderDisplay = ({ step, mapdata, formdata, setResult }: props) => {
           <div className="modal-action">
             <button className="bg-[#1e3a8b] py-2 px-4 rounded-xl text-white" onClick={onClick}>Lanjut</button>
           </div>
+        </div>
+      </dialog>
+
+      <dialog id="alert" className="modal">
+        <div className="modal-box lg:w-[30%] w-11/12">
+          <div className="flex items-center">
+            <h3 className="font-bold lg:text-lg text-[14px] text-red-600 mr-auto">Error!</h3>
+          </div>
+            {/* <p className="py-4 font-normal text-[14px]">{error? error : 'Terjadi kesalahan!, coba lagi nanti'}</p> */}
+            <div className="py-2 text-[14px]">
+            <p>Penyebab error yang mungkin: </p>
+            <ul>
+              <li>• User sudah meminjam h6 hari ini</li>
+              <li>• Pastikan user telah terdaftar pada sistem kami ya</li>
+            </ul>
+          </div>  
+          <form method="dialog" className="">
+            <button className="bg-red-600 py-2 px-4 rounded-xl text-white">Kembali</button>
+            {/* if there is a button in form, it will close the modal */}
+          </form>
         </div>
       </dialog>
     </div>

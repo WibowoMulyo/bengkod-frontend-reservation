@@ -7,37 +7,14 @@ import ButtonDashboard from "@/components/button/ButtonDashboard";
 import HeaderCellTable from "@/components/table/HeaderCellTable";
 import ContentCellTable from "@/components/table/ContentCellTable";
 import WhiteCard from "@/components/card/WhiteCard";
-
-const getData = (navbar: props) => {
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    // async function get() {
-    //     const get = await fetch('LINK DISINI')
-    //     setData(await get.json())
-    // }
-    console.log("Memanggil data")
-  }, [navbar])
-
-  return data
-
-}
-
-const filterData = () => {
-  // const data = getData()
-  // data.filter()
-}
+import { useGetHistoryQuery } from "@/services/HistoryServiceRedux";
 
 interface props {
   navbar: number
 }
 
 const renderDisplay = (navbar: props) => {
-  function onClick(status: number) {
-    console.log(status)
-  }
-
-  const data = getData(navbar)
+  // const {data} = useGetHistoryQuery({})
 
   return (
     <div className="">
@@ -259,6 +236,27 @@ const renderDisplay = (navbar: props) => {
                     </ContentCellTable>
                   </div>
                 </div>
+                {/* {data.map(data => {
+                  <div className="hover:bg-gray-300">
+                  <div className="group grid grid-cols-6 py-4 mx-4">
+                    <ContentCellTable className="col-span-2 " indexcolortext={0}>
+                      {data.id}
+                    </ContentCellTable>
+                    <ContentCellTable className="col-span-1 text-center" indexcolortext={0}>
+                      {data.date}
+                    </ContentCellTable>
+                    <ContentCellTable className="col-span-1 text-center" indexcolortext={0}>
+                      {data.table_id}
+                    </ContentCellTable>
+                    <ContentCellTable className="col-span-1 text-center" indexcolortext={0}>
+                      {data.total_seats}
+                    </ContentCellTable>
+                    <ContentCellTable className="col-span-1 group-hover:text-gray-950/[.9] text-center" indexcolortext={1}>
+                      {data.status}
+                    </ContentCellTable>
+                  </div>
+                </div>
+                })} */}
               </div>
             </div>
           </WhiteCard>

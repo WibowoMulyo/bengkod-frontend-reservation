@@ -1,6 +1,6 @@
 import { apiSlice } from "@/services/core/BaseQuery";
 
-export const calendarApi = apiSlice.injectEndpoints({
+export const historyApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getHistory: builder.query({
       query: (params) => ({
@@ -9,14 +9,7 @@ export const calendarApi = apiSlice.injectEndpoints({
         params: params
       })
     }),
-    confirmReservation: builder.mutation({
-      query: (data) => ({
-        url: 'riwayat',
-        method: 'POST',
-        body: data
-      })
-    })
   })
 })
 
-export const { useGetHistoryQuery } = calendarApi;
+export const { useGetHistoryQuery } = historyApi;

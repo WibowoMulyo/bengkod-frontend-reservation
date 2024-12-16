@@ -6,6 +6,9 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'dummyimage.com',
                 port: '',
+            },
+            {
+              hostname: '127.0.0.1'
             }
         ]
     },

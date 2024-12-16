@@ -4,20 +4,31 @@ import { useEffect, useState } from "react";
 import StatusReservation from "@/components/StatusReservation";
 import SimpleCard from "@/components/card/SimpleCard";
 import CountdownTimer from "@/components/CountdownTimer";
+import { Reservation } from "@/components/interface/Reservation";
 
 interface props {
   step?: () => void,
   status: string,
-  // result: any
+  result: any,
+  data: Reservation
 }
 
-const renderDisplay = ({ step, status }: props) => {
+const renderDisplay = ({ step, status, result, data }: props) => {
   // const end = result.end_time
-  const date = new Date()
-  const now = date.getMinutes()
-  useEffect(() => {
-    console.log(now)
-  }, [])
+  function getTimeDifferenceInSeconds(targetTime: string) {
+    const now: any = new Date();
+    const targetDate : any = new Date(targetTime);
+  
+    const differenceInMilliseconds = targetDate - now;
+  
+    if (differenceInMilliseconds <= 0) {
+      return 0; // Jika waktu target sudah lewat, kembalikan 0
+    }
+  
+    return Math.floor(differenceInMilliseconds / 1000); // Konversi ke detik
+  }
+
+  const isgroup = data?.type == 'Individu' ? true : false
   return (
     <div className="my-[3.5%]">
       <div className="flex flex-col md:gap-y-[10%]">
@@ -91,11 +102,11 @@ const renderDisplay = ({ step, status }: props) => {
         {/* END SECTION STEP FORM */}
 
         {/* START INFORMATION DETAIL */}
-        <div className="flex flex-col md:flex-row gap-8 md:w-4/5 mx-[3%] md:mx-auto justify-center lg:my-[3%] my-[2.5%]">
+        <div className={"flex flex-col md:flex-row gap-8 mx-[3%] md:mx-auto justify-center lg:my-[3%] my-[2.5%] " + (isgroup ? "w-full" : 'w-4/5')}>
           {/* START RESERVATION DETAILS */}
           <div className="flex flex-col gap-y-4">
             {/* <StatusReservation status="1" /> */}
-            <SimpleCard className="bg-white xl:w-[775px]">
+            <SimpleCard className={"bg-white xl:w-[775px] "  + (isgroup ? "mx-auto" : '')} >
               <div className="pb-4">
                 <h1 className="font-extrabold">Reservation Details  </h1>
               </div>
@@ -104,25 +115,26 @@ const renderDisplay = ({ step, status }: props) => {
                 <div className="col-span-1">
                   <h1 className="font-light italic md:text-[16px] text-[10px]">Guess</h1>
                   <div className="md:text-[15px] text-[11px] font-medium">
+                    {/* <p>example@mhs.dinus.ac.id</p>
                     <p>example@mhs.dinus.ac.id</p>
                     <p>example@mhs.dinus.ac.id</p>
-                    <p>example@mhs.dinus.ac.id</p>
-                    <p>example@mhs.dinus.ac.id</p>
+                    <p>example@mhs.dinus.ac.id</p> */}
+                    {data.email_mhs.map(index => <p>{index}</p>)}
                   </div>
                 </div>
                 <div className="col-span-1">
                   <h1 className="font-light italic md:text-[16px] text-[10px]">From</h1>
                   <div className="md:text-[15px] text-[11px] font-medium">
-                    <p>Senin, 31 Oktober 2024</p>
+                    <p>{data.date}</p>
                   </div>
-                  <p className="md:text-[15px] text-[11px] font-medium">Pukul 10.00 AM</p>
+                  <p className="md:text-[15px] text-[11px] font-medium">{data.time_slot?.split('-')[0]}</p>
                 </div>
                 <div className="col-span-1">
                   <h1 className="font-light italic md:text-[16px] text-[10px]">End</h1>
                   <div className="md:text-[15px] text-[11px] font-medium">
-                    <p>Senin, 31 Oktober 2024</p>
+                    <p>{data.date}</p>
                   </div>
-                  <p className="md:text-[15px] text-[11px] font-medium">Pukul 12.00 AM</p>
+                  <p className="md:text-[15px] text-[11px] font-medium">{data.time_slot?.split('-')[1]}</p>
                 </div>
               </div>
               {/* <div className="flex flex-wrap"></div> */}
@@ -133,22 +145,22 @@ const renderDisplay = ({ step, status }: props) => {
                 <div className="col-span-1">
                   <h1 className="font-light italic md:text-[16px] text-[10px]">Table number</h1>
                   <div className="md:text-[15px] text-[11px] font-medium">
-                    <p>T-01</p>
+                    <p>Table-{data.table_id}</p>
                   </div>
                 </div>
                 <div className="col-span-1">
                   <h1 className="font-light italic md:text-[16px] text-[10px]">Person</h1>
                   <div className="md:text-[15px] text-[11px] font-medium">
-                    <p>4</p>
+                    <p>{data.total_person}</p>
                   </div>
                 </div>
                 <div className="col-span-1">
-                  <div className="">
+                  {/* <div className="">
                     <h1 className="font-light italic md:text-[16px] text-[10px]">Booking number</h1>
                     <div className="md:text-[15px] text-[11px] font-medium">
                       <p>123ASW</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* END ROW 2 */}
@@ -161,15 +173,18 @@ const renderDisplay = ({ step, status }: props) => {
           {/* END RESERVATION DETAILS */}
 
           {/* START RESERVATION SUMMARY */}
+          {isgroup ? '' 
+          : 
           <SimpleCard className="bg-white md:min-w-[450px] w-full">
             <div className="border-[#e5e5e5] border-[3.5px] rounded-xl h-[473px]">
               <div className="flex flex-col space-y-[5%] my-[5%]">
                 <h1 className="text-center font-medium text-xl">Waktu Konfirmasi</h1>
-                <CountdownTimer duration={300} initialDuration={300} size={250} strokeBgColor="#E9E9FF" strokeGradientStart="#1E3A8B" strokeGradientEnd="#FFFFFF" strokeWidth={20} />
+                <CountdownTimer duration={300} initialDuration={getTimeDifferenceInSeconds(result.data.expires_at)} size={250} strokeBgColor="#E9E9FF" strokeGradientStart="#1E3A8B" strokeGradientEnd="#FFFFFF" strokeWidth={20} />
                 <h1 className="text-center font-medium text-lg">Batas waktu konfirmasi</h1>
               </div>
             </div>
-          </SimpleCard>
+          </SimpleCard>}
+          
           {/* END RESERVATION SUMMARY */}
         </div>
         <div className="my-10 lg">

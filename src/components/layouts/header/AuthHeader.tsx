@@ -1,5 +1,4 @@
 'use client'
-
 import Image from "next/image";
 import Navlink from "@/components/link/NavLink";
 import CustomLink from "../../link/CustomLink";
@@ -9,6 +8,7 @@ import HeaderLayout from "../HeaderLayout";
 import ResponsiveImage from "../../ResponsiveImage";
 const renderDisplay = () => {
   const { data: session } = useSession()
+  const profilepath = process.env.NEXT_PUBLIC_STORAGE_BASE_URL + (session?.user.image ? session.user.image : '') 
   return (
     <div className="w-full">
       <HeaderLayout>
@@ -35,17 +35,12 @@ const renderDisplay = () => {
             </Navlink>
           </div>
           <div className="my-auto flex gap-x-4 items-center">
-            <div className="xl:block hidden">
-              <div className="p-1 bg-[#FFE3E3] border-[#E59898] italic font-normal border-2 rounded-xl text-[14px] text-wrap text-[#667085]">
-                Sisa waktu peminjaman tersisa 2 jam
-              </div>
-            </div>
             <div className="dropdown dropdown-end">
               <div className="" tabIndex={0}>
                 <button>
                   <div className="w-[60px]">
                     <ResponsiveImage
-                      src={"/image/profile-image.jpeg"}
+                      src={"/image/profile1.png"}
                       width={60}
                       height={60}
                       alt="logo profile"
@@ -58,7 +53,7 @@ const renderDisplay = () => {
                       Profile
                     </CustomLink>
                   </li>
-                  <li>
+                  <li className="mt-2">
                     <LogoutButton onClick={() => signOut()} className="w-full text-left">
                       Logout
                     </LogoutButton>

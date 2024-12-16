@@ -1,18 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import HeaderAuth from "@/components/layouts/AuthHeader";
+import HeaderAuth from "@/components/layouts/header/AuthHeader";
 import Dashboard_navbar from "@/components/layouts/navbar/dashboard-navbar";
 import Footer from "@/components/layouts/footer";
 import SimpleCard from "@/components/card/SimpleCard";
-import MiniCard from "@/components/card/minicard";
+import MiniCard from "@/components/card/MiniCard";
 import PrimaryButton from "@/components/button/PrimaryButton";
-import SecondaryButton from "@/components/button/SecondaryButton";
-
+import { useGetConfirmationQuery } from "@/services/ConfirmationServicesRedux";
 const renderDisplay = () => {
-  function onClick(status: number) {
-    console.log(status);
-  }
-
+  // const {data, error} = useGetConfirmationQuery({})
+  // useEffect(() => {
+  //   if(data)
+  // }, [data])
   return (
     <div>
       <HeaderAuth />
@@ -27,25 +26,25 @@ const renderDisplay = () => {
                   Reservation Details
                 </h1>
                 <MiniCard
-                  subtitle={<h2>Guest</h2>}
+                  subtitle={"Guest"}
                   value={<p>111202219832@mhs.dinus.ac.id</p>}
                 />
 
                 <MiniCard
-                  subtitle={<h2>Start</h2>}
+                  subtitle={"Start"}
                   value={<p>Senin, 10 September 2024, Pukul 10.00 AM</p>}
                 />
 
                 <MiniCard
-                  subtitle={<h2>End</h2>}
+                  subtitle={"End"}
                   value={<p>Senin, 10 September 2024, 12.00 AM</p>}
                 />
 
-                <MiniCard subtitle={<h2>Table</h2>} value={<p>Table 01</p>} />
-                <MiniCard subtitle={<h2>Person</h2>} value={<p>1</p>} />
+                <MiniCard subtitle={"Table"} value={<p>Table 01</p>} />
+                <MiniCard subtitle={"Person"} value={<p>1</p>} />
                 
                 <MiniCard
-                  subtitle={<h2>Booking ID</h2>}
+                  subtitle={"Booking ID"}
                   value={<p>RSV011120241539</p>}
                 />
 

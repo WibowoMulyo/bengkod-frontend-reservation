@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const params = Object.fromEntries(searchParams.entries());
   let data = await ApiHandler({
-    requestfunc: () => RequestHttp({ type: "get", url: "user" }),
+    requestfunc: () => RequestHttp({ type: "get", url: "confirmation", params: params }),
   })
 
   return NextResponse.json(data)
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   // Parse body request
   const body = await request.json()
   let data = await ApiHandler({
-    requestfunc: () => RequestHttp({ type: "post", url: "user-update", datas: body }),
+    requestfunc: () => RequestHttp({ type: "post", url: "confirmation", datas: body }),
   })
 
   return NextResponse.json(data)

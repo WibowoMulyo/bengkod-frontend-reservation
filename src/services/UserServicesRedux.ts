@@ -12,7 +12,7 @@ export const reservationApi = apiSlice.injectEndpoints({
     updateUser: builder.mutation({
       query: ({id ,data}) => ({
         url: 'profil',
-        method: 'PATCH',
+        method: 'POST',
         body: data,
         params: id
       })

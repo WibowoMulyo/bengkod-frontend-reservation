@@ -5,6 +5,6 @@ export interface Reservation {
   email_mhs: string[]; // format 'YYYY-MM-DD'
   total_person?: number,
   time_slot?: string; // format 'HH:mm'
-  reason?: string,
+  purpose?: string,
   table_id?: string;
 }

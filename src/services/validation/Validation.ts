@@ -9,13 +9,13 @@ export function ValidationReservation({ type, data }: validation) {
   const reservation1 = z.object({
     date: z.string().min(5, {message: "Harap isi tanggal" }),
     email: z.array(
-      z.string().email({message: "kesalahan domain email"}).refine((email) => email.endsWith("mhs.dinus.ac.id"), {
+      z.string().min(1).email({message: "kesalahan domain email"}).refine((email) => email.endsWith("mhs.dinus.ac.id"), {
         message: "Hanya email dengan domain @mhs.dinus.ac.id yang diperbolehkan",
       }),
     ),
     totalperson: z.number().min(1, {message: "Jika kamu tim pastikan lebih dari 1!"}),
     type: z.string().min(2, { message: "Harap isi tipe reservasi" }),
-    reason: z.string().min(2, { message: "Harap isi alasan" }),
+    purpose: z.string().min(2, { message: "Harap isi alasan" }),
   })
 
   const reservation2 = z.object({

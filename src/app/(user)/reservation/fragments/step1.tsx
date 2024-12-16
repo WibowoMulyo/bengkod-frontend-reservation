@@ -48,6 +48,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   function shownTeamInput(e: string) {
     if (e === 'Kelompok') {
       setTotalPerson(2)
+      ChangeEmailInput(2)
       setShown(true)
     }
     else {
@@ -89,7 +90,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   async function submitButton() {
     let body = { date: date, email: email_mhs, type: type, purpose: reason, totalperson:totalperson }
     let result: any = ValidationReservation({ type: 'step1', data: body }) || ''
-    
+    console.log(body)
     setError([])
     // console.log(body)
     if (result.success == false) {
@@ -108,7 +109,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
             date: date,
             email_mhs: email_mhs,
             type: type,
-            reason: reason,
+            purpose: reason,
             total_person: totalperson
           }
         )
@@ -120,8 +121,11 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   }
 
   function ChangeEmailInput(input?: number) {
-    setEmail(Array(totalperson).fill(''))
-    setEmail([session?.user ? session.user.email_mhs : ''])
+    setEmail((prevEmail) => {
+      const newEmail = Array(input).fill('');
+      newEmail[0] = prevEmail[0]; // Pertahankan nilai pada index pertama
+      return newEmail;
+    });
   }
 
   useEffect(() => {
@@ -209,7 +213,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
         <div className="lg:py-16 lg:px-14 py-10 px-7 md:flex block">
           <div className="xl:w-[650px] xl:h-[466px] w-[280px] lg:w-[400px] mx-auto">
             <Image
-              src={"/img/test-cropped.jpg"}
+              src={"/image/step1.png"}
               alt="Foto meja"
               style={{
                 width: '100%',
@@ -244,8 +248,8 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
                       onChange={(e) => { setReason(e.target.value); }}
                     >
                       <option value="">--</option>
-                      <option value="mandiri">Belajar mandiri</option>
-                      <option value="santai">Nyantuy</option>
+                      <option value="Kerja Kelompok">Kerja Kelompok</option>
+                      <option value="Penelitian">Penelitian</option>
                     </select>
                     {/* {error.reason ? <p className="font-light text-red-600 text-xs">{error.reason}</p> : ''} */}
                     <InputErrorLight errorValue={error.reason ? error.reason[0].message : ''} value=""/>
@@ -258,7 +262,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
                     <select name="" id="" className=
                       "border-[2px] shadow-[1px_2px_2px_rgba(0,0,0,0.1)] border-[#e5e5e5] rounded-lg text-[14px] font-medium p-1 pr-10 focus:ring-primary-700 focus:ring-2"
                       value={type}
-                      onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value); ChangeEmailInput }}
+                      onChange={(e) => { setTypeReserve(e.target.value); shownTeamInput(e.target.value); }}
                     >
                       <option value="">--</option>
                       <option value="Individu">individu</option>

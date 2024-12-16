@@ -34,7 +34,7 @@ function getReservationHourMap(reservations: Reservation[]){
     if (!map[time_slot]) {
       map[time_slot] = new Set();
     }
-    map[time_slot].add(date.toString());
+    map[time_slot].add('');
   });
 
   return map;

@@ -37,6 +37,7 @@ const body = () => {
         email_mhs: user.email_mhs,
         name: user.name,
         token: user.token,
+        image: user.photo,
         callbackUrl: searchParams.get('callbackUrl') || '/',
         redirect: false,
       })

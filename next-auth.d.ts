@@ -7,11 +7,13 @@ declare module "next-auth" {
       id: number,
       token: string,
       email_mhs: string,
+      image: string
     } & DefaultSession["user"]
   }
 
   interface User{
     token: string,
     email_mhs: string,
+    image: string
   }
 }

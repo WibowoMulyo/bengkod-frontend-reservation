@@ -21,6 +21,9 @@ export const authOption: AuthOptions = {
         email_mhs: {
           type: "email"
         },
+        image: {
+          type: "text"
+        },
         token: {
           type: "text"
         },
@@ -37,6 +40,7 @@ export const authOption: AuthOptions = {
         token.id = +user.id;
         token.token = user.token;
         token.email_mhs = user.email_mhs;
+        token.image = user.image;
         token.name = user.name
       }
       return token
@@ -46,6 +50,7 @@ export const authOption: AuthOptions = {
         session.user.id = token.id as number
         session.user.name = token.name as string
         session.user.token = token.token as string
+        session.user.image = token.image as string
         session.user.email_mhs = token.email_mhs as string
       }
       

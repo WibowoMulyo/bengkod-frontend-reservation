@@ -1,29 +1,21 @@
 'use client'
+import GreenCard from "@/components/card/GreenCard";
 import SimpleCard from "@/components/card/SimpleCard";
 import WhiteCard from "@/components/card/WhiteCard";
 import GrayInput from "@/components/input/GrayInput";
+import InputWithIcon from "@/components/input/InputWithIcon";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import ContentCellTable from "@/components/table/ContentCellTable";
 import SecondaryHeaderCellTable from "@/components/table/SecondaryHeaderCellTable";
-import { useRef } from "react";
+
 
 export default function dashboard() {
-  const input = useRef(null)
-  function checkActive() {
-    console.log(input.current)
-  }
+
   return (
     <WhiteCard className="p-6">
       <nav className="flex flex-col gap-y-4">
         {/* Jadiin komponen */}
-        <div className="border-[1px] border-gray-300 w-full rounded-xl px-3">
-          <div className="flex gap-x-4 items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-search fill-gray-300" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-            </svg>
-            <input className="border-none py-2 w-full" placeholder="search reservation number" ref={input} onChange={checkActive} />
-          </div>
-        </div>
+        <InputWithIcon />
         <div className="text-gray-500 font-bold text-2xl capitalize">
           <h1>Halo, Admin</h1>
         </div>
@@ -32,13 +24,11 @@ export default function dashboard() {
             <h2 className="font-normal text-[14px]">Jumlah peminjam hari ini</h2>
             <p className="text-3xl font-bold text-right mt-auto">4/60</p>
           </div>
-          <div className="bg-green-500 rounded-xl p-4 text-white w-[240px] h-[120px] flex">
+          <GreenCard className="flex">
             <h2 className="font-normal text-[14px]">Jumlah meja:</h2>
             <p className="text-3xl font-bold text-right mt-auto ml-auto">4/60</p>
-          </div>
+          </GreenCard>
           <div className="bg-gray-200 rounded-xl p-4 text-white w-[240px] h-[120px] flex">
-            {/* <h2 className="font-normal text-[14px]">Jumlah meja:</h2>
-            <p className="text-3xl font-bold text-right mt-auto ml-auto">4/60</p> */}
           </div>
         </div>
       </nav>

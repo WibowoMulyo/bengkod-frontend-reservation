@@ -44,7 +44,7 @@ const RenderStep = () => {
          /> : ''
     case 2:
       // submit()
-      return <Step3 step={nextButt} status={'1'} />
+      return <Step3 step={nextButt} status={'1'} result={result} data={formdatastep1}/>
   }
 }
 

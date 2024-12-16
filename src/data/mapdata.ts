@@ -19,7 +19,7 @@ export const mapdata : mapdictionary = {
     ]
   },
   "Table-03": {
-    id: '2',
+    id: '3',
     shape: "poly",
     title: "Table-03",
     alt : "Table-03",
@@ -28,7 +28,7 @@ export const mapdata : mapdictionary = {
     ]
   },
   "Table-04": {
-    id: '2',
+    id: '4',
     shape: "poly",
     title: "Table-04",
     alt : "Table-04",
@@ -37,7 +37,7 @@ export const mapdata : mapdictionary = {
     ]
   },
   "Table-05": {
-    id: '2',
+    id: '5',
     shape: "poly",
     title: "Table-05",
     alt : "Table-05",
