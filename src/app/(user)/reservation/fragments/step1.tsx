@@ -87,7 +87,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
   }
   
   async function submitButton() {
-    let body = { date: date, email: email_mhs, type: type, reason: reason, totalperson:totalperson }
+    let body = { date: date, email: email_mhs, type: type, purpose: reason, totalperson:totalperson }
     let result: any = ValidationReservation({ type: 'step1', data: body }) || ''
     
     setError([])
@@ -101,7 +101,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
         if(data.status == 'error'){
           throw new Error(data.message)
         }
-        let datamap = GetCenterCoord(reservationData2Map({datas: data}))
+        let datamap = GetCenterCoord(reservationData2Map({datas: data.data}))
         setMapData(datamap)
         setFormData(
           {
