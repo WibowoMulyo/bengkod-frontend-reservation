@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ValidationReservation } from "../../../../services/validation/Validation";
 import { Reservation } from "@/components/interface/Reservation";
 import InputErrorLight from "@/components/input/InputErrorLight";
-import { getDataAvalaible } from "../../../../services/ReservationServices";
+// import { getDataAvalaible } from "../../../../services/ReservationServices";
 import { useSession } from "next-auth/react";
 import { useGetMapQuery } from "@/services/ReservationServicesRedux";
 import { GetCenterCoord } from "@/lib/Coordinate";
@@ -53,6 +53,7 @@ const renderDisplay = ({ onClick, setFormData, setMapData,...props }: props) => 
     }
     else {
       setTotalPerson(1)
+      ChangeEmailInput(1)
       setShown(false)
     }
   }

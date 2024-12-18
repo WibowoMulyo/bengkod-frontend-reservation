@@ -13,6 +13,8 @@ import { useUpdateUserMutation } from "@/services/UserServicesRedux";
 const Profile = ({ data }: profile) => {
   const [name, setName] = useState(data.name)
   const [emailMhs, setEmailMhs] = useState(data.email_mhs)
+  const [password, setPassword] = useState<string>('')
+  const [confirm, setConfirmation] = useState<string>('')
   const [update, { isLoading }] = useUpdateUserMutation()
   const [file, setFile] = useState<File | null>(null);
   const path = process.env.NEXT_PUBLIC_STORAGE_BASE_URL + data.image
@@ -23,6 +25,7 @@ const Profile = ({ data }: profile) => {
       setFile(e.target.files[0]);
 
       console.log(res)
+      console.log(e.target.files[0])
     }
   };
 
@@ -30,11 +33,17 @@ const Profile = ({ data }: profile) => {
     // e.preventDefault()
     e.preventDefault()
     let formdata = new FormData(e.currentTarget)
+    // let body = {
+    //   name: formdata.get('name'),
+    //   email_mhs: formdata.get('email_mhs'),
+    //   password: formdata.get('password'),
+    //   password_confirmation: formdata.get('confirmation')
+    // }
     let body = {
-      name: formdata.get('name'),
-      email_mhs: formdata.get('email_mhs'),
-      password: formdata.get('password'),
-      password_confirmation: formdata.get('confirmation')
+      name: name,
+      emailMhs: emailMhs,
+      // password: password,
+      // password_confirmation: confirm
     }
     let res = await update({ id: data.id, data: body }).unwrap()
     console.log(res)
@@ -81,13 +90,13 @@ const Profile = ({ data }: profile) => {
                 <Label className="capitalize text-sm">Password</Label>
                 <GrayInput value="" type="password"
                   name="password" errorValue=""
-                  className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setEmailMhs(e.target.value)} />
+                  className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setPassword(e.target.value)} />
               </div>
               <div className="font-normal w-full mr-auto">
                 <Label className="capitalize text-sm">Konfirmasi Password</Label>
                 <GrayInput value="" type="password"
                   name="password_confirmation" errorValue=""
-                  className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setEmailMhs(e.target.value)} />
+                  className="pl-[1.5%] py-[1%] pr-[10%]" onChange={e => setConfirmation(e.target.value)} />
               </div>
               <div className="flex items-center">
                 <PrimaryButton className="py-2 px-3 capitalize font-medium">

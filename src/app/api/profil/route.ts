@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   // Parse body request
   const body = await request.json()
   let data = await ApiHandler({
-    requestfunc: () => RequestHttp({ type: "post", url: "user-update", datas: body }),
+    requestfunc: () => RequestHttp({ type: "patch", url: "update-user", datas: body }),
   })
 
   return NextResponse.json(data)
